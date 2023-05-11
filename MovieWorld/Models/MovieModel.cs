@@ -2,6 +2,8 @@
 namespace MovieWorld.Models
 {
 
+
+
     public class MovieModel
     {
         public bool adult { get; set; }
@@ -22,6 +24,15 @@ namespace MovieWorld.Models
         public string title { get; set; }
         public float vote_average { get; set; }
         public int vote_count { get; set; }
+
+        public string BackdropImagePath
+        {
+            get
+            {
+                string baseUri = $"https://image.tmdb.org/t/p/original";
+                return string.Format("{0}/{1}", baseUri, backdrop_path.Trim('/'));
+            }
+        }
     }
 
     public class Genre

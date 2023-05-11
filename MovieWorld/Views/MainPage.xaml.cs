@@ -1,6 +1,8 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MovieWorld.Models;
+using Newtonsoft.Json;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -16,9 +18,15 @@ namespace MovieWorld.Views
             this.InitializeComponent();
         }
 
-        private void OnButtonClick(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel.NavigateToMovieDetails(5054);
+            ViewModel.OnNavigatedAsync();
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var movieModel = (MovieListResult)e.ClickedItem;
+            ViewModel.NavigateToMovieDetails(movieModel.id);
         }
     }
 }

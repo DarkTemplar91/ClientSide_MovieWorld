@@ -36,7 +36,6 @@ namespace MovieWorld.Services
         public void Navigate<T>(object args = null) where T : ObservableRecipient
         {
             this.frame.Navigate(this.viewMapping[typeof(T)], args);
-            Console.WriteLine();
         }
     }
 }
