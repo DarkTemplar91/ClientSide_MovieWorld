@@ -26,6 +26,13 @@ namespace MovieWorld.ViewModels
             set { SetProperty(ref movieModel, value); }
         }
 
+        private MovieCastModel movieCastModel;
+        public MovieCastModel MovieCastModel
+        {
+            get { return movieCastModel; }
+            set { SetProperty(ref movieCastModel, value); }
+        }
+
         public ICommand ReloadTaskCommand { get; }
 
         public async void OnNavigatedAsync()
@@ -33,6 +40,7 @@ namespace MovieWorld.ViewModels
             //TODO: Create a singleton?
             var service = new MovieDBService();
             MovieModel = await service.GetMovieModelAsync(movieId);
+            MovieCastModel = await service.GetMovieCastAsync(movieId);
 
         }
 

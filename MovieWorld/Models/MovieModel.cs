@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Linq;
+
 namespace MovieWorld.Models
 {
 
@@ -31,6 +34,66 @@ namespace MovieWorld.Models
             {
                 string baseUri = $"https://image.tmdb.org/t/p/original";
                 return string.Format("{0}/{1}", baseUri, backdrop_path.Trim('/'));
+            }
+        }
+        public string PosterImagePath
+        {
+            get
+            {
+                string baseUri = $"https://image.tmdb.org/t/p/original";
+                return string.Format("{0}/{1}", baseUri, poster_path.Trim('/'));
+            }
+        }
+        public string ReleaseYear
+        {
+            get
+            {
+                return "("+ release_date.Substring(0, 4)+")";
+            }
+        }
+        public string VoteCountString
+        {
+            get
+            {
+                return $"({vote_count})";
+            }
+        }
+        public float VoteAvarageOnScale
+        {
+            get
+            {
+                return vote_average / 2;
+            }
+        }
+        public string DateString
+        {
+            get
+            {
+                DateTime asDate = DateTime.ParseExact(release_date,
+                   "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                return asDate.ToString("dd/MM/yyyy");
+            }
+        }
+        public string RuntimeString
+        {
+            get
+            {
+                return $"{runtime / 60}h {runtime % 60}m";
+            }
+        }
+        public string IMDb_ID
+        {
+            get
+            {
+                return $"https://www.imdb.com/title/{imdb_id}/";
+            }
+        }
+
+        public string AllGenres
+        {
+            get
+            {
+                return genres.Select(s => s.name + ", ").Aggregate((s, q) => s + q).TrimEnd(' ').TrimEnd(',');
             }
         }
     }

@@ -37,6 +37,11 @@ namespace MovieWorld.Services
             return await GetAsync<MovieModel>(new Uri(serverUrl, $"movie/{movieId}?language-en-US"));
         }
 
+        public async Task<MovieCastModel> GetMovieCastAsync(int movieId)
+        {
+            return await GetAsync<MovieCastModel>(new Uri(serverUrl, $"movie/{movieId}/credits"));
+        }
+
 
     }
 }
