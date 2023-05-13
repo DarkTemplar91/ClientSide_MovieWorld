@@ -16,6 +16,7 @@ namespace MovieWorld.Services
         {
             [typeof(MainPageViewModel)] = typeof(MainPage),
             [typeof(MovieDetailsViewModel)] = typeof(MovieDetailsPage),
+            [typeof(PersonDetailsViewModel)] = typeof(PersonDetailsPage),
             // Other viewmodel types...
         };
 

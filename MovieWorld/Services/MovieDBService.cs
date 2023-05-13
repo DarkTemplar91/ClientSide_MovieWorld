@@ -29,17 +29,22 @@ namespace MovieWorld.Services
 
         public async Task<MovieList> GetTrendingMoviesAsync()
         {
-            return await GetAsync<MovieList>(new Uri(serverUrl, "trending/movie/day?language=en-US"));
+            return await GetAsync<MovieList>(new Uri(serverUrl, $"trending/movie/day"));
         }
 
         public async Task<MovieModel> GetMovieModelAsync(int movieId)
         {
-            return await GetAsync<MovieModel>(new Uri(serverUrl, $"movie/{movieId}?language-en-US"));
+            return await GetAsync<MovieModel>(new Uri(serverUrl, $"movie/{movieId}"));
         }
 
         public async Task<MovieCastModel> GetMovieCastAsync(int movieId)
         {
             return await GetAsync<MovieCastModel>(new Uri(serverUrl, $"movie/{movieId}/credits"));
+        }
+
+        public async Task<PersonModel> GetPersonDetailsAsync(int personId)
+        {
+            return await GetAsync<PersonModel>(new Uri(serverUrl, $"person/{personId}"));
         }
 
 

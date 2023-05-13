@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MovieWorld.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,6 +34,20 @@ namespace MovieWorld.Views
         {
             ViewModel.MovieId = (int)e.Parameter;
             ViewModel.OnNavigatedAsync();
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var obj = e.ClickedItem;
+            int id = -1;
+            if (obj.GetType() == typeof(Crew))
+                id = ((Crew)obj).id;
+            else if (obj.GetType() == typeof(Cast))
+                id = ((Cast)obj).id;
+            else
+                return;
+            
+            ViewModel.NavigateToPersonPage(id);
         }
     }
 }

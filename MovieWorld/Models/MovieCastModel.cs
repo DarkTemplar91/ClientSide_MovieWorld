@@ -18,7 +18,7 @@ namespace MovieWorld.Models
         {
             get
             {
-                return crew.Where(c => c.job == "Director" || c.job == "Screenplay" ).ToArray();
+                return crew.Where(c => c.job == "Director" || c.job == "Screenplay" || c.job == "Writer" || c.job == "Story by").ToArray();
             }
         }
     }
@@ -42,8 +42,8 @@ namespace MovieWorld.Models
         {
             get
             {
-                if (profile_path == null)
-                    return "";
+                if (profile_path == null || profile_path.Length == 0)
+                    return "ms-appx:///Assets/headshot-placeholder.png";
 
                 string baseUri = $"https://image.tmdb.org/t/p/original";
                 return string.Format("{0}/{1}", baseUri, profile_path.Trim('/'));
@@ -64,18 +64,6 @@ namespace MovieWorld.Models
         public string credit_id { get; set; }
         public string department { get; set; }
         public string job { get; set; }
-
-        public string ProfileImagePath
-        {
-            get
-            {
-                if (profile_path == null)
-                    return "";
-
-                string baseUri = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUri, profile_path.Trim('/'));
-            }
-        }
 
     }
 

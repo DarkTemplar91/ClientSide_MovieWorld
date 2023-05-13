@@ -15,7 +15,7 @@
             <GradientStop Color="Black" Offset="1"/>
         </LinearGradientBrush>
     </Page.Background>
-    
+
     <Page.DataContext>
         <vm:MovieDetailsViewModel x:Name="ViewModel" />
     </Page.DataContext>
@@ -36,52 +36,90 @@
 
         </Style>
     </Page.Resources>
-
     <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
-            <Image Source="{Binding MovieModel.PosterImagePath}" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" Stretch="Uniform"/>
-            <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,0,0">
-                <StackPanel  Orientation="Horizontal">
-                    <TextBlock Text="{Binding MovieModel.title}"  FontFamily="Bahnschrift" FontSize="30"/>
-                    <TextBlock Text="{Binding MovieModel.ReleaseYear}" FontSize="24" Margin="4,0,0,0" Foreground="Gray"/>
-                </StackPanel>
-                <TextBlock Text="{Binding MovieModel.DateString}"/>
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{Binding MovieModel.BackdropImagePath}" Opacity="0.2"/>
+        </Grid.Background>
 
-                <StackPanel Orientation="Horizontal">
-                    <HyperlinkButton Content="IMDb" NavigateUri="{Binding MovieModel.IMDb_ID}"/>
-                    <AppBarSeparator></AppBarSeparator>
-                    <TextBlock Text="{Binding MovieModel.AllGenres}" VerticalAlignment="Center"/>
-                    <AppBarSeparator></AppBarSeparator>
-                    <TextBlock Text="{Binding MovieModel.RuntimeString}" VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-                </StackPanel>
+        
+        
+        <Image Source="{Binding MovieModel.PosterImagePath}" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" Stretch="Uniform"/>
+        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,0,0">
+            <StackPanel  Orientation="Horizontal">
+                <TextBlock Text="{Binding MovieModel.title}"  FontFamily="Bahnschrift" FontSize="30"/>
+                <TextBlock Text="{Binding MovieModel.ReleaseYear}" FontSize="24" Margin="4,0,0,0" Foreground="Gray"/>
             </StackPanel>
+            <TextBlock Text="{Binding MovieModel.DateString}"/>
+            
+            <StackPanel Orientation="Horizontal">
+                <HyperlinkButton Content="IMDb" NavigateUri="{Binding MovieModel.IMDb_ID}" FontSize="15" Foreground="White"/>
+                <AppBarSeparator></AppBarSeparator>
+                <TextBlock Text="{Binding MovieModel.AllGenres}" VerticalAlignment="Center"/>
+                <AppBarSeparator></AppBarSeparator>
+                <TextBlock Text="{Binding MovieModel.RuntimeString}" VerticalAlignment="Center"/>
 
-            <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
-                <RatingControl Value="{Binding MovieModel.VoteAvarageOnScale}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding MovieModel.VoteCountString}">
-                    <RatingControl.Resources>
-                        <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold" />
-                    </RatingControl.Resources>
-                </RatingControl>
-                <TextBlock Text="{Binding MovieModel.tagline}"></TextBlock>
-                <TextBlock  Text="Overview" HorizontalAlignment="Left" FontSize="26" Margin="0,20,0,10"/>
-                <TextBlock  Text="{Binding MovieModel.overview}" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" Margin="0,0,30,0" FontSize="20" FontStyle="Italic" MaxWidth="700"/>
             </StackPanel>
+        </StackPanel>
 
-            <GridView Grid.Row="3"
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+            <RatingControl Value="{Binding MovieModel.VoteAvarageOnScale}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding MovieModel.VoteCountString}">
+                <RatingControl.Resources>
+                    <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold" />
+                </RatingControl.Resources>
+            </RatingControl>
+            <TextBlock Text="{Binding MovieModel.tagline}"></TextBlock>
+            <TextBlock  Text="Overview" HorizontalAlignment="Left" FontSize="26" Margin="0,20,0,10"/>
+            <TextBlock  Text="{Binding MovieModel.overview}" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" Margin="0,0,30,0" FontSize="20" FontStyle="Italic" MaxWidth="700"/>
+
+
+
+            <GridView Padding="18"
+                  ItemsSource="{Binding Source={StaticResource MovieCrewSource}}"
+                  IsItemClickEnabled="True"
+                      HorizontalAlignment="Left"
+                      SelectionMode="None"
+                      ItemClick="GridView_ItemClick">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <GridViewHeaderItem>
+                                <TextBlock Text="{Binding job}"></TextBlock>
+                            </GridViewHeaderItem>
+                            <TextBlock Width="Auto" Text="{Binding name}" Margin="0" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid MaximumRowsOrColumns="1" Orientation="Vertical" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+
+
+            </GridView>
+
+        </StackPanel>
+
+        <GridViewHeaderItem Grid.Row="3" Margin="10,0,0,0" FontFamily="Bahnschrift">
+            <TextBlock>Cast</TextBlock>
+        </GridViewHeaderItem>
+        <GridView Margin="0,30,0,0"
+            Grid.Row="3"
                   Grid.RowSpan="2"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
@@ -89,67 +127,34 @@
                   ItemsSource="{Binding Source={StaticResource MovieCastSource}}"
                   IsItemClickEnabled="True"
                   ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                  ScrollViewer.HorizontalScrollMode="Enabled">
-                <GridView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Width="200" Height="250" Margin="10">
-                            <Border CornerRadius="8,0,8,0">
-                                <Border.Background>
-                                    <ImageBrush Stretch="Uniform" ImageSource="{Binding ProfileImagePath}"/>
-                                </Border.Background>
-
-                            </Border>
-                            <Border VerticalAlignment="Bottom" Background="#AA000000">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding name}" Margin="12,12,12,4" Foreground="White"/>
-                                    <TextBlock Text="{Binding character}" Margin="5,0,0,5" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid MaximumRowsOrColumns="1" Orientation="Vertical" HorizontalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-            </GridView>
-            <GridView Grid.Row="5"
-                  Grid.RowSpan="1"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="2"
-                  Padding="18"
-                  ItemsSource="{Binding Source={StaticResource MovieCrewSource}}"
-                  IsItemClickEnabled="True"
-                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                  ScrollViewer.HorizontalScrollMode="Enabled">
-
-                <GridView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Width="80" Height="100" Margin="10">
-                            <Border CornerRadius="8,0,8,0">
-                                <Border.Background>
-                                    <ImageBrush Stretch="Uniform" ImageSource="{Binding ProfileImagePath}"/>
-                                </Border.Background>
-
-                            </Border>
-                            <Border VerticalAlignment="Bottom" Background="#AA000000">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding name}" Margin="12,12,12,4" Foreground="White"/>
-                                    <TextBlock Text="{Binding job}" Margin="5,0,0,5" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid MaximumRowsOrColumns="1" Orientation="Vertical" HorizontalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-            </GridView>
+                  ScrollViewer.HorizontalScrollMode="Enabled"
+                  ItemClick="GridView_ItemClick">
+            
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="200" Height="250" Margin="10">
+                        <Border CornerRadius="8,0,8,0">
+                            <Border.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="{Binding ProfileImagePath}"/>
+                            </Border.Background>
+                        </Border>
+                        <Border VerticalAlignment="Bottom" Background="#AA000000">
+                            <StackPanel>
+                                <TextBlock Text="{Binding name}" Margin="12,12,12,4" Foreground="White"/>
+                                <TextBlock Text="{Binding character}" Margin="5,0,0,5" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="1" Orientation="Vertical" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+        </GridView>
 
 
 
-        </Grid>
+    </Grid>
 </Page>

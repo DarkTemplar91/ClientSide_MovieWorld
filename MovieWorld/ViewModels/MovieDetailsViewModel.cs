@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using MovieWorld.Models;
 using MovieWorld.Services;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace MovieWorld.ViewModels
 {
@@ -44,7 +47,10 @@ namespace MovieWorld.ViewModels
 
         }
 
-        
+        public void NavigateToPersonPage(int personId)
+        {
+            Ioc.Default.GetRequiredService<INavigationService>().Navigate<PersonDetailsViewModel>(personId);
+        }
 
     }
 }
