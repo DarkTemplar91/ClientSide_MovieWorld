@@ -22,6 +22,36 @@ namespace MovieWorld.Models
         public float popularity { get; set; }
         public string profile_path { get; set; }
 
+        public string ProfileImagePath
+        {
+            get
+            {
+                string baseUri = $"https://image.tmdb.org/t/p/w500";
+                return string.Format("{0}/{1}", baseUri, profile_path.Trim('/'));
+            }
+        }
+
+        public string Gender
+        {
+            get
+            {
+                if (gender == 0)
+                    return "Not specified";
+
+                if (gender == 1)
+                    return "Female";
+
+                return "Male";
+            }
+        }
+
+        public string IsDead
+        {
+            get
+            {
+                return deathday is null ? "Collapsed" : "Visible";
+            }
+        }
     }
 
 }

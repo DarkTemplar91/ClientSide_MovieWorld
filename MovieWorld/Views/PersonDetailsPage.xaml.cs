@@ -26,5 +26,11 @@ namespace MovieWorld.Views
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ViewModel.PersonId = (int)e.Parameter;
+            ViewModel.OnNavigatedAsync();
+        }
     }
 }
