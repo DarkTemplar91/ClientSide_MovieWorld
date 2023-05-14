@@ -45,13 +45,60 @@ namespace MovieWorld.Models
             }
         }
 
-        public string IsDead
+        public int Age
         {
             get
             {
-                return deathday is null ? "Collapsed" : "Visible";
+                DateTime today = DateTime.Today;
+                if (deathday != null)
+                    today = DateTime.ParseExact((string)deathday,
+                   "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
+                DateTime birthdate = DateTime.ParseExact(birthday,
+                   "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
+                int age = today.Year - birthdate.Year;
+                if (birthdate.Date > today.AddYears(-age)) age--;
+
+                return age;
+            }
+        }
+
+        public string Birthday
+        {
+            get
+            {
+                if (deathday is not null)
+                    return birthday;
+
+                return $"{birthday} ({Age} years old)";
+
+            }
+        }
+
+        public string Deathday
+        {
+            get
+            {
+                if( deathday is null)
+                    return "";
+
+                return $"{deathday} ({Age} years old)";
+
+                
+
+            }
+        }
+
+
+        public string IMDb_ID
+        {
+            get
+            {
+                return $"https://www.imdb.com/name/{imdb_id}/";
             }
         }
     }
+
 
 }

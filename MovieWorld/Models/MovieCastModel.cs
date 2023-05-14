@@ -65,6 +65,40 @@ namespace MovieWorld.Models
         public string department { get; set; }
         public string job { get; set; }
 
+        public static explicit operator Crew(Cast cast)
+        {
+            return new Crew()
+            {
+                adult = cast.adult,
+                gender = cast.gender,
+                id = cast.id,
+                known_for_department = cast.known_for_department,
+                name = cast.name,
+                original_name = cast.original_name,
+                popularity = cast.popularity,
+                profile_path = cast.profile_path,
+                credit_id = cast.credit_id,
+                job = cast.character
+            };
+        }
+
+        public static explicit operator Cast(Crew crew)
+        {
+            return new Cast()
+            {
+                adult = crew.adult,
+                gender = crew.gender,
+                id = crew.id,
+                known_for_department = crew.known_for_department,
+                name = crew.name,
+                original_name = crew.original_name,
+                popularity = crew.popularity,
+                profile_path = crew.profile_path,
+                credit_id = crew.credit_id,
+                character = crew.job
+            };
+        }
+
     }
 
 

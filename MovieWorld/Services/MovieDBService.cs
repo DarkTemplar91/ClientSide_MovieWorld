@@ -47,6 +47,11 @@ namespace MovieWorld.Services
             return await GetAsync<PersonModel>(new Uri(serverUrl, $"person/{personId}"));
         }
 
+        public async Task<PersonCreditsModel> GetPersonCredits(int personId)
+        {
+            return await GetAsync<PersonCreditsModel>(new Uri(serverUrl, $"person/{personId}/combined_credits"));
+        }
+
 
     }
 }

@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:vm="using:MovieWorld.ViewModels">
 
     <Page.DataContext>
@@ -21,6 +21,23 @@
             <GradientStop Color="Black" Offset="1"/>
         </LinearGradientBrush>
     </Page.Background>
+
+    <Page.Resources>
+        <CollectionViewSource x:Key="CastCreditsList"
+                              IsSourceGrouped="False"
+                              Source="{Binding Credits.cast}"
+                              ItemsPath="PersonCreditsCast" />
+
+        <CollectionViewSource x:Key="CrewCreditsList"
+                              IsSourceGrouped="False"
+                              Source="{Binding Credits.crew}"
+                              ItemsPath="PersonCreditsCrew" />
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe"></Setter>
+
+        </Style>
+    </Page.Resources>
 
 
     <Grid>
@@ -44,36 +61,102 @@
 
         <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" >
             <TextBlock Text="{Binding PersonModel.name}" FontFamily="Bahnschrift" FontSize="30"/>
+            <HyperlinkButton Content="IMDb" NavigateUri="{Binding PersonModel.IMDb_ID}"  Foreground="White" HorizontalAlignment="Left"/>
             <TextBlock Text="Biography" Margin="0,10,0,0" FontSize="20"/>
             <TextBlock Margin="0,20" Text="{Binding PersonModel.biography}" MaxWidth="800" MaxHeight="400" TextWrapping="Wrap" Height="Auto" Visibility="Visible" TextTrimming="CharacterEllipsis"/>
         </StackPanel>
 
-        <ScrollViewer Grid.Row="2" Grid.Column="0" Margin="20,0,0,0">
-            <StackPanel Orientation="Vertical">
-                <TextBlock FontSize="25" FontFamily="Bahnschrift">Personal Info</TextBlock>
 
-                <TextBlock Margin="0,20,0,0" FontSize="18">Known for</TextBlock>
-                <TextBlock Text="{Binding PersonModel.known_for_department}"></TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" Orientation="Vertical">
+            <TextBlock FontSize="25" FontFamily="Bahnschrift">Personal Info</TextBlock>
 
-                <TextBlock Margin="0,20,0,0" FontSize="18">Gender</TextBlock>
-                <TextBlock Text="{Binding PersonModel.Gender}"></TextBlock>
+            <TextBlock Margin="0,20,0,0" FontSize="18">Known for</TextBlock>
+            <TextBlock Text="{Binding PersonModel.known_for_department}"></TextBlock>
 
-                <TextBlock Margin="0,20,0,0" FontSize="18">Birthday</TextBlock>
-                <TextBlock Text="{Binding PersonModel.birthday}"></TextBlock>
+            <TextBlock Margin="0,20,0,0" FontSize="18">Gender</TextBlock>
+            <TextBlock Text="{Binding PersonModel.Gender}"></TextBlock>
 
-                <TextBlock Margin="0,20,0,0" FontSize="18" Visibility="{Binding PersonModel.IsDead}">Day of Death</TextBlock>
-                <TextBlock Text="{Binding PersonModel.deathday}" Visibility="{Binding PersonModel.IsDead}"></TextBlock>
+            <TextBlock Margin="0,20,0,0" FontSize="18">Birthday</TextBlock>
+            <TextBlock Text="{Binding PersonModel.Birthday}"></TextBlock>
 
-                <TextBlock Margin="0,20,0,0" FontSize="18" Text="Place of Birth" />
-                <TextBlock Text="{Binding PersonModel.place_of_birth}"></TextBlock>
+            <TextBlock Margin="0,20,0,0" FontSize="18" Visibility="{Binding ShowDeathDate, Mode=OneWay}">Day of Death</TextBlock>
+            <TextBlock Text="{Binding PersonModel.Deathday}" Visibility="{Binding ShowDeathDate, Mode=OneWay}"></TextBlock>
 
-                <TextBlock Margin="0,20,0,0" FontSize="18">Birthday</TextBlock>
-                <TextBlock Text="{Binding PersonModel.birthday}"></TextBlock>
+            <TextBlock Margin="0,20,0,0" FontSize="18" Text="Place of Birth" />
+            <TextBlock Text="{Binding PersonModel.place_of_birth}"></TextBlock>
 
 
-            </StackPanel>
-            
-        </ScrollViewer>
+        </StackPanel>
+
+        <muxc:TabView Grid.Row="2" Grid.Column="1" IsAddTabButtonVisible="False" CanReorderTabs="False" CanDragTabs="False" SelectedIndex="{Binding DefaultTabPage, Mode=OneWay}">
+            <muxc:TabViewItem Header="Cast credits" IsClosable="False" Visibility="{Binding ShowActingCredit, Mode=OneWay}">
+                <GridView 
+                  Padding="18"
+                  ItemsSource="{Binding Source={StaticResource CastCreditsList}}"
+                  IsItemClickEnabled="True"
+                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                  ScrollViewer.HorizontalScrollMode="Enabled"
+                    ItemClick="GridView_ItemClick">
+
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="200" Height="250" Margin="10">
+                                <Border CornerRadius="8,0,8,0">
+                                    <Border.Background>
+                                        <ImageBrush Stretch="Uniform" ImageSource="{Binding PosterImagePath}"/>
+                                    </Border.Background>
+                                </Border>
+                                <Border VerticalAlignment="Bottom" Background="#AA000000">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding title}" Margin="12,12,12,4" Foreground="White"/>
+                                        <TextBlock Text="{Binding character}" Margin="12,0,0,5" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid MaximumRowsOrColumns="1" Orientation="Vertical" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </muxc:TabViewItem>
+
+            <muxc:TabViewItem Header="Crew credits" IsClosable="False" Visibility="{Binding ShowCrewCredit, Mode=OneWay}">
+                <GridView 
+                  Padding="18"
+                  ItemsSource="{Binding Source={StaticResource CrewCreditsList}}"
+                  IsItemClickEnabled="True"
+                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                  ScrollViewer.HorizontalScrollMode="Enabled"
+                    ItemClick="GridView_ItemClick">
+
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="200" Height="250" Margin="10">
+                                <Border CornerRadius="8,0,8,0">
+                                    <Border.Background>
+                                        <ImageBrush Stretch="Uniform" ImageSource="{Binding PosterImagePath}"/>
+                                    </Border.Background>
+                                </Border>
+                                <Border VerticalAlignment="Bottom" Background="#AA000000">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding title}" Margin="12,12,12,4" Foreground="White"/>
+                                        <TextBlock Text="{Binding job}" Margin="12,0,0,5" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid MaximumRowsOrColumns="1" Orientation="Vertical" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </muxc:TabViewItem>
+        </muxc:TabView>
         
 
 

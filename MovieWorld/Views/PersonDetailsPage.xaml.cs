@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieWorld.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,20 @@ namespace MovieWorld.Views
         {
             ViewModel.PersonId = (int)e.Parameter;
             ViewModel.OnNavigatedAsync();
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var obj = e.ClickedItem;
+            int id = -1;
+            if (obj.GetType() == typeof(CreditCrew))
+                id = ((CreditCrew)obj).id;
+            else if (obj.GetType() == typeof(CreditCast))
+                id = ((CreditCast)obj).id;
+            else
+                return;
+
+            ViewModel.NavigateToMoviePage(id);
         }
     }
 }
