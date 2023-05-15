@@ -31,7 +31,7 @@ namespace MovieWorld.ViewModels
 
         public void NavigateToNavItemPage(string selectedItemTag)
         {
-            if (selectedItemTag == "x:trending")
+            if (selectedItemTag == "x:home")
                 Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
             /*else if (selectedItemTag == "favorites")
                 Ioc.Default.GetRequiredService<INavigationService>().Navigate<SeriesDetailsViewModel>(model.id);*/

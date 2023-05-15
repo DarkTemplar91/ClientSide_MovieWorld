@@ -41,10 +41,13 @@
     </Page.Resources>
 
     <NavigationView
+        x:Name="NavView"
+        x:FieldModifier="public"
         IsBackButtonVisible="Auto"
         IsBackEnabled="True"
         SelectionChanged="NavigationView_SelectionChanged"
         IsSettingsVisible="False"
+        PaneDisplayMode="Auto"
         BackRequested="NavigationView_BackRequested"
         Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <NavigationView.AutoSuggestBox>
@@ -54,8 +57,10 @@
                     VerticalAlignment="Center"
                     x:FieldModifier="public"
                     KeyboardAcceleratorPlacementMode="Hidden"
-                    PlaceholderText="Search"
-                    QueryIcon="Find">
+                    PlaceholderText="Search">
+                <AutoSuggestBox.QueryIcon>
+                    <SymbolIcon Symbol="Find"/>
+                </AutoSuggestBox.QueryIcon>
                 <AutoSuggestBox.KeyboardAccelerators>
                     <KeyboardAccelerator
                             Key="F"
