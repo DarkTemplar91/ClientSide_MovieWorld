@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:vm="using:MovieWorld.ViewModels">
 
     <Page.DataContext>
@@ -25,13 +24,11 @@
     <Page.Resources>
         <CollectionViewSource x:Key="CastCreditsList"
                               IsSourceGrouped="False"
-                              Source="{Binding Credits.cast}"
-                              ItemsPath="PersonCreditsCast" />
+                              Source="{Binding Credits.cast}"/>
 
         <CollectionViewSource x:Key="CrewCreditsList"
                               IsSourceGrouped="False"
-                              Source="{Binding Credits.crew}"
-                              ItemsPath="PersonCreditsCrew" />
+                              Source="{Binding Credits.crew}"/>
 
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe"></Setter>

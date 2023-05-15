@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:vm="using:MovieWorld.ViewModels">
 
     <Page.Background>
@@ -23,13 +24,11 @@
     <Page.Resources>
         <CollectionViewSource x:Key="MovieCastSource"
                               IsSourceGrouped="False"
-                              Source="{Binding MovieCastModel.cast}"
-                              ItemsPath="MovieCast" />
+                              Source="{Binding MovieCastModel.cast}"/>
 
         <CollectionViewSource x:Key="MovieCrewSource"
                               IsSourceGrouped="False"
-                              Source="{Binding MovieCastModel.GetFilteredCrew}"
-                              ItemsPath="MovieCrew" />
+                              Source="{Binding MovieCastModel.GetFilteredCrew}"/>
 
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe"></Setter>
@@ -83,10 +82,8 @@
                 </RatingControl.Resources>
             </RatingControl>
             <TextBlock Text="{Binding MovieModel.tagline}"></TextBlock>
-            <TextBlock  Text="Overview" HorizontalAlignment="Left" FontSize="26" Margin="0,20,0,10"/>
-            <TextBlock  Text="{Binding MovieModel.overview}" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" Margin="0,0,30,0" FontSize="20" FontStyle="Italic" MaxWidth="700"/>
-
-
+            <TextBlock Text="Overview" HorizontalAlignment="Left" FontSize="26" Margin="0,20,0,10"/>
+            <TextBlock TextTrimming="WordEllipsis" LineStackingStrategy="BlockLineHeight" Text="{Binding MovieModel.overview}" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" Margin="0,0,30,0" FontSize="20" FontStyle="Italic" MaxWidth="700"/>
 
             <GridView Padding="18"
                   ItemsSource="{Binding Source={StaticResource MovieCrewSource}}"

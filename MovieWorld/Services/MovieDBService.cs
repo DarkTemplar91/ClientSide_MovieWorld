@@ -27,9 +27,9 @@ namespace MovieWorld.Services
             }
         }
 
-        public async Task<MovieList> GetTrendingMoviesAsync()
+        public async Task<MovieList> GetTrendingContentAsync()
         {
-            return await GetAsync<MovieList>(new Uri(serverUrl, $"trending/movie/day"));
+            return await GetAsync<MovieList>(new Uri(serverUrl, $"trending/person/day"));
         }
 
         public async Task<MovieModel> GetMovieModelAsync(int movieId)
@@ -37,9 +37,18 @@ namespace MovieWorld.Services
             return await GetAsync<MovieModel>(new Uri(serverUrl, $"movie/{movieId}"));
         }
 
-        public async Task<MovieCastModel> GetMovieCastAsync(int movieId)
+        public async Task<SeriesModel> GetSeriesModelAsync(int seriesId)
         {
-            return await GetAsync<MovieCastModel>(new Uri(serverUrl, $"movie/{movieId}/credits"));
+            return await GetAsync<SeriesModel>(new Uri(serverUrl, $"tv/{seriesId}"));
+        }
+
+        public async Task<CastModel> GetMovieCastAsync(int movieId)
+        {
+            return await GetAsync<CastModel>(new Uri(serverUrl, $"movie/{movieId}/credits"));
+        }
+        public async Task<CastModel> GetSeriesCastAsync(int seriesId)
+        {
+            return await GetAsync<CastModel>(new Uri(serverUrl, $"tv/{seriesId}/credits"));
         }
 
         public async Task<PersonModel> GetPersonDetailsAsync(int personId)
@@ -50,6 +59,18 @@ namespace MovieWorld.Services
         public async Task<PersonCreditsModel> GetPersonCredits(int personId)
         {
             return await GetAsync<PersonCreditsModel>(new Uri(serverUrl, $"person/{personId}/combined_credits"));
+        }
+
+        public async Task<List<EpisodeList>> GetEpisodeList(int showId, int seasonCount)
+        {
+            List<EpisodeList> allEpisodes = new List<EpisodeList>();
+            for(int i = 0; i < seasonCount; i++)
+            {
+                var episodesInSeason = await GetAsync<EpisodeList>(new Uri(serverUrl, $"tv/{showId}/season/{i+1}"));
+                allEpisodes.Add(episodesInSeason);
+            }
+
+            return allEpisodes;
         }
 
 

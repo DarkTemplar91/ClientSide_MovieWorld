@@ -120,15 +120,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\MovieCastModel.cs" />
+    <Compile Include="Models\CastModel.cs" />
     <Compile Include="Models\MovieListModel.cs" />
     <Compile Include="Models\PersonCreditsModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
+    <Compile Include="Models\SeriesModel.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
+    <Compile Include="ViewModels\SeriesDetailsViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -140,6 +142,9 @@
     </Compile>
     <Compile Include="Views\PersonDetailsPage.xaml.cs">
       <DependentUpon>PersonDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeriesDetailsPage.xaml.cs">
+      <DependentUpon>SeriesDetailsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SeriesDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -26,7 +26,8 @@ namespace MovieWorld.Views
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var movieModel = (MovieListResult)e.ClickedItem;
-            ViewModel.NavigateToMovieDetails(movieModel.id);
+            ViewModel.NavigateToDetailsPage(movieModel);
+
         }
     }
 }

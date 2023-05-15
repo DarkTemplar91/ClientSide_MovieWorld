@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 namespace MovieWorld.Models
 {
 
-    public class MovieCastModel
+    public class CastModel
     {
         public int id { get; set; }
         public Cast[] cast { get; set; }
@@ -18,7 +18,7 @@ namespace MovieWorld.Models
         {
             get
             {
-                return crew.Where(c => c.job == "Director" || c.job == "Screenplay" || c.job == "Writer" || c.job == "Story by").ToArray();
+                return crew.Where(c => c.job == "Director" || c.job == "Screenplay" || c.job == "Writer" || c.job == "Story by" || c.job == "Creator").ToArray();
             }
         }
     }

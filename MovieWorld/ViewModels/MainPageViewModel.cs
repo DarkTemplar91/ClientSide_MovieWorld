@@ -14,6 +14,8 @@ using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using System.Reflection.Metadata;
 using System.Windows.Input;
+using Windows.UI.Xaml.Automation;
+using Windows.ApplicationModel.Contacts;
 
 namespace MovieWorld.ViewModels
 {
@@ -24,24 +26,46 @@ namespace MovieWorld.ViewModels
             ReloadTaskCommand = new RelayCommand(OnNavigatedAsync);
         }
 
-        public ObservableCollection<MovieListResult> RecommendedMovies { get; set; } = new ObservableCollection<MovieListResult>();
+        public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new ObservableCollection<ContentGroup>();
+
 
         public ICommand ReloadTaskCommand { get; }
 
         public async void OnNavigatedAsync()
         {
             var service = new MovieDBService();
-            var recommendedMovies = await service.GetTrendingMoviesAsync();
+            var recommendedMovies = await service.GetTrendingContentAsync();
+            List<MovieListResult> movieList = new List<MovieListResult>();
+            List<MovieListResult> showList = new List<MovieListResult>();
+            List<MovieListResult> actorList = new List<MovieListResult>();
             foreach (var item in recommendedMovies.results)
             {
-                RecommendedMovies.Add(item);
+                if(item.media_type == "movie")
+                    movieList.Add(item);
+                else if (item.media_type == "tv")
+                    showList.Add(item);
+                else if (item.media_type == "person")
+                    actorList.Add(item);
             }
+            if( movieList.Count > 0)
+                RecommendedContent.Add(new ContentGroup() { Content = movieList, Title = "Movies", Id = "0" });
+            if( showList.Count > 0)
+                RecommendedContent.Add(new ContentGroup() { Content = showList, Title = "TV Shows", Id = "1" });
+            if (actorList.Count > 0)
+                RecommendedContent.Add(new ContentGroup() { Content = actorList, Title = "Actors", Id = "2" });
+
         }
 
-        public void NavigateToMovieDetails(int movieId)
+        public void NavigateToDetailsPage(MovieListResult model)
         {
-            Ioc.Default.GetRequiredService<INavigationService>().Navigate<MovieDetailsViewModel>(movieId);
+            if (model.media_type == "movie")
+                Ioc.Default.GetRequiredService<INavigationService>().Navigate<MovieDetailsViewModel>(model.id);
+            else if (model.media_type == "tv")
+                Ioc.Default.GetRequiredService<INavigationService>().Navigate<SeriesDetailsViewModel>(model.id);
+            else if (model.media_type == "person")
+                Ioc.Default.GetRequiredService<INavigationService>().Navigate<PersonDetailsViewModel>(model.id);
         }
+
 
     }
 }

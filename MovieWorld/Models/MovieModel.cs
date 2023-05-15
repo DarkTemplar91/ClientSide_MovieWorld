@@ -32,6 +32,10 @@ namespace MovieWorld.Models
         {
             get
             {
+                if (backdrop_path == null || backdrop_path.Length == 0)
+                    return "ms-appx:///Assets/headshot-placeholder.png";
+
+
                 string baseUri = $"https://image.tmdb.org/t/p/original";
                 return string.Format("{0}/{1}", baseUri, backdrop_path.Trim('/'));
             }
@@ -40,6 +44,9 @@ namespace MovieWorld.Models
         {
             get
             {
+                if (poster_path == null || poster_path.Length == 0)
+                    return "ms-appx:///Assets/headshot-placeholder.png";
+
                 string baseUri = $"https://image.tmdb.org/t/p/original";
                 return string.Format("{0}/{1}", baseUri, poster_path.Trim('/'));
             }
@@ -78,7 +85,10 @@ namespace MovieWorld.Models
         {
             get
             {
-                return $"{runtime / 60}h {runtime % 60}m";
+                if(runtime >= 60)
+                    return $"{runtime / 60}h {runtime % 60}m";
+
+                return $"{runtime}m";
             }
         }
         public string IMDb_ID

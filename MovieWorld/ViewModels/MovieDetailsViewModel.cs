@@ -29,8 +29,8 @@ namespace MovieWorld.ViewModels
             set { SetProperty(ref movieModel, value); }
         }
 
-        private MovieCastModel movieCastModel;
-        public MovieCastModel MovieCastModel
+        private CastModel movieCastModel;
+        public CastModel MovieCastModel
         {
             get { return movieCastModel; }
             set { SetProperty(ref movieCastModel, value); }
