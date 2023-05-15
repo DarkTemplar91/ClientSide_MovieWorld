@@ -63,8 +63,6 @@ namespace MovieWorld
                 Window.Current.Content = rootFrame;
             }
 
-            Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<INavigationService>(new NavigationService(rootFrame)).BuildServiceProvider());
-
             if (e.PrelaunchActivated == false)
             {
                 if (rootFrame.Content == null)

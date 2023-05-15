@@ -36,14 +36,14 @@ namespace MovieWorld.ViewModels
             set { SetProperty(ref credits, value); }
         }
 
-        public ICommand ReloadTaskCommand { get; }
+        public IAsyncRelayCommand ReloadTaskCommand { get; }
 
         public PersonDetailsViewModel()
         {
-            ReloadTaskCommand = new RelayCommand(OnNavigatedAsync);
+            ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
 
-        public async void OnNavigatedAsync()
+        public async Task OnNavigatedAsync()
         {
             //TODO: Create a singleton?
             var service = new MovieDBService();

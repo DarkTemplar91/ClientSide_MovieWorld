@@ -14,10 +14,14 @@ namespace MovieWorld.Services
     {
         private readonly Dictionary<Type, Type> viewMapping = new()
         {
-            [typeof(MainPageViewModel)] = typeof(MainPage),
+            [typeof(TrendingPageViewModel)] = typeof(MainPage),
             [typeof(MovieDetailsViewModel)] = typeof(MovieDetailsPage),
             [typeof(PersonDetailsViewModel)] = typeof(PersonDetailsPage),
             [typeof(SeriesDetailsViewModel)] = typeof(SeriesDetailsPage),
+            [typeof(TrendingPageViewModel)] = typeof(TrendingPage),
+            
+            
+            
             // Other viewmodel types...
         };
 

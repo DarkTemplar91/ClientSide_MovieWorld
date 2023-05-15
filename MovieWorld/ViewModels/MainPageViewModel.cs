@@ -1,71 +1,40 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Navigation;
-using MovieWorld.Models;
-using System.Collections.ObjectModel;
-using MovieWorld.Services;
-using MovieWorld.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
-using System.Net.Mail;
-using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm.DependencyInjection;
-using System.Reflection.Metadata;
-using System.Windows.Input;
-using Windows.UI.Xaml.Automation;
-using Windows.ApplicationModel.Contacts;
+using MovieWorld.Models;
+using MovieWorld.Services;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MovieWorld.ViewModels
 {
-    public class MainPageViewModel : ObservableRecipient
+    public class MainPageViewModel
     {
         public MainPageViewModel()
         {
-            ReloadTaskCommand = new RelayCommand(OnNavigatedAsync);
+            ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
 
         public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new ObservableCollection<ContentGroup>();
 
 
-        public ICommand ReloadTaskCommand { get; }
+        public IAsyncRelayCommand ReloadTaskCommand { get; }
 
-        public async void OnNavigatedAsync()
+        public async Task OnNavigatedAsync()
         {
-            var service = new MovieDBService();
-            var recommendedMovies = await service.GetTrendingContentAsync();
-            List<MovieListResult> movieList = new List<MovieListResult>();
-            List<MovieListResult> showList = new List<MovieListResult>();
-            List<MovieListResult> actorList = new List<MovieListResult>();
-            foreach (var item in recommendedMovies.results)
-            {
-                if(item.media_type == "movie")
-                    movieList.Add(item);
-                else if (item.media_type == "tv")
-                    showList.Add(item);
-                else if (item.media_type == "person")
-                    actorList.Add(item);
-            }
-            if( movieList.Count > 0)
-                RecommendedContent.Add(new ContentGroup() { Content = movieList, Title = "Movies", Id = "0" });
-            if( showList.Count > 0)
-                RecommendedContent.Add(new ContentGroup() { Content = showList, Title = "TV Shows", Id = "1" });
-            if (actorList.Count > 0)
-                RecommendedContent.Add(new ContentGroup() { Content = actorList, Title = "Actors", Id = "2" });
-
+            Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
         }
 
-        public void NavigateToDetailsPage(MovieListResult model)
+        public void NavigateToNavItemPage(string selectedItemTag)
         {
-            if (model.media_type == "movie")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<MovieDetailsViewModel>(model.id);
-            else if (model.media_type == "tv")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<SeriesDetailsViewModel>(model.id);
-            else if (model.media_type == "person")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<PersonDetailsViewModel>(model.id);
+            if (selectedItemTag == "x:trending")
+                Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
+            /*else if (selectedItemTag == "favorites")
+                Ioc.Default.GetRequiredService<INavigationService>().Navigate<SeriesDetailsViewModel>(model.id);*/
         }
-
-
     }
 }

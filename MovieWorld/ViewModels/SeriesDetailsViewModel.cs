@@ -18,7 +18,7 @@ namespace MovieWorld.ViewModels
     {
         public SeriesDetailsViewModel()
         {
-            ReloadTaskCommand = new RelayCommand(OnNavigatedAsync);
+            ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
         private int showId;
         public int ShowId { get { return showId; } set { showId = value; } }
@@ -43,9 +43,9 @@ namespace MovieWorld.ViewModels
             set { SetProperty(ref episodeList, value); }
         }
 
-        public ICommand ReloadTaskCommand { get; }
+        public IAsyncRelayCommand ReloadTaskCommand { get; }
 
-        public async void OnNavigatedAsync()
+        public async Task OnNavigatedAsync()
         {
             var service = new MovieDBService();
             SeriesModel = await service.GetSeriesModelAsync(ShowId);

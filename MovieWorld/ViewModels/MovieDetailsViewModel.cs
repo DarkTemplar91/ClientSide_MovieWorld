@@ -18,7 +18,7 @@ namespace MovieWorld.ViewModels
     {
         public MovieDetailsViewModel()
         {
-            ReloadTaskCommand = new RelayCommand(OnNavigatedAsync);
+            ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
         private int movieId;
         public int MovieId { get { return movieId; } set { movieId = value; } }
@@ -36,9 +36,9 @@ namespace MovieWorld.ViewModels
             set { SetProperty(ref movieCastModel, value); }
         }
 
-        public ICommand ReloadTaskCommand { get; }
+        public IAsyncRelayCommand ReloadTaskCommand { get; }
 
-        public async void OnNavigatedAsync()
+        public async Task OnNavigatedAsync()
         {
             //TODO: Create a singleton?
             var service = new MovieDBService();
