@@ -41,9 +41,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.Background>
@@ -51,14 +49,16 @@
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        
-        
-        <Image Source="{Binding MovieModel.PosterImagePath}" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" Stretch="Uniform"/>
-        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,0,0">
+
+        <Border Padding="18" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Source="{Binding MovieModel.PosterImagePath}" Stretch="Uniform"/>
+        </Border>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="2,0,0,0">
             <StackPanel  Orientation="Horizontal">
                 <TextBlock Text="{Binding MovieModel.title}"  FontFamily="Bahnschrift" FontSize="30"/>
                 <TextBlock Text="{Binding MovieModel.ReleaseYear}" FontSize="24" Margin="4,0,0,0" Foreground="Gray"/>
@@ -75,7 +75,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Padding="2,0,0,0">
             <RatingControl Value="{Binding MovieModel.VoteAvarageOnScale}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding MovieModel.VoteCountString}">
                 <RatingControl.Resources>
                     <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold" />
@@ -116,6 +116,8 @@
             <TextBlock>Cast</TextBlock>
         </GridViewHeaderItem>
         <GridView Margin="0,30,0,0"
+                  Height="320"
+                  VerticalAlignment="Top"
             Grid.Row="3"
                   Grid.RowSpan="2"
                   Grid.Column="0"
@@ -132,7 +134,11 @@
                     <Grid Width="200" Height="250" Margin="10">
                         <Border CornerRadius="8,0,8,0">
                             <Border.Background>
-                                <ImageBrush Stretch="Uniform" ImageSource="{Binding ProfileImagePath}"/>
+                                <ImageBrush Stretch="Uniform">
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage DecodePixelWidth="200" UriSource="{Binding ProfileImagePath}"></BitmapImage>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
                             </Border.Background>
                         </Border>
                         <Border VerticalAlignment="Bottom" Background="#AA000000">
