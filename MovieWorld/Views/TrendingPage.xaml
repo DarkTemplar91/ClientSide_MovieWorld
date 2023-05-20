@@ -41,10 +41,12 @@
 
         <converters:FavoriteToggleButtonConverter x:Key="FavoriteToggleConverter"/>
         <converters:WatchlistToggleButtonConverter x:Key="WatchlistToggleConverter"/>
+        <converters:IsWarchlistToggledConvereter x:Key="IsWatchlistToggled"/>
+        <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
 
     </Page.Resources>
     
-    <Grid>
+    <Grid x:Name="trendingGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -87,8 +89,8 @@
                                         <FontIcon VerticalAlignment="Center" Visibility="{Binding ShowIfNotPerson}" Glyph="&#xEB51;" FontSize="14" Foreground="Red" Margin="2,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <ToggleButton Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" FontFamily="Segoe MDL2 Assets"/>
-                                        <ToggleButton Foreground="Green" BorderBrush="Green" VerticalAlignment="Center" x:Name="WatchlistToggleButton" Content="{Binding ElementName=WatchlistToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource WatchlistToggleConverter}}" FontFamily="Segoe MDL2 Assets"/>
+                                        <ToggleButton Command="{Binding ElementName=trendingGrid, Path=DataContext.FavoritesCommand}" CommandParameter="{Binding}" Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" IsChecked="{Binding id, Converter={StaticResource IsFavoritesToggled}}" FontFamily="Segoe MDL2 Assets"/>
+                                        <ToggleButton Command="{Binding ElementName=trendingGrid, Path=DataContext.WatchlistCommand}" CommandParameter="{Binding}" Foreground="Green" BorderBrush="Green" VerticalAlignment="Center" x:Name="WatchlistToggleButton" Content="{Binding ElementName=WatchlistToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource WatchlistToggleConverter}}" IsChecked="{Binding id, Converter={StaticResource IsWatchlistToggled}}" FontFamily="Segoe MDL2 Assets"/>
                                     </StackPanel>
                                 </Grid>
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,10 +31,9 @@ namespace MovieWorld.Views
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var movieModel = (MovieListResult)e.ClickedItem;
+            var movieModel = (ContentListItem)e.ClickedItem;
             ViewModel.NavigateToDetailsPage(movieModel);
         }
-
     }
 
 }

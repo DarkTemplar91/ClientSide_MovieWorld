@@ -27,9 +27,9 @@ namespace MovieWorld.Services
             }
         }
 
-        public async Task<MovieList> GetTrendingContentAsync()
+        public async Task<ContentList> GetTrendingContentAsync()
         {
-            return await GetAsync<MovieList>(new Uri(serverUrl, $"trending/all/day"));
+            return await GetAsync<ContentList>(new Uri(serverUrl, $"trending/all/day"));
         }
 
         public async Task<MovieModel> GetMovieModelAsync(int movieId)

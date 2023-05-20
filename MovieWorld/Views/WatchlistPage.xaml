@@ -20,8 +20,70 @@
     <Page.DataContext>
         <vm:WatchlistPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
-    
+
+    <Page.Resources>
+        <CollectionViewSource x:Key="WatchlistSource"
+                              IsSourceGrouped="False"
+                              Source="{Binding ContentLists}"
+                              ItemsPath="Content"/>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe"/>
+        </Style>
+
+    </Page.Resources>
+
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GridViewHeaderItem HorizontalAlignment="Center" FontSize="30" FontFamily="Bahnschrift">
+            <TextBlock>Watchlist</TextBlock>
+        </GridViewHeaderItem>
+
+        <GridView Grid.Row="1"
+                  Padding="18"
+                  ItemsSource="{Binding Source={StaticResource WatchlistSource}}"
+                  IsItemClickEnabled="True" ItemClick="GridView_ItemClick">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="270" Height="400" Margin="10">
+
+                        <ToolTipService.ToolTip>
+                            <ToolTip Placement="Right" HorizontalOffset="20">
+                                <StackPanel Orientation="Vertical" Height="Auto">
+                                    <TextBlock Text="{Binding Name}" Margin="5,0,0,2" FontSize="20" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="{Binding original_language}" Margin="5,0,0,10" FontSize="10" FontStyle="Italic"/>
+                                    <TextBlock Text="{Binding overview}" VerticalAlignment="Stretch" TextWrapping="WrapWholeWords" TextAlignment="Left"/>
+                                </StackPanel>
+                            </ToolTip>
+                        </ToolTipService.ToolTip>
+
+                        <Border CornerRadius="8,0,8,0">
+                            <Border.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="{Binding PosterImagePath}"/>
+                            </Border.Background>
+
+                        </Border>
+                        <Border VerticalAlignment="Bottom" Background="#AA000000">
+                            <StackPanel HorizontalAlignment="Stretch">
+                                <TextBlock Text="{Binding Name}" Margin="12,12,12,4" Foreground="White"/>
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal" Margin="12,0,0,6">
+                                        <TextBlock VerticalAlignment="Center" Visibility="{Binding ShowIfNotPerson}" Text="{Binding VoteString}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                        <FontIcon VerticalAlignment="Center" Visibility="{Binding ShowIfNotPerson}" Glyph="&#xEB51;" FontSize="14" Foreground="Red" Margin="2,0,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+
+        </GridView>
 
     </Grid>
 </Page>

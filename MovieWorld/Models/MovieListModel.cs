@@ -12,18 +12,18 @@ namespace MovieWorld.Models
     {
         public string Id { get; set; }
         public string Title { get; set; }
-        public List<MovieListResult> Content { get; set; }
+        public List<ContentListItem> Content { get; set; }
     }
 
-    public class MovieList
+    public class ContentList
     {
         public int page { get; set; }
-        public MovieListResult[] results { get; set; }
+        public ContentListItem[] results { get; set; }
         public int total_pages { get; set; }
         public int total_results { get; set; }
     }
 
-    public class MovieListResult
+    public class ContentListItem
     {
         public bool adult { get; set; }
         public string backdrop_path { get; set; }

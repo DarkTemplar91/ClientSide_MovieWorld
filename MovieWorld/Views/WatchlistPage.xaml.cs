@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieWorld.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,12 @@ namespace MovieWorld.Views
         public WatchlistPage()
         {
             this.InitializeComponent();
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ContentListItem contentListItem = e.ClickedItem as ContentListItem;
+            ViewModel.NavigateToDetailsPage(contentListItem);
         }
     }
 }

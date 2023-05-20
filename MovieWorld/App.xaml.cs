@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using MovieWorld.Models;
 using MovieWorld.Services;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace MovieWorld
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
-
+            UserModel.GetInstanceAsync().GetAwaiter().GetResult();
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)

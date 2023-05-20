@@ -17,6 +17,8 @@ using System.Windows.Input;
 using Windows.UI.Xaml.Automation;
 using Windows.ApplicationModel.Contacts;
 using Microsoft.Extensions.DependencyInjection;
+using Windows.UI.Xaml;
+using MovieWorld.Commands;
 
 namespace MovieWorld.ViewModels
 {
@@ -25,20 +27,22 @@ namespace MovieWorld.ViewModels
         public TrendingPageViewModel()
         {
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
+            FavoritesCommand = new AddToFavoritesCommand();
+            WatchlistCommand = new AddToWatchlistCommand();
         }
 
         public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new ObservableCollection<ContentGroup>();
-
-
+        public AddToFavoritesCommand FavoritesCommand { get; }
+        public AddToWatchlistCommand WatchlistCommand { get; }
         public IAsyncRelayCommand ReloadTaskCommand { get; }
 
         public async Task OnNavigatedAsync()
         {
             var service = new MovieDBService();
             var recommendedMovies = await service.GetTrendingContentAsync();
-            List<MovieListResult> movieList = new List<MovieListResult>();
-            List<MovieListResult> showList = new List<MovieListResult>();
-            List<MovieListResult> actorList = new List<MovieListResult>();
+            List<ContentListItem> movieList = new List<ContentListItem>();
+            List<ContentListItem> showList = new List<ContentListItem>();
+            List<ContentListItem> actorList = new List<ContentListItem>();
             foreach (var item in recommendedMovies.results)
             {
                 if(item.media_type == "movie")
@@ -57,7 +61,7 @@ namespace MovieWorld.ViewModels
 
         }
 
-        public void NavigateToDetailsPage(MovieListResult model)
+        public void NavigateToDetailsPage(ContentListItem model)
         {
             if (model.media_type == "movie")
                 Ioc.Default.GetRequiredService<INavigationService>().Navigate<MovieDetailsViewModel>(model.id);

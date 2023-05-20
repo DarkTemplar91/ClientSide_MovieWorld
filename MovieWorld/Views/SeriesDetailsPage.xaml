@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:converters="using:MovieWorld.Converters"
     xmlns:vm="using:MovieWorld.ViewModels" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -92,18 +93,20 @@
             SeasonTemplate="{StaticResource SeasonTemplate}"
             EpisodeTemplate="{StaticResource EpisodeTemplate}" />
 
+        <converters:FavoriteToggleButtonConverter x:Key="FavoriteToggleConverter"/>
+        <converters:WatchlistToggleButtonConverter x:Key="WatchlistToggleConverter"/>
+        <converters:IsWarchlistToggledConvereter x:Key="IsWatchlistToggled"/>
+        <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
     </Page.Resources>
 
 
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.Background>
@@ -125,9 +128,11 @@
                 <TextBlock Text="{Binding SeriesModel.ReleaseYear}" FontSize="24" Margin="4,0,0,0" Foreground="Gray"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding SeriesModel.AllGenres}" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding SeriesModel.AllGenres}" VerticalAlignment="Center"/>
 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <ToggleButton Margin="5,0" Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" IsChecked="{Binding SeriesModel.id, Converter={StaticResource IsFavoritesToggled}}" FontFamily="Segoe MDL2 Assets"/>
+                <ToggleButton Margin="5,0" Foreground="Green" BorderBrush="Green" VerticalAlignment="Center" x:Name="WatchlistToggleButton" Content="{Binding ElementName=WatchlistToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource WatchlistToggleConverter}}" IsChecked="{Binding SeriesModel.id, Converter={StaticResource IsWatchlistToggled}}" FontFamily="Segoe MDL2 Assets"/>
             </StackPanel>
         </StackPanel>
 
@@ -194,7 +199,6 @@
         </GridViewHeaderItem>
         <GridView Margin="0,30,0,0"
             Grid.Row="3"
-                  Grid.RowSpan="2"
                   Grid.Column="0"
                   Grid.ColumnSpan="3"
                   Padding="18"
