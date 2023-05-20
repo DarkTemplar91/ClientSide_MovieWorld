@@ -35,9 +35,9 @@
                               ItemsPath="Content"/>
 
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe"></Setter>
-
+            <Setter Property="FontFamily" Value="Segoe"/>
         </Style>
+        
     </Page.Resources>
     
     <Grid>

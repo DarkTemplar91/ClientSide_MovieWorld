@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using MovieWorld.Models;
 using MovieWorld.Services;
@@ -6,44 +7,44 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+using System.Net.Http.Headers;
 
 namespace MovieWorld.ViewModels
 {
-    public class MainPageViewModel
+    public class SearchPageViewModel : ObservableRecipient
     {
+        public IAsyncRelayCommand ReloadTaskCommand { get; }
+        private string keyword;
+        public string Keyword
+        {
+            get { return keyword; }
+            set
+            {
+                SetProperty(ref keyword, value);
+            }
+        }
 
-        public MainPageViewModel()
+        public SearchPageViewModel()
         {
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
 
-        public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new ObservableCollection<ContentGroup>();
         public ObservableCollection<SearchResult> SearchResults { get; set; } = new ObservableCollection<SearchResult>();
-
-
-        public IAsyncRelayCommand ReloadTaskCommand { get; }
-
+        
         public async Task OnNavigatedAsync()
         {
-            Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
-        }
-
-        public void NavigateToNavItemPage(string selectedItemTag)
-        {
-            if (selectedItemTag == "x:home")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
-            /*else if (selectedItemTag == "favorites")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<SeriesDetailsViewModel>(model.id);*/
+            await RefreshSearchResults(Keyword);
         }
 
         public async Task RefreshSearchResults(string keyword)
         {
             SearchResults.Clear();
             var searchResultModel = await new MovieDBService().GetSearchResult(keyword);
-            foreach( var result in searchResultModel.results )
+            foreach (var result in searchResultModel.results)
             {
                 SearchResults.Add(result);
             }
@@ -58,10 +59,29 @@ namespace MovieWorld.ViewModels
             else if (model.media_type == "person")
                 Ioc.Default.GetRequiredService<INavigationService>().Navigate<PersonDetailsViewModel>(model.id);
         }
+    }
 
-        public void NavigateToSearchPage(string keyword)
+    public class SearchItemTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate MovieTemplate { get; set; }
+        public DataTemplate SeriesTemplate { get; set; }
+        public DataTemplate PersonTemplate { get; set; }
+
+        protected override DataTemplate SelectTemplateCore(object item)
         {
-            Ioc.Default.GetRequiredService<INavigationService>().Navigate<SearchPageViewModel>(keyword);
+            var searchResult = item as SearchResult;
+
+            switch(searchResult.media_type)
+            {
+                case "movie":
+                    return MovieTemplate;
+                case "tv":
+                    return SeriesTemplate;
+                case "person":
+                    return PersonTemplate;
+                default: return null;
+            }
         }
+
     }
 }

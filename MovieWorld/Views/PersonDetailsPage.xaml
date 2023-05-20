@@ -89,7 +89,7 @@
 
         </StackPanel>
 
-        <muxc:TabView Grid.Row="2" Grid.Column="1" IsAddTabButtonVisible="False" CanReorderTabs="False" CanDragTabs="False" SelectedIndex="{Binding DefaultTabPage, Mode=OneWay}">
+        <muxc:TabView Grid.Row="2" Grid.Column="1" IsAddTabButtonVisible="False" CanReorderTabs="False" CanDragTabs="False" SelectedIndex="{Binding DefaultTabPage, Mode=TwoWay}">
             <muxc:TabViewItem Header="Cast credits" IsClosable="False" Visibility="{Binding ShowActingCredit, Mode=OneWay}">
                 <GridView 
                   Padding="18"

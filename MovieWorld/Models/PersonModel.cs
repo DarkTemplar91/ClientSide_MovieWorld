@@ -26,6 +26,9 @@ namespace MovieWorld.Models
         {
             get
             {
+                if (profile_path == null || profile_path.Length == 0)
+                    return "ms-appx:///Assets/headshot-placeholder.png";
+
                 string baseUri = $"https://image.tmdb.org/t/p/w500";
                 return string.Format("{0}/{1}", baseUri, profile_path.Trim('/'));
             }

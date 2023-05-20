@@ -124,10 +124,12 @@
     <Compile Include="Models\MovieListModel.cs" />
     <Compile Include="Models\PersonCreditsModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
+    <Compile Include="Models\SearchResultModel.cs" />
     <Compile Include="Models\SeriesModel.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Compile Include="ViewModels\TrendingPageViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
@@ -143,6 +145,9 @@
     </Compile>
     <Compile Include="Views\PersonDetailsPage.xaml.cs">
       <DependentUpon>PersonDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SeriesDetailsPage.xaml.cs">
       <DependentUpon>SeriesDetailsPage.xaml</DependentUpon>
@@ -182,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

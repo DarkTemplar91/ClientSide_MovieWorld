@@ -95,7 +95,7 @@
                     <DataTemplate>
                         <StackPanel>
                             <GridViewHeaderItem>
-                                <TextBlock Text="{Binding job}"></TextBlock>
+                                <TextBlock Text="{Binding job}"/>
                             </GridViewHeaderItem>
                             <TextBlock Width="Auto" Text="{Binding name}" Margin="0" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" HorizontalAlignment="Center"/>
                         </StackPanel>

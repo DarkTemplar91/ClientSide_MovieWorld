@@ -3,6 +3,10 @@ using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using MovieWorld.Services;
 using System.Linq;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using System;
+using MovieWorld.Models;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -38,6 +42,33 @@ namespace MovieWorld.Views
             {
                 contentFrame.GoBack();
             }
+        }
+
+        private async void controlsSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if ( args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                ViewModel.RefreshSearchResults(sender.Text);
+            }
+        }
+
+        private void controlsSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null)
+            {
+                var searchResult = args.ChosenSuggestion as SearchResult;
+                ViewModel.NavigateToDetailsPage(searchResult);
+
+            }
+            else
+            {
+                ViewModel.NavigateToSearchPage(args.QueryText);
+            }
+        }
+
+        private void controlsSearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            sender.Text = (args.SelectedItem as SearchResult).SearchName;
         }
     }
 }

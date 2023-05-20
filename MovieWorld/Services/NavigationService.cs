@@ -19,10 +19,7 @@ namespace MovieWorld.Services
             [typeof(PersonDetailsViewModel)] = typeof(PersonDetailsPage),
             [typeof(SeriesDetailsViewModel)] = typeof(SeriesDetailsPage),
             [typeof(TrendingPageViewModel)] = typeof(TrendingPage),
-            
-            
-            
-            // Other viewmodel types...
+            [typeof(SearchPageViewModel)] = typeof(SearchPage)
         };
 
         private readonly Frame frame;

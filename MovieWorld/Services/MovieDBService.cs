@@ -73,6 +73,11 @@ namespace MovieWorld.Services
             return allEpisodes;
         }
 
+        public async Task<SearchResultModel> GetSearchResult(string keyword)
+        {
+            return await GetAsync<SearchResultModel>(new Uri(serverUrl, $"search/multi?query={keyword}"));
+        }
+
 
     }
 }
