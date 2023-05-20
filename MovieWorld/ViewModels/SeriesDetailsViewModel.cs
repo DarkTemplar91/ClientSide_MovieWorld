@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using MovieWorld.Commands;
 
 namespace MovieWorld.ViewModels
 {
@@ -19,6 +20,8 @@ namespace MovieWorld.ViewModels
         public SeriesDetailsViewModel()
         {
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
+            FavoritesCommand = new ToggleFavoritesCommand();
+            WatchlistCommand = new ToggleWatchlistCommand();
         }
         private int showId;
         public int ShowId { get { return showId; } set { showId = value; } }
@@ -44,6 +47,8 @@ namespace MovieWorld.ViewModels
         }
 
         public IAsyncRelayCommand ReloadTaskCommand { get; }
+        public ToggleFavoritesCommand FavoritesCommand { get; }
+        public ToggleWatchlistCommand WatchlistCommand { get; }
 
         public async Task OnNavigatedAsync()
         {

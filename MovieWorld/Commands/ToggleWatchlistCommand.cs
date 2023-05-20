@@ -2,14 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.System;
 
 namespace MovieWorld.Commands
 {
-    public class AddToFavoritesCommand : ICommand
+    public class ToggleWatchlistCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
 
@@ -29,8 +29,16 @@ namespace MovieWorld.Commands
             if (CanExecute(parameter) == false)
                 return;
 
+            var model = parameter as ContentListItem;
             var user = UserModel.Instance;
-            user.AddContentToFavorites(parameter as ContentListItem);
+            var modelFound = UserModel.Instance.Watchlist.Find(x => x.id == model.id);
+            if(modelFound is null)
+            {
+                user.AddContentToWatchlist(model);
+                return;
+            }
+            user.RemoveContentFromWatchlist(modelFound);
+            
         }
     }
 }

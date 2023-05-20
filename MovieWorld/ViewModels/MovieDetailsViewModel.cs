@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using MovieWorld.Commands;
 using MovieWorld.Models;
 using MovieWorld.Services;
 using System;
@@ -19,6 +20,8 @@ namespace MovieWorld.ViewModels
         public MovieDetailsViewModel()
         {
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
+            FavoritesCommand = new ToggleFavoritesCommand();
+            WatchlistCommand = new ToggleWatchlistCommand();
         }
         private int movieId;
         public int MovieId { get { return movieId; } set { movieId = value; } }
@@ -37,6 +40,8 @@ namespace MovieWorld.ViewModels
         }
 
         public IAsyncRelayCommand ReloadTaskCommand { get; }
+        public ToggleFavoritesCommand FavoritesCommand { get; }
+        public ToggleWatchlistCommand WatchlistCommand { get; }
 
         public async Task OnNavigatedAsync()
         {

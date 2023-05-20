@@ -27,13 +27,13 @@ namespace MovieWorld.ViewModels
         public TrendingPageViewModel()
         {
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
-            FavoritesCommand = new AddToFavoritesCommand();
-            WatchlistCommand = new AddToWatchlistCommand();
+            FavoritesCommand = new ToggleFavoritesCommand();
+            WatchlistCommand = new ToggleWatchlistCommand();
         }
 
         public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new ObservableCollection<ContentGroup>();
-        public AddToFavoritesCommand FavoritesCommand { get; }
-        public AddToWatchlistCommand WatchlistCommand { get; }
+        public ToggleFavoritesCommand FavoritesCommand { get; }
+        public ToggleWatchlistCommand WatchlistCommand { get; }
         public IAsyncRelayCommand ReloadTaskCommand { get; }
 
         public async Task OnNavigatedAsync()

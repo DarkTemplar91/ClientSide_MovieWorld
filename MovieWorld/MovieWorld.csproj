@@ -120,14 +120,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\AddToFavoritesCommand.cs" />
-    <Compile Include="Commands\AddToWatchlistCommand.cs" />
-    <Compile Include="Commands\RemoveFromFavoritesCommand.cs" />
-    <Compile Include="Commands\RemoveFromWatchlistCommand.cs" />
+    <Compile Include="Commands\ToggleFavoritesCommand.cs" />
+    <Compile Include="Commands\ToggleWatchlistCommand.cs" />
     <Compile Include="Converters\FavoriteToggleButtonConverter.cs" />
-    <Compile Include="Converters\FavoriteToggleCommandConverter.cs" />
     <Compile Include="Converters\IsFavoriteToggledConverter.cs" />
     <Compile Include="Converters\IsWarchlistToggledConverter.cs" />
+    <Compile Include="Converters\MovieModelToContentItemConverter.cs" />
+    <Compile Include="Converters\SeriesToContentItemConverter.cs" />
     <Compile Include="Converters\WatchlistToggleButtonConverter.cs" />
     <Compile Include="Models\CastModel.cs" />
     <Compile Include="Models\MovieListModel.cs" />

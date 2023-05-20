@@ -87,6 +87,7 @@ namespace MovieWorld.Models
                 return  media_type == "person" ? "Collapsed" : "Visible";
             }
         }
+
     }
 
 }

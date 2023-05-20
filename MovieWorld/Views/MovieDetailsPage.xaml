@@ -40,6 +40,7 @@
         <converters:WatchlistToggleButtonConverter x:Key="WatchlistToggleConverter"/>
         <converters:IsWarchlistToggledConvereter x:Key="IsWatchlistToggled"/>
         <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
+        <converters:MovieModelToContentItemConverter x:Key="MovieToItemConverter"/>
     </Page.Resources>
     <Grid>
 
@@ -79,8 +80,8 @@
                 <TextBlock Text="{Binding MovieModel.RuntimeString}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <ToggleButton Margin="5,0" Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" IsChecked="{Binding MovieModel.id, Converter={StaticResource IsFavoritesToggled}}" FontFamily="Segoe MDL2 Assets"/>
-                <ToggleButton Margin="5,0" Foreground="Green" BorderBrush="Green" VerticalAlignment="Center" x:Name="WatchlistToggleButton" Content="{Binding ElementName=WatchlistToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource WatchlistToggleConverter}}" IsChecked="{Binding MovieModel.id, Converter={StaticResource IsWatchlistToggled}}" FontFamily="Segoe MDL2 Assets"/>
+                <ToggleButton Command="{Binding FavoritesCommand}" CommandParameter="{Binding MovieModel, Converter={StaticResource MovieToItemConverter}}" Margin="5,0" Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" IsChecked="{Binding MovieModel.id, Converter={StaticResource IsFavoritesToggled}}" FontFamily="Segoe MDL2 Assets"/>
+                <ToggleButton Command="{Binding WatchlistCommand}" CommandParameter="{Binding MovieModel, Converter={StaticResource MovieToItemConverter}}" Margin="5,0" Foreground="Green" BorderBrush="Green" VerticalAlignment="Center" x:Name="WatchlistToggleButton" Content="{Binding ElementName=WatchlistToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource WatchlistToggleConverter}}" IsChecked="{Binding MovieModel.id, Converter={StaticResource IsWatchlistToggled}}" FontFamily="Segoe MDL2 Assets"/>
             </StackPanel>
         </StackPanel>
 

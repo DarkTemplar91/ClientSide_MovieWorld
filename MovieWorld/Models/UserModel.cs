@@ -137,7 +137,54 @@ namespace MovieWorld.Models
                 Console.WriteLine(e.Message);
             }
         }
+        public async Task RemoveContentFromWatchlist(ContentListItem item)
+        {
+            Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalCacheFolder;
+            if (Watchlist.Count == 0)
+            {
+                return;
+            }
+            try
+            {
+                Windows.Storage.StorageFile file = await storageFolder.GetFileAsync("watchlist.json");
+                if (file == null)
+                    return;
 
+                Watchlist.Remove(item);
+                string json = JsonConvert.SerializeObject(Watchlist);
+                await Windows.Storage.FileIO.WriteTextAsync(file, json);
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        public async Task RemoveContentFromFavorites(ContentListItem item)
+        {
+            Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalCacheFolder;
+            if (Favorites.Count == 0)
+            {
+                return;
+            }
+            try
+            {
+                Windows.Storage.StorageFile file = await storageFolder.GetFileAsync("favorites.json");
+                if (file == null)
+                    return;
+
+                Favorites.Remove(item);
+                string json = JsonConvert.SerializeObject(Favorites);
+                await Windows.Storage.FileIO.WriteTextAsync(file, json);
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
 
 
     }
