@@ -9,6 +9,8 @@ using System;
 using MovieWorld.Models;
 using Windows.UI.Xaml.Input;
 using Windows.Networking.BackgroundTransfer;
+using MovieWorld.ViewModels;
+using System.Reflection;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,6 +28,8 @@ namespace MovieWorld.Views
             this.InitializeComponent();
             Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<INavigationService>(new NavigationService(contentFrame)).BuildServiceProvider());
             NavView.SelectedItem = NavView.MenuItems.ElementAt(0);
+            if (contentFrame.CanGoBack)
+                contentFrame.GoBack();
         }
 
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -42,9 +46,10 @@ namespace MovieWorld.Views
 
         private void NavigationView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            if (contentFrame.CanGoBack)
+            var navigationService = Ioc.Default.GetRequiredService<INavigationService>();
+            if(navigationService.CanGoBack)
             {
-                contentFrame.GoBack();
+                navigationService.GoBack(NavView);
             }
         }
 

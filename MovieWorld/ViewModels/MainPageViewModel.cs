@@ -35,8 +35,10 @@ namespace MovieWorld.ViewModels
         {
             if (selectedItemTag == "x:home")
                 Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
-            /*else if (selectedItemTag == "favorites")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<SeriesDetailsViewModel>(model.id);*/
+            else if (selectedItemTag == "x:favorites")
+                Ioc.Default.GetRequiredService<INavigationService>().Navigate<FavoritesPageViewModel>();
+            else if (selectedItemTag == "x:watchlist")
+                Ioc.Default.GetRequiredService<INavigationService>().Navigate<WatchlistPageViewModel>();
         }
 
         public async Task RefreshSearchResults(string keyword)

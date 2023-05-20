@@ -4,6 +4,7 @@ using MovieWorld.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
@@ -19,7 +20,9 @@ namespace MovieWorld.Services
             [typeof(PersonDetailsViewModel)] = typeof(PersonDetailsPage),
             [typeof(SeriesDetailsViewModel)] = typeof(SeriesDetailsPage),
             [typeof(TrendingPageViewModel)] = typeof(TrendingPage),
-            [typeof(SearchPageViewModel)] = typeof(SearchPage)
+            [typeof(SearchPageViewModel)] = typeof(SearchPage),
+            [typeof(FavoritesPageViewModel)] = typeof(FavoritesPage),
+            [typeof(WatchlistPageViewModel)] = typeof(WatchlistPage)
         };
 
         private readonly Frame frame;
@@ -31,9 +34,40 @@ namespace MovieWorld.Services
 
         public bool CanGoBack => this.frame.CanGoBack;
 
-        public void GoBack()
+        public void GoBack(NavigationView rootNavigationView = null)
         {
-            this.frame.GoBack();
+            if (frame.CanGoBack)
+            {
+                var lastPageEntry = frame.BackStack[frame.BackStackDepth - 1];
+                var lastPageType = lastPageEntry.SourcePageType;
+                if(lastPageType != frame.CurrentSourcePageType && rootNavigationView is not null)
+                {
+                    NavigationViewItem navigationViewItem = null;
+                    
+                    if (lastPageType == typeof(FavoritesPage))
+                    {
+                        navigationViewItem = rootNavigationView.MenuItems.ElementAt(1) as NavigationViewItem;
+                    }
+                    else if (lastPageType == typeof(WatchlistPage))
+                    {
+                        navigationViewItem = rootNavigationView.MenuItems.ElementAt(2) as NavigationViewItem;
+                    }
+                    else
+                    {
+                        navigationViewItem = rootNavigationView.MenuItems.ElementAt(0) as NavigationViewItem;
+                    }
+                    bool goBackLater = false;
+                    if (navigationViewItem != null && navigationViewItem.IsSelected == false)
+                    {
+                        goBackLater = true;
+                        navigationViewItem.IsSelected = true;
+                    }
+                    if (frame.CanGoBack && goBackLater)
+                        frame.GoBack();
+                }
+                frame.GoBack();
+
+            }
         }
 
         public void Navigate<T>(object args = null) where T : ObservableRecipient

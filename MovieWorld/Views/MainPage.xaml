@@ -91,9 +91,15 @@
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             
-            <NavigationViewItem Content="Watchlist" Tag="x:watchlist">
+            <NavigationViewItem Content="Favorites" Tag="x:favorites">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="OutlineStar"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+            <NavigationViewItem Content="Watchlist" Tag="x:watchlist">
+                <NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="List"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
 
