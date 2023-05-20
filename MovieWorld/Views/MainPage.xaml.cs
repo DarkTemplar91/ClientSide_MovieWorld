@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System;
 using MovieWorld.Models;
+using Windows.UI.Xaml.Input;
+using Windows.Networking.BackgroundTransfer;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -17,6 +19,8 @@ namespace MovieWorld.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private string queryText = "";
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -54,6 +58,13 @@ namespace MovieWorld.Views
 
         private void controlsSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
+            if (string.IsNullOrEmpty(controlsSearchBox.Text) != true)
+            {
+                if (queryText == controlsSearchBox.Text)
+                    return;
+            }
+            queryText = controlsSearchBox.Text;
+
             if (args.ChosenSuggestion != null)
             {
                 var searchResult = args.ChosenSuggestion as SearchResult;
@@ -62,6 +73,9 @@ namespace MovieWorld.Views
             }
             else
             {
+                if (string.IsNullOrEmpty(args.QueryText))
+                    return;
+
                 ViewModel.NavigateToSearchPage(args.QueryText);
             }
         }
@@ -69,6 +83,11 @@ namespace MovieWorld.Views
         private void controlsSearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             sender.Text = (args.SelectedItem as SearchResult).SearchName;
+        }
+
+        private void CtrlF_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            controlsSearchBox.Focus(Windows.UI.Xaml.FocusState.Keyboard);
         }
     }
 }

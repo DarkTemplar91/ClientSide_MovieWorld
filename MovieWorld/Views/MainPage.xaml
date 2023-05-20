@@ -54,7 +54,7 @@
                     x:Name="controlsSearchBox"
                     VerticalAlignment="Center"
                     x:FieldModifier="public"
-                    KeyboardAcceleratorPlacementMode="Hidden"
+                KeyboardAcceleratorPlacementMode="Hidden"
                     PlaceholderText="Search"
                 TextChanged="controlsSearchBox_TextChanged"
                 QuerySubmitted="controlsSearchBox_QuerySubmitted"
@@ -73,10 +73,12 @@
                 <AutoSuggestBox.QueryIcon>
                     <SymbolIcon Symbol="Find"/>
                 </AutoSuggestBox.QueryIcon>
+                
                 <AutoSuggestBox.KeyboardAccelerators>
                     <KeyboardAccelerator
                             Key="F"
-                            Modifiers="Control" />
+                            Modifiers="Control"
+                            Invoked="CtrlF_Invoked"/>
                 </AutoSuggestBox.KeyboardAccelerators>
             </AutoSuggestBox>
         </NavigationView.AutoSuggestBox>

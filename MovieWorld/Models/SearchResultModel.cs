@@ -96,7 +96,7 @@ namespace MovieWorld.Models
         {
             get
             {
-                if (known_for is null)
+                if (known_for is null || known_for.Length == 0)
                     return "";
 
                 return known_for.Select((k) => k.title).Aggregate((a, b) => a + ", " + b);
