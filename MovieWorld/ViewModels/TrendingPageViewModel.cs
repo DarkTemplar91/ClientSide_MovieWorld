@@ -19,7 +19,7 @@ namespace MovieWorld.ViewModels
             WatchlistCommand = new ToggleWatchlistCommand();
         }
 
-        public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new ObservableCollection<ContentGroup>();
+        public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new();
         public ToggleFavoritesCommand FavoritesCommand { get; }
         public ToggleWatchlistCommand WatchlistCommand { get; }
         public IAsyncRelayCommand ReloadTaskCommand { get; }

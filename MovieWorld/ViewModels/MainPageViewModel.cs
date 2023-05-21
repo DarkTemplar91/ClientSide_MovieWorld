@@ -15,8 +15,7 @@ namespace MovieWorld.ViewModels
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
 
-        public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new ObservableCollection<ContentGroup>();
-        public ObservableCollection<SearchResult> SearchResults { get; set; } = new ObservableCollection<SearchResult>();
+        public ObservableCollection<SearchResult> SearchResults { get; set; } = new();
 
 
         public IAsyncRelayCommand ReloadTaskCommand { get; }
@@ -28,12 +27,18 @@ namespace MovieWorld.ViewModels
 
         public void NavigateToNavItemPage(string selectedItemTag)
         {
-            if (selectedItemTag == "x:home")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
-            else if (selectedItemTag == "x:favorites")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<FavoritesPageViewModel>();
-            else if (selectedItemTag == "x:watchlist")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<WatchlistPageViewModel>();
+            switch (selectedItemTag)
+            {
+                case "x:home":
+                    Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
+                    break;
+                case "x:favorites":
+                    Ioc.Default.GetRequiredService<INavigationService>().Navigate<FavoritesPageViewModel>();
+                    break;
+                case "x:watchlist":
+                    Ioc.Default.GetRequiredService<INavigationService>().Navigate<WatchlistPageViewModel>();
+                    break;
+            }
         }
 
         public async Task RefreshSearchResults(string keyword)
@@ -48,12 +53,18 @@ namespace MovieWorld.ViewModels
 
         public void NavigateToDetailsPage(SearchResult model)
         {
-            if (model.media_type == "movie")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<MovieDetailsViewModel>(model.id);
-            else if (model.media_type == "tv")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<SeriesDetailsViewModel>(model.id);
-            else if (model.media_type == "person")
-                Ioc.Default.GetRequiredService<INavigationService>().Navigate<PersonDetailsViewModel>(model.id);
+            switch (model.media_type)
+            {
+                case "movie":
+                    Ioc.Default.GetRequiredService<INavigationService>().Navigate<MovieDetailsViewModel>(model.id);
+                    break;
+                case "tv":
+                    Ioc.Default.GetRequiredService<INavigationService>().Navigate<SeriesDetailsViewModel>(model.id);
+                    break;
+                case "person":
+                    Ioc.Default.GetRequiredService<INavigationService>().Navigate<PersonDetailsViewModel>(model.id);
+                    break;
+            }
         }
 
         public void NavigateToSearchPage(string keyword)

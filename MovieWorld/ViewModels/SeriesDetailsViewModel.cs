@@ -19,27 +19,28 @@ namespace MovieWorld.ViewModels
             FavoritesCommand = new ToggleFavoritesCommand();
             WatchlistCommand = new ToggleWatchlistCommand();
         }
-        private int showId;
-        public int ShowId { get { return showId; } set { showId = value; } }
+
+        public int ShowId { get; set; }
+
         private SeriesModel seriesModel;
         public SeriesModel SeriesModel
         {
-            get { return seriesModel; }
-            set { SetProperty(ref seriesModel, value); }
+            get => seriesModel;
+            set => SetProperty(ref seriesModel, value);
         }
 
         private CastModel castModel;
         public CastModel CastModel
         {
-            get { return castModel; }
-            set { SetProperty(ref castModel, value); }
+            get => castModel;
+            set => SetProperty(ref castModel, value);
         }
 
         private List<EpisodeList> episodeList;
         public List<EpisodeList> EpisodeList
         {
-            get { return episodeList; }
-            set { SetProperty(ref episodeList, value); }
+            get => episodeList;
+            set => SetProperty(ref episodeList, value);
         }
 
         public IAsyncRelayCommand ReloadTaskCommand { get; }

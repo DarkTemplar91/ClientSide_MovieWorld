@@ -17,19 +17,23 @@ namespace MovieWorld.ViewModels
             WatchlistCommand = new ToggleWatchlistCommand();
         }
         private int movieId;
-        public int MovieId { get { return movieId; } set { movieId = value; } }
+        public int MovieId
+        {
+            get => movieId;
+            set => movieId = value;
+        }
         private MovieModel movieModel;
         public MovieModel MovieModel
         {
-            get { return movieModel; }
-            set { SetProperty(ref movieModel, value); }
+            get => movieModel;
+            set => SetProperty(ref movieModel, value);
         }
 
         private CastModel movieCastModel;
         public CastModel MovieCastModel
         {
-            get { return movieCastModel; }
-            set { SetProperty(ref movieCastModel, value); }
+            get => movieCastModel;
+            set => SetProperty(ref movieCastModel, value);
         }
 
         public IAsyncRelayCommand ReloadTaskCommand { get; }

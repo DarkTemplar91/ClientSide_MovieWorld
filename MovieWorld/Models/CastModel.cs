@@ -28,22 +28,9 @@ namespace MovieWorld.Models
         public string original_name { get; set; }
         public float popularity { get; set; }
         public string profile_path { get; set; }
-        public int cast_id { get; set; }
         public string character { get; set; }
         public string credit_id { get; set; }
-        public int order { get; set; }
 
-        public string ProfileImagePath
-        {
-            get
-            {
-                if (profile_path == null || profile_path.Length == 0)
-                    return "ms-appx:///Assets/headshot-placeholder.png";
-
-                string baseUri = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUri, profile_path.Trim('/'));
-            }
-        }
     }
 
     public class Crew
@@ -57,7 +44,6 @@ namespace MovieWorld.Models
         public float popularity { get; set; }
         public string profile_path { get; set; }
         public string credit_id { get; set; }
-        public string department { get; set; }
         public string job { get; set; }
 
         public static explicit operator Crew(Cast cast)

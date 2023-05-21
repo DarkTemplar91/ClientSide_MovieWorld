@@ -51,14 +51,14 @@
         Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <NavigationView.AutoSuggestBox>
             <AutoSuggestBox
-                    x:Name="controlsSearchBox"
+                    x:Name="ControlsSearchBox"
                     VerticalAlignment="Center"
                     x:FieldModifier="public"
                 KeyboardAcceleratorPlacementMode="Hidden"
                     PlaceholderText="Search"
-                TextChanged="controlsSearchBox_TextChanged"
-                QuerySubmitted="controlsSearchBox_QuerySubmitted"
-                SuggestionChosen="controlsSearchBox_SuggestionChosen"
+                TextChanged="ControlsSearchBox_TextChanged"
+                QuerySubmitted="ControlsSearchBox_QuerySubmitted"
+                SuggestionChosen="ControlsSearchBox_SuggestionChosen"
                 ItemsSource="{Binding Source={StaticResource SearchResultsSource}}">
 
                 <AutoSuggestBox.ItemTemplate>
@@ -105,7 +105,7 @@
 
         </NavigationView.MenuItems>
         
-        <Frame x:Name="contentFrame"/>
+        <Frame x:Name="ContentFrame"/>
 
     </NavigationView>
     

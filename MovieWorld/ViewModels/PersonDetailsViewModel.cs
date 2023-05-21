@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace MovieWorld.ViewModels
 {
-    public class PersonDetailsViewModel : ObservableRecipient, INotifyPropertyChanged
+    public class PersonDetailsViewModel : ObservableRecipient
     {
         private int personId;
         public int PersonId
         {
-            get { return personId; }
-            set { SetProperty(ref personId, value); }
+            get => personId;
+            set => SetProperty(ref personId, value);
         }
         private PersonModel personModel;
         public PersonModel PersonModel
         {
-            get { return personModel; }
-            set { SetProperty(ref personModel, value); }
+            get => personModel;
+            set => SetProperty(ref personModel, value);
         }
 
         private PersonCreditsModel credits;
         public PersonCreditsModel Credits
         {
-            get { return credits; }
-            set { SetProperty(ref credits, value); }
+            get => credits;
+            set => SetProperty(ref credits, value);
         }
 
         public IAsyncRelayCommand ReloadTaskCommand { get; }
@@ -55,80 +55,35 @@ namespace MovieWorld.ViewModels
             Ioc.Default.GetRequiredService<INavigationService>().Navigate<MovieDetailsViewModel>(movieId);
         }
 
-        public int DefaultTabPage
-        {
-            get
-            {
-                return personModel?.known_for_department == "Acting" ? 0 : 1;
-            }
-        }
+        public int DefaultTabPage => personModel?.known_for_department == "Acting" ? 0 : 1;
 
         public string ShowDeathDate
         {
-            get
-            {
-                return showDeathDate;
-            }
-            set
-            {
-                SetProperty(ref showDeathDate, value);
-            }
+            get => showDeathDate;
+            set => SetProperty(ref showDeathDate, value);
         }
 
         public string ShowActingCredit
         {
-            get
-            {
-                return showActingCredit;
-            }
+            get => showActingCredit;
 
-            set
-            {
-                SetProperty(ref showActingCredit, value);
-            }
+            set => SetProperty(ref showActingCredit, value);
         }
 
         public string ShowCrewCredit
         {
-            get
-            {
-                return showCrewCredit;
-            }
-            set
-            {
-                SetProperty(ref showCrewCredit, value);
-            }
+            get => showCrewCredit;
+            set => SetProperty(ref showCrewCredit, value);
         }
 
         public void SetContentVisibility()
         {
 
-            if (Credits?.cast.Length == 0)
-            {
-                ShowActingCredit = "Collapsed";
-            }
-            else
-            {
-                ShowActingCredit = "Visible";
-            }
+            ShowActingCredit = Credits?.cast.Length == 0 ? "Collapsed" : "Visible";
 
-            if (Credits?.crew.Length == 0)
-            {
-                ShowCrewCredit = "Collapsed";
-            }
-            else
-            {
-                ShowCrewCredit = "Visible";
-            }
+            ShowCrewCredit = Credits?.crew.Length == 0 ? "Collapsed" : "Visible";
 
-            if (PersonModel?.deathday is null)
-            {
-                ShowDeathDate = "Collapsed";
-            }
-            else
-            {
-                ShowDeathDate = "Visible";
-            }
+            ShowDeathDate = PersonModel?.deathday is null ? "Collapsed" : "Visible";
 
         }
 

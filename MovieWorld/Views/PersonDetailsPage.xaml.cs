@@ -18,14 +18,14 @@ namespace MovieWorld.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel.PersonId = (int)e.Parameter;
-            ViewModel.OnNavigatedAsync();
+            if (e.Parameter != null) ViewModel.PersonId = (int) e.Parameter;
+            ViewModel?.OnNavigatedAsync();
         }
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var obj = e.ClickedItem;
-            int id = -1;
+            var id = -1;
             if (obj.GetType() == typeof(CreditCrew))
                 id = ((CreditCrew)obj).id;
             else if (obj.GetType() == typeof(CreditCast))

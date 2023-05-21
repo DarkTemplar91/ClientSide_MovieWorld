@@ -20,10 +20,10 @@ namespace MovieWorld.Views
         public MainPage()
         {
             this.InitializeComponent();
-            Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<INavigationService>(new NavigationService(contentFrame)).BuildServiceProvider());
+            Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<INavigationService>(new NavigationService(ContentFrame)).BuildServiceProvider());
             NavView.SelectedItem = NavView.MenuItems.ElementAt(0);
-            if (contentFrame.CanGoBack)
-                contentFrame.GoBack();
+            if (ContentFrame.CanGoBack)
+                ContentFrame.GoBack();
         }
 
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -47,22 +47,22 @@ namespace MovieWorld.Views
             }
         }
 
-        private async void controlsSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void ControlsSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                ViewModel.RefreshSearchResults(sender.Text);
+                await ViewModel.RefreshSearchResults(sender.Text);
             }
         }
 
-        private void controlsSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private void ControlsSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            if (string.IsNullOrEmpty(controlsSearchBox.Text) != true)
+            if (string.IsNullOrEmpty(ControlsSearchBox.Text) != true)
             {
-                if (queryText == controlsSearchBox.Text)
+                if (queryText == ControlsSearchBox.Text)
                     return;
             }
-            queryText = controlsSearchBox.Text;
+            queryText = ControlsSearchBox.Text;
 
             if (args.ChosenSuggestion != null)
             {
@@ -79,14 +79,14 @@ namespace MovieWorld.Views
             }
         }
 
-        private void controlsSearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        private void ControlsSearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            sender.Text = (args.SelectedItem as SearchResult).SearchName;
+            sender.Text = ((SearchResult) args.SelectedItem).SearchName;
         }
 
         private void CtrlF_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
-            controlsSearchBox.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+            ControlsSearchBox.Focus(Windows.UI.Xaml.FocusState.Keyboard);
         }
 
         //TODO: Create converters instead of properties and use those with binding

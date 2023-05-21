@@ -7,18 +7,9 @@ namespace MovieWorld.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            bool ischecked = (bool)value;
+            bool isChecked = (bool)value;
 
-            string content = null;
-
-            if (ischecked)
-            {
-                content = "\xE735";
-            }
-            else
-            {
-                content = "\xE734";
-            }
+            var content = isChecked ? "\xE735" : "\xE734";
 
             return content;
         }

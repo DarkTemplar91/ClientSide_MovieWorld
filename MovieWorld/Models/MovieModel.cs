@@ -6,46 +6,27 @@ namespace MovieWorld.Models
 {
     public class MovieModel
     {
-        public bool adult { get; set; }
         public string backdrop_path { get; set; }
-        public int budget { get; set; }
         public Genre[] genres { get; set; }
         public int id { get; set; }
         public string imdb_id { get; set; }
         public string original_language { get; set; }
         public string original_title { get; set; }
         public string overview { get; set; }
-        public float popularity { get; set; }
         public string poster_path { get; set; }
         public string release_date { get; set; }
         public int runtime { get; set; }
-        public string status { get; set; }
         public string tagline { get; set; }
         public string title { get; set; }
         public float vote_average { get; set; }
         public int vote_count { get; set; }
 
-        public string ReleaseYear
-        {
-            get
-            {
-                return "(" + release_date.Substring(0, 4) + ")";
-            }
-        }
-        public string VoteCountString
-        {
-            get
-            {
-                return $"({vote_count})";
-            }
-        }
-        public float VoteAvarageOnScale
-        {
-            get
-            {
-                return vote_average / 2;
-            }
-        }
+        public string ReleaseYear => "(" + release_date.Substring(0, 4) + ")";
+
+        public string VoteCountString => $"({vote_count})";
+
+        public float VoteAverageOnScale => vote_average / 2;
+
         public string DateString
         {
             get
@@ -65,13 +46,7 @@ namespace MovieWorld.Models
                 return $"{runtime}m";
             }
         }
-        public string IMDb_ID
-        {
-            get
-            {
-                return $"https://www.imdb.com/title/{imdb_id}/";
-            }
-        }
+        public string IMDb_ID => $"https://www.imdb.com/title/{imdb_id}/";
 
         public string AllGenres
         {

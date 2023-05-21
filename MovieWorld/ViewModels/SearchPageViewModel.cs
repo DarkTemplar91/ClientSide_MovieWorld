@@ -16,11 +16,8 @@ namespace MovieWorld.ViewModels
         private string keyword;
         public string Keyword
         {
-            get { return keyword; }
-            set
-            {
-                SetProperty(ref keyword, value);
-            }
+            get => keyword;
+            set => SetProperty(ref keyword, value);
         }
 
         public SearchPageViewModel()
@@ -28,17 +25,17 @@ namespace MovieWorld.ViewModels
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
 
-        public ObservableCollection<SearchResult> SearchResults { get; set; } = new ObservableCollection<SearchResult>();
+        public ObservableCollection<SearchResult> SearchResults { get; set; } = new();
 
         public async Task OnNavigatedAsync()
         {
             await RefreshSearchResults(Keyword);
         }
 
-        public async Task RefreshSearchResults(string keyword)
+        public async Task RefreshSearchResults(string searchKeyword)
         {
             SearchResults.Clear();
-            var searchResultModel = await new MovieDBService().GetSearchResult(keyword);
+            var searchResultModel = await new MovieDBService().GetSearchResult(searchKeyword);
             foreach (var result in searchResultModel.results)
             {
                 SearchResults.Add(result);
@@ -64,18 +61,15 @@ namespace MovieWorld.ViewModels
 
         protected override DataTemplate SelectTemplateCore(object item)
         {
-            var searchResult = item as SearchResult;
-
-            switch (searchResult.media_type)
-            {
-                case "movie":
-                    return MovieTemplate;
-                case "tv":
-                    return SeriesTemplate;
-                case "person":
-                    return PersonTemplate;
-                default: return null;
-            }
+            if (item is SearchResult searchResult)
+                return searchResult.media_type switch
+                {
+                    "movie" => MovieTemplate,
+                    "tv" => SeriesTemplate,
+                    "person" => PersonTemplate,
+                    _ => null
+                };
+            return null;
         }
 
     }

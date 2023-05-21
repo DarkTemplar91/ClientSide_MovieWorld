@@ -9,25 +9,22 @@ namespace MovieWorld.Services
 {
     public class MovieDBService
     {
-        private readonly Uri serverUrl = new Uri("https://api.themoviedb.org/3/");
-        private readonly string apiKey = "eecb4764a3dc1e3c49f14ecf0365ad28";
+        private readonly Uri serverUrl = new("https://api.themoviedb.org/3/");
         private readonly string readAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZWNiNDc2NGEzZGMxZTNjNDlmMTRlY2YwMzY1YWQyOCIsInN1YiI6IjY0NTdiZGQwMWI3MGFlMDEyNjBiOTY5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.N5ZVga5oQIgSa2AO7PHMXlZqzZ3X07ecp2Vx8K_tXGo";
 
         private async Task<T> GetAsync<T>(Uri uri)
         {
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", readAccessToken);
-                var response = await client.GetAsync(uri);
-                var json = await response.Content.ReadAsStringAsync();
-                T result = JsonConvert.DeserializeObject<T>(json);
-                return result;
-            }
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", readAccessToken);
+            var response = await client.GetAsync(uri);
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<T>(json);
+            return result;
         }
 
         public async Task<ContentList> GetTrendingContentAsync()
         {
-            return await GetAsync<ContentList>(new Uri(serverUrl, $"trending/all/day"));
+            return await GetAsync<ContentList>(new Uri(serverUrl, "trending/all/day"));
         }
 
         public async Task<MovieModel> GetMovieModelAsync(int movieId)

@@ -39,7 +39,7 @@ namespace MovieWorld.Services
                 var lastPageType = lastPageEntry.SourcePageType;
                 if (lastPageType != frame.CurrentSourcePageType && rootNavigationView is not null)
                 {
-                    NavigationViewItem navigationViewItem = null;
+                    NavigationViewItem navigationViewItem;
 
                     if (lastPageType == typeof(FavoritesPage))
                     {
@@ -54,7 +54,7 @@ namespace MovieWorld.Services
                         navigationViewItem = rootNavigationView.MenuItems.ElementAt(0) as NavigationViewItem;
                     }
                     bool goBackLater = false;
-                    if (navigationViewItem != null && navigationViewItem.IsSelected == false)
+                    if (navigationViewItem is {IsSelected: false})
                     {
                         goBackLater = true;
                         navigationViewItem.IsSelected = true;

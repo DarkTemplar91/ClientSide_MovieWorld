@@ -26,7 +26,7 @@ namespace MovieWorld.Commands
 
             var model = parameter as ContentListItem;
             var user = UserModel.Instance;
-            var modelFound = UserModel.Instance.Favorites.Find(x => x.id == model.id);
+            var modelFound = UserModel.Instance.Favorites.Find(x => model != null && x.id == model.id);
             if (modelFound is null)
             {
                 user.AddContentToFavorites(model);

@@ -50,7 +50,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Stretch="Uniform" Grid.RowSpan="3" Source="{Binding Converter={StaticResource ImagePathConverter}}" HorizontalAlignment="Left"/>
-                    <TextBlock FontSize="20" FontFamily="Bahnschrift" Grid.Column="1" Text="{Binding SearchName}" Margin="0,5,0,0"></TextBlock>
+                    <TextBlock FontSize="20" FontFamily="Bahnschrift" Grid.Row="0" Grid.Column="1" Text="{Binding SearchName}" Margin="0,5,0,0"></TextBlock>
                     <TextBlock Grid.Row="1" FontFamily="Bahnschrift" Grid.Column="1" Text="{Binding release_date}" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Top" Margin="0,5"></TextBlock>
                     <TextBlock Grid.Row="2" Grid.Column="1" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding overview}"></TextBlock>
                 </Grid>
@@ -76,7 +76,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Stretch="Uniform" Grid.RowSpan="3" Source="{Binding Converter={StaticResource ImagePathConverter}}" HorizontalAlignment="Left"/>
-                    <TextBlock FontSize="20" FontFamily="Bahnschrift" Grid.Column="1" Text="{Binding SearchName}" Margin="0,5,0,0"></TextBlock>
+                    <TextBlock FontSize="20" FontFamily="Bahnschrift" Grid.Row="0" Grid.Column="1" Text="{Binding SearchName}" Margin="0,5,0,0"></TextBlock>
                     <TextBlock Grid.Row="1" FontFamily="Bahnschrift" Grid.Column="1" Text="{Binding first_air_date}" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Top" Margin="0,5"></TextBlock>
                     <TextBlock Grid.Row="2" Grid.Column="1" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding overview}"></TextBlock>
                 </Grid>
@@ -101,8 +101,8 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Stretch="Uniform" Grid.RowSpan="3" Source="{Binding Converter={StaticResource ImagePathConverter}}" HorizontalAlignment="Left"/>
-                    <TextBlock FontSize="20" FontFamily="Bahnschrift" Grid.Column="1" Text="{Binding SearchName}" Margin="0,5,0,0"></TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="1" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding KnownForSeperated}" FontStyle="Italic" ></TextBlock>
+                    <TextBlock FontSize="20" FontFamily="Bahnschrift" Grid.Row="0" Grid.Column="1" Text="{Binding SearchName}" Margin="0,5,0,0"></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding KnownForSeparated}" FontStyle="Italic" ></TextBlock>
                 </Grid>
             </Border>
         </DataTemplate>

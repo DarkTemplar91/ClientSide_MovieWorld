@@ -9,8 +9,8 @@ namespace MovieWorld.Models
     public class UserModel
     {
 
-        public List<ContentListItem> Watchlist { get; set; } = new List<ContentListItem>();
-        public List<ContentListItem> Favorites { get; set; } = new List<ContentListItem>();
+        public List<ContentListItem> Watchlist { get; set; } = new();
+        public List<ContentListItem> Favorites { get; set; } = new();
 
         private static UserModel instance;
         private UserModel()
@@ -23,16 +23,14 @@ namespace MovieWorld.Models
         {
             get
             {
-                if (instance is null)
-                    instance = new UserModel();
+                instance ??= new UserModel();
 
                 return instance;
             }
         }
-        public async static Task<UserModel> GetInstanceAsync()
+        public static async Task<UserModel> GetInstanceAsync()
         {
-            if (instance is null)
-                instance = await BuildViewModelAsync();
+            instance ??= await BuildViewModelAsync();
             return instance;
 
         }

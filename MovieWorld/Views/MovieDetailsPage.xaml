@@ -38,7 +38,7 @@
 
         <converters:FavoriteToggleButtonConverter x:Key="FavoriteToggleConverter"/>
         <converters:WatchlistToggleButtonConverter x:Key="WatchlistToggleConverter"/>
-        <converters:IsWarchlistToggledConvereter x:Key="IsWatchlistToggled"/>
+        <converters:IsWatchlistToggledConverter x:Key="IsWatchlistToggled"/>
         <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
         <converters:MovieModelToContentItemConverter x:Key="MovieToItemConverter"/>
         <converters:ImagePathConverter x:Key="ImagePathConverter"/>
@@ -88,7 +88,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Padding="2,0,0,0">
-            <RatingControl Value="{Binding MovieModel.VoteAvarageOnScale}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding MovieModel.VoteCountString}">
+            <RatingControl Value="{Binding MovieModel.VoteAverageOnScale}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding MovieModel.VoteCountString}">
                 <RatingControl.Resources>
                     <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold" />
                 </RatingControl.Resources>
@@ -124,14 +124,13 @@
 
         </StackPanel>
 
-        <GridViewHeaderItem Grid.Row="3" Margin="10,0,0,0" FontFamily="Bahnschrift">
+        <GridViewHeaderItem Grid.Row="3" Grid.Column="0" Margin="10,0,0,0" FontFamily="Bahnschrift">
             <TextBlock>Cast</TextBlock>
         </GridViewHeaderItem>
         <GridView Margin="0,30,0,0"
                   Height="320"
                   VerticalAlignment="Top"
             Grid.Row="3"
-                  Grid.RowSpan="2"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   Padding="18"

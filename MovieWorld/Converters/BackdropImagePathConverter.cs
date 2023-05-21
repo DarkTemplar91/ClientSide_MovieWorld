@@ -9,20 +9,20 @@ namespace MovieWorld.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             string backdrop_path = null;
-            if (value is MovieModel)
+            if (value is MovieModel model)
             {
-                backdrop_path = (value as MovieModel).backdrop_path;
+                backdrop_path = model.backdrop_path;
             }
-            else if (value is SeriesModel)
+            else if (value is SeriesModel seriesModel)
             {
-                backdrop_path = (value as SeriesModel).backdrop_path;
+                backdrop_path = seriesModel.backdrop_path;
             }
 
             if (string.IsNullOrEmpty(backdrop_path))
                 return "ms-appx:///Assets/headshot-placeholder.png";
 
-            string baseUri = $"https://image.tmdb.org/t/p/original";
-            return string.Format("{0}/{1}", baseUri, backdrop_path.Trim('/'));
+            string baseUri = "https://image.tmdb.org/t/p/original";
+            return $"{baseUri}/{backdrop_path.Trim('/')}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

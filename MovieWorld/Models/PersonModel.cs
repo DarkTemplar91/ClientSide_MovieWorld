@@ -4,45 +4,24 @@ namespace MovieWorld.Models
 {
     public class PersonModel
     {
-        public bool adult { get; set; }
         public string biography { get; set; }
         public string birthday { get; set; }
         public object deathday { get; set; }
         public int gender { get; set; }
-        public string homepage { get; set; }
         public int id { get; set; }
         public string imdb_id { get; set; }
         public string known_for_department { get; set; }
         public string name { get; set; }
         public string place_of_birth { get; set; }
-        public float popularity { get; set; }
         public string profile_path { get; set; }
 
-        public string ProfileImagePath
-        {
-            get
+        public string Gender =>
+            gender switch
             {
-                if (profile_path == null || profile_path.Length == 0)
-                    return "ms-appx:///Assets/headshot-placeholder.png";
-
-                string baseUri = $"https://image.tmdb.org/t/p/w500";
-                return string.Format("{0}/{1}", baseUri, profile_path.Trim('/'));
-            }
-        }
-
-        public string Gender
-        {
-            get
-            {
-                if (gender == 0)
-                    return "Not specified";
-
-                if (gender == 1)
-                    return "Female";
-
-                return "Male";
-            }
-        }
+                1 => "Female",
+                2 => "Male",
+                _ => "Not specified"
+            };
 
         public int Age
         {
@@ -75,28 +54,10 @@ namespace MovieWorld.Models
             }
         }
 
-        public string Deathday
-        {
-            get
-            {
-                if (deathday is null)
-                    return "";
-
-                return $"{deathday} ({Age} years old)";
+        public string Deathday => deathday is null ? "" : $"{deathday} ({Age} years old)";
 
 
-
-            }
-        }
-
-
-        public string IMDb_ID
-        {
-            get
-            {
-                return $"https://www.imdb.com/name/{imdb_id}/";
-            }
-        }
+        public string IMDb_ID => $"https://www.imdb.com/name/{imdb_id}/";
     }
 
 

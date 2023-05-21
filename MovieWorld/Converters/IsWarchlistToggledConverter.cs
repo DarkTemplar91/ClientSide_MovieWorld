@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace MovieWorld.Converters
 {
-    public class IsWarchlistToggledConvereter : IValueConverter
+    public class IsWatchlistToggledConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

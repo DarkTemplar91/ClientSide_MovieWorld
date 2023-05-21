@@ -13,56 +13,54 @@ namespace MovieWorld.Converters
 
             string size = "w342";
             string poster_path = null;
-            if (value is SeriesModel)
+            if (value is SeriesModel seriesModel)
             {
-                poster_path = (value as SeriesModel).poster_path;
+                poster_path = seriesModel.poster_path;
                 size = "w500";
             }
-            else if (value is MovieModel)
+            else if (value is MovieModel movieModel)
             {
-                poster_path = (value as MovieModel).poster_path;
+                poster_path = movieModel.poster_path;
                 size = "w500";
             }
-            else if (value is CreditCast)
+            else if (value is CreditCast creditCast)
             {
-                poster_path = (value as CreditCast).poster_path;
+                poster_path = creditCast.poster_path;
                 size = "w185";
             }
-            else if (value is CreditCrew)
+            else if (value is CreditCrew creditCrew)
             {
-                poster_path = (value as CreditCrew).poster_path;
+                poster_path = creditCrew.poster_path;
                 size = "w185";
             }
-            else if (value is Cast)
+            else if (value is Cast cast)
             {
-                poster_path = (value as Cast).profile_path;
+                poster_path = cast.profile_path;
                 size = "w185";
             }
-            else if (value is Crew)
+            else if (value is Crew crew)
             {
-                poster_path = (value as Crew).profile_path;
+                poster_path = crew.profile_path;
                 size = "w185";
             }
 
-            else if (value is PersonModel)
+            else if (value is PersonModel personModel)
             {
-                poster_path = (value as PersonModel).profile_path;
+                poster_path = personModel.profile_path;
                 size = "w500";
             }
-            else if (value is ContentListItem)
+            else if (value is ContentListItem item)
             {
-                var model = value as ContentListItem;
-                poster_path = model.poster_path;
+                poster_path = item.poster_path;
                 if (string.IsNullOrEmpty(poster_path))
                 {
-                    poster_path = model.profile_path;
+                    poster_path = item.profile_path;
                     size = "w185";
                 }
 
             }
-            else if (value is SearchResult)
+            else if (value is SearchResult model)
             {
-                var model = value as SearchResult;
                 poster_path = model.poster_path;
                 if (string.IsNullOrEmpty(poster_path))
                 {
@@ -75,7 +73,7 @@ namespace MovieWorld.Converters
                 return "ms-appx:///Assets/no_image_placeholder.png";
 
             string baseUri = $"https://image.tmdb.org/t/p/{size}";
-            return string.Format("{0}/{1}", baseUri, poster_path.Trim('/'));
+            return $"{baseUri}/{poster_path.Trim('/')}";
 
 
         }

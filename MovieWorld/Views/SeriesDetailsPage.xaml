@@ -95,7 +95,7 @@
 
         <converters:FavoriteToggleButtonConverter x:Key="FavoriteToggleConverter"/>
         <converters:WatchlistToggleButtonConverter x:Key="WatchlistToggleConverter"/>
-        <converters:IsWarchlistToggledConvereter x:Key="IsWatchlistToggled"/>
+        <converters:IsWatchlistToggledConverter x:Key="IsWatchlistToggled"/>
         <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
         <converters:SeriesToContentItemConverter x:Key="SeriesToItemConverter"/>
         <converters:ImagePathConverter x:Key="ImagePathConverter"/>
@@ -140,10 +140,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
-            <RatingControl Value="{Binding SeriesModel.VoteAvarageOnScale}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding SeriesModel.VoteCountString}">
-                <RatingControl.Resources>
-                    <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold" />
-                </RatingControl.Resources>
+            <RatingControl Value="{Binding SeriesModel.VoteAverageOnScale}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding SeriesModel.VoteCountString}">
             </RatingControl>
             <TextBlock Text="{Binding SeriesModel.tagline}"></TextBlock>
             <TextBlock  Text="Overview" HorizontalAlignment="Left" FontSize="26" Margin="0,20,0,10"/>
@@ -197,7 +194,7 @@
         </StackPanel>
         
 
-        <GridViewHeaderItem Grid.Row="3" Margin="10,0,0,0" FontFamily="Bahnschrift">
+        <GridViewHeaderItem Grid.Row="3" Grid.Column="0" Margin="10,0,0,0" FontFamily="Bahnschrift">
             <TextBlock>Cast</TextBlock>
         </GridViewHeaderItem>
         <GridView Margin="0,30,0,0"
