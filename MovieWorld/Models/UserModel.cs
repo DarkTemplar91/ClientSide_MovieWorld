@@ -2,14 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using Windows.ApplicationModel.Chat;
-using Windows.Storage;
 
 namespace MovieWorld.Models
 {
@@ -83,8 +76,8 @@ namespace MovieWorld.Models
             string text = await Windows.Storage.FileIO.ReadTextAsync(file);
 
             Favorites = JsonConvert.DeserializeObject<List<ContentListItem>>(text) ?? new List<ContentListItem>();
-            
-            
+
+
         }
 
         public async Task AddContentToWatchlist(ContentListItem item)
@@ -105,7 +98,7 @@ namespace MovieWorld.Models
                 string json = JsonConvert.SerializeObject(Watchlist);
                 await Windows.Storage.FileIO.WriteTextAsync(file, json);
 
-                
+
             }
             catch (Exception e)
             {
@@ -130,9 +123,9 @@ namespace MovieWorld.Models
                 string json = JsonConvert.SerializeObject(Favorites);
                 await Windows.Storage.FileIO.WriteTextAsync(file, json);
 
-                
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }

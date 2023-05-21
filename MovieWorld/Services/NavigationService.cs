@@ -4,9 +4,6 @@ using MovieWorld.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
 namespace MovieWorld.Services
@@ -40,10 +37,10 @@ namespace MovieWorld.Services
             {
                 var lastPageEntry = frame.BackStack[frame.BackStackDepth - 1];
                 var lastPageType = lastPageEntry.SourcePageType;
-                if(lastPageType != frame.CurrentSourcePageType && rootNavigationView is not null)
+                if (lastPageType != frame.CurrentSourcePageType && rootNavigationView is not null)
                 {
                     NavigationViewItem navigationViewItem = null;
-                    
+
                     if (lastPageType == typeof(FavoritesPage))
                     {
                         navigationViewItem = rootNavigationView.MenuItems.ElementAt(1) as NavigationViewItem;

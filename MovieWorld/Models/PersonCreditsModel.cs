@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MovieWorld.Models
+﻿namespace MovieWorld.Models
 {
 
     public class PersonCreditsModel
@@ -17,7 +11,6 @@ namespace MovieWorld.Models
     public class CreditCast
     {
         public bool adult { get; set; }
-        public string backdrop_path { get; set; }
         public int?[] genre_ids { get; set; }
         public int id { get; set; }
         public string original_language { get; set; }
@@ -40,23 +33,11 @@ namespace MovieWorld.Models
         public string name { get; set; }
         public int episode_count { get; set; }
 
-        public string PosterImagePath
-        {
-            get
-            {
-                if (poster_path is null)
-                    return "ms-appx:///Assets/no_image_placeholder.png";
-
-                string baseUri = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUri, poster_path.Trim('/'));
-            }
-        }
     }
 
     public class CreditCrew
     {
         public bool adult { get; set; }
-        public string backdrop_path { get; set; }
         public int[] genre_ids { get; set; }
         public int id { get; set; }
         public string original_language { get; set; }
@@ -79,17 +60,6 @@ namespace MovieWorld.Models
         public string name { get; set; }
         public int episode_count { get; set; }
 
-        public string PosterImagePath
-        {
-            get
-            {
-                if (poster_path is null)
-                    return "ms-appx:///Assets/no_image_placeholder.png";
-
-                string baseUri = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUri, poster_path.Trim('/'));
-            }
-        }
     }
 
 }

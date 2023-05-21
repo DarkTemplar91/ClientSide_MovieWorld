@@ -1,24 +1,12 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Navigation;
-using MovieWorld.Models;
-using System.Collections.ObjectModel;
-using MovieWorld.Services;
-using MovieWorld.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Net.Mail;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
-using System.Reflection.Metadata;
-using System.Windows.Input;
-using Windows.UI.Xaml.Automation;
-using Windows.ApplicationModel.Contacts;
-using Microsoft.Extensions.DependencyInjection;
-using Windows.UI.Xaml;
+using CommunityToolkit.Mvvm.Input;
 using MovieWorld.Commands;
+using MovieWorld.Models;
+using MovieWorld.Services;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace MovieWorld.ViewModels
 {
@@ -45,16 +33,16 @@ namespace MovieWorld.ViewModels
             List<ContentListItem> actorList = new List<ContentListItem>();
             foreach (var item in recommendedMovies.results)
             {
-                if(item.media_type == "movie")
+                if (item.media_type == "movie")
                     movieList.Add(item);
                 else if (item.media_type == "tv")
                     showList.Add(item);
                 else if (item.media_type == "person")
                     actorList.Add(item);
             }
-            if( movieList.Count > 0)
+            if (movieList.Count > 0)
                 RecommendedContent.Add(new ContentGroup() { Content = movieList, Title = "Movies", Id = "0" });
-            if( showList.Count > 0)
+            if (showList.Count > 0)
                 RecommendedContent.Add(new ContentGroup() { Content = showList, Title = "TV Shows", Id = "1" });
             if (actorList.Count > 0)
                 RecommendedContent.Add(new ContentGroup() { Content = actorList, Title = "Actors", Id = "2" });

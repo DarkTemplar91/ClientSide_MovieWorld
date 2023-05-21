@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:vm="using:MovieWorld.ViewModels">
+    xmlns:vm="using:MovieWorld.ViewModels" xmlns:converters="using:MovieWorld.Converters">
 
     <Page.DataContext>
         <vm:PersonDetailsViewModel x:Name="ViewModel" />
@@ -34,6 +34,8 @@
             <Setter Property="FontFamily" Value="Segoe"></Setter>
 
         </Style>
+
+        <converters:ImagePathConverter x:Key="ImagePathConverter"/>
     </Page.Resources>
 
 
@@ -53,7 +55,7 @@
                 <Border.Background>
                     <ImageBrush Stretch="UniformToFill">
                         <ImageBrush.ImageSource>
-                            <BitmapImage DecodePixelWidth="400" UriSource="{Binding PersonModel.ProfileImagePath}"></BitmapImage>
+                            <BitmapImage DecodePixelWidth="400" UriSource="{Binding PersonModel, Converter={StaticResource ImagePathConverter}}"></BitmapImage>
                         </ImageBrush.ImageSource>
                     </ImageBrush>
                 </Border.Background>
@@ -106,7 +108,7 @@
                                     <Border.Background>
                                         <ImageBrush Stretch="Uniform">
                                             <ImageBrush.ImageSource>
-                                                <BitmapImage DecodePixelWidth="200" UriSource="{Binding PosterImagePath}"></BitmapImage>
+                                                <BitmapImage DecodePixelWidth="200" UriSource="{Binding Converter={StaticResource ImagePathConverter}}"></BitmapImage>
                                             </ImageBrush.ImageSource>
                                         </ImageBrush>
                                     </Border.Background>
@@ -144,7 +146,7 @@
                                     <Border.Background>
                                         <ImageBrush Stretch="Uniform">
                                             <ImageBrush.ImageSource>
-                                                <BitmapImage DecodePixelWidth="200" UriSource="{Binding PosterImagePath}"></BitmapImage>
+                                                <BitmapImage DecodePixelWidth="200" UriSource="{Binding Converter={StaticResource ImagePathConverter}}"></BitmapImage>
                                             </ImageBrush.ImageSource>
                                         </ImageBrush>
                                     </Border.Background>

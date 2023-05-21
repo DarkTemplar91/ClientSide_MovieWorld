@@ -2,12 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MovieWorld.Models;
 using MovieWorld.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MovieWorld.ViewModels
@@ -45,7 +40,7 @@ namespace MovieWorld.ViewModels
         {
             SearchResults.Clear();
             var searchResultModel = await new MovieDBService().GetSearchResult(keyword);
-            foreach( var result in searchResultModel.results )
+            foreach (var result in searchResultModel.results)
             {
                 SearchResults.Add(result);
             }

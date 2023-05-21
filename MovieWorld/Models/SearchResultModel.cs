@@ -1,9 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace MovieWorld.Models
 {
@@ -20,7 +15,6 @@ namespace MovieWorld.Models
     public class SearchResult
     {
         public bool adult { get; set; }
-        public string backdrop_path { get; set; }
         public int id { get; set; }
         public string title { get; set; }
         public string original_language { get; set; }
@@ -67,28 +61,6 @@ namespace MovieWorld.Models
                         return "";
 
                 }
-            }
-        }
-
-        public string ImagePath
-        {
-            get
-            {
-                if (media_type == "person")
-                {
-                    if (profile_path == null || profile_path.Length == 0)
-                        return "ms-appx:///Assets/headshot-placeholder.png";
-
-                    string baseUriProfile = $"https://image.tmdb.org/t/p/w500";
-                    return string.Format("{0}/{1}", baseUriProfile, profile_path.Trim('/'));
-                }
-
-                if (poster_path == null || poster_path.Length == 0)
-                    return "ms-appx:///Assets/headshot-placeholder.png";
-
-                string baseUriPoster = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUriPoster, poster_path.Trim('/'));
-
             }
         }
 

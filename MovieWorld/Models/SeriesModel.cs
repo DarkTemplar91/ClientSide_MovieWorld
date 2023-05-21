@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieWorld.Models
 {
@@ -38,29 +35,6 @@ namespace MovieWorld.Models
         public float vote_average { get; set; }
         public int vote_count { get; set; }
 
-        public string BackdropImagePath
-        {
-            get
-            {
-                if (backdrop_path == null || backdrop_path.Length == 0)
-                    return "ms-appx:///Assets/headshot-placeholder.png";
-
-
-                string baseUri = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUri, backdrop_path.Trim('/'));
-            }
-        }
-        public string PosterImagePath
-        {
-            get
-            {
-                if (poster_path == null || poster_path.Length == 0)
-                    return "ms-appx:///Assets/headshot-placeholder.png";
-
-                string baseUri = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUri, poster_path.Trim('/'));
-            }
-        }
         public string ReleaseYear
         {
             get
@@ -164,13 +138,13 @@ namespace MovieWorld.Models
         {
             get
             {
-                return $"{vote_average*10}/100";
+                return $"{vote_average * 10}/100";
             }
         }
 
         public float VoteValueScaled
         {
-            get { return vote_average*10; }
+            get { return vote_average * 10; }
         }
 
         public string AirDateString

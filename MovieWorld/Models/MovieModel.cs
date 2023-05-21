@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace MovieWorld.Models
 {
-
-
-
     public class MovieModel
     {
         public bool adult { get; set; }
@@ -28,34 +25,11 @@ namespace MovieWorld.Models
         public float vote_average { get; set; }
         public int vote_count { get; set; }
 
-        public string BackdropImagePath
-        {
-            get
-            {
-                if (backdrop_path == null || backdrop_path.Length == 0)
-                    return "ms-appx:///Assets/headshot-placeholder.png";
-
-
-                string baseUri = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUri, backdrop_path.Trim('/'));
-            }
-        }
-        public string PosterImagePath
-        {
-            get
-            {
-                if (poster_path == null || poster_path.Length == 0)
-                    return "ms-appx:///Assets/headshot-placeholder.png";
-
-                string baseUri = $"https://image.tmdb.org/t/p/original";
-                return string.Format("{0}/{1}", baseUri, poster_path.Trim('/'));
-            }
-        }
         public string ReleaseYear
         {
             get
             {
-                return "("+ release_date.Substring(0, 4)+")";
+                return "(" + release_date.Substring(0, 4) + ")";
             }
         }
         public string VoteCountString
@@ -85,7 +59,7 @@ namespace MovieWorld.Models
         {
             get
             {
-                if(runtime >= 60)
+                if (runtime >= 60)
                     return $"{runtime / 60}h {runtime % 60}m";
 
                 return $"{runtime}m";

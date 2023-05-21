@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieWorld.Models
 {
@@ -83,12 +79,12 @@ namespace MovieWorld.Models
         {
             get
             {
-                if( deathday is null)
+                if (deathday is null)
                     return "";
 
                 return $"{deathday} ({Age} years old)";
 
-                
+
 
             }
         }

@@ -1,9 +1,5 @@
 ﻿using MovieWorld.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
 namespace MovieWorld.Converters
@@ -12,7 +8,7 @@ namespace MovieWorld.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if(value == null)
+            if (value == null)
                 return null;
             var model = value as MovieModel;
             return new ContentListItem()

@@ -41,6 +41,8 @@
         <converters:IsWarchlistToggledConvereter x:Key="IsWatchlistToggled"/>
         <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
         <converters:MovieModelToContentItemConverter x:Key="MovieToItemConverter"/>
+        <converters:ImagePathConverter x:Key="ImagePathConverter"/>
+        <converters:BackdropImagePathConverter x:Key="BackdropPathConverter"/>
     </Page.Resources>
     <Grid>
 
@@ -52,7 +54,7 @@
         </Grid.RowDefinitions>
 
         <Grid.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="{Binding MovieModel.BackdropImagePath}" Opacity="0.2"/>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{Binding MovieModel, Converter={StaticResource BackdropPathConverter}}" Opacity="0.2"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
@@ -62,7 +64,7 @@
 
 
         <Border Padding="18" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Image Source="{Binding MovieModel.PosterImagePath}" Stretch="Uniform"/>
+            <Image Source="{Binding MovieModel, Converter={StaticResource ImagePathConverter}}" Stretch="Uniform"/>
         </Border>
 
         <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="2,0,0,0">
@@ -146,7 +148,7 @@
                             <Border.Background>
                                 <ImageBrush Stretch="Uniform">
                                     <ImageBrush.ImageSource>
-                                        <BitmapImage DecodePixelWidth="200" UriSource="{Binding ProfileImagePath}"></BitmapImage>
+                                        <BitmapImage DecodePixelWidth="200" UriSource="{Binding Converter={StaticResource ImagePathConverter}}"></BitmapImage>
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Border.Background>

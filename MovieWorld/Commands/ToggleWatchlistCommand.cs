@@ -1,11 +1,6 @@
 ﻿using MovieWorld.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.System;
 
 namespace MovieWorld.Commands
 {
@@ -15,7 +10,7 @@ namespace MovieWorld.Commands
 
         public bool CanExecute(object parameter)
         {
-            if(parameter == null)
+            if (parameter == null)
                 return false;
 
             if (parameter.GetType() != typeof(ContentListItem))
@@ -32,13 +27,13 @@ namespace MovieWorld.Commands
             var model = parameter as ContentListItem;
             var user = UserModel.Instance;
             var modelFound = UserModel.Instance.Watchlist.Find(x => x.id == model.id);
-            if(modelFound is null)
+            if (modelFound is null)
             {
                 user.AddContentToWatchlist(model);
                 return;
             }
             user.RemoveContentFromWatchlist(modelFound);
-            
+
         }
     }
 }

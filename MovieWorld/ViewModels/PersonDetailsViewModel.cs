@@ -3,14 +3,8 @@ using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using MovieWorld.Models;
 using MovieWorld.Services;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace MovieWorld.ViewModels
 {
@@ -45,7 +39,6 @@ namespace MovieWorld.ViewModels
 
         public async Task OnNavigatedAsync()
         {
-            //TODO: Create a singleton?
             var service = new MovieDBService();
             PersonModel = await service.GetPersonDetailsAsync(PersonId);
             Credits = await service.GetPersonCredits(PersonId);
@@ -128,7 +121,7 @@ namespace MovieWorld.ViewModels
                 ShowCrewCredit = "Visible";
             }
 
-            if(PersonModel?.deathday is null)
+            if (PersonModel?.deathday is null)
             {
                 ShowDeathDate = "Collapsed";
             }

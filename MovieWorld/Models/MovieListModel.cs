@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.WebRequestMethods;
+﻿using System.Collections.Generic;
 
 namespace MovieWorld.Models
 {
@@ -26,7 +20,6 @@ namespace MovieWorld.Models
     public class ContentListItem
     {
         public bool adult { get; set; }
-        public string backdrop_path { get; set; }
         public int id { get; set; }
         public string title { get; set; }
         public string name { get; set; }
@@ -54,24 +47,6 @@ namespace MovieWorld.Models
             }
         }
 
-        public string PosterImagePath
-        {
-            get
-            {
-                if (poster_path is null && profile_path is null)
-                    return "ms-appx:///Assets/headshot-placeholder.png";
-
-
-                string baseUri = $"https://image.tmdb.org/t/p/w500";
-                if (poster_path is not null)
-                {
-                    return string.Format("{0}/{1}", baseUri, poster_path.Trim('/'));
-                }
-
-                return string.Format("{0}/{1}", baseUri, profile_path.Trim('/'));
-            }
-        }
-
         public string VoteString
         {
             get
@@ -84,7 +59,7 @@ namespace MovieWorld.Models
         {
             get
             {
-                return  media_type == "person" ? "Collapsed" : "Visible";
+                return media_type == "person" ? "Collapsed" : "Visible";
             }
         }
 

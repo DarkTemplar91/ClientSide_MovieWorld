@@ -1,17 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using MovieWorld.Commands;
 using MovieWorld.Models;
 using MovieWorld.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
-using MovieWorld.Commands;
+using Windows.UI.Xaml.Controls;
 
 namespace MovieWorld.ViewModels
 {

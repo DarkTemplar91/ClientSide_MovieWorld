@@ -3,15 +3,10 @@ using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using MovieWorld.Models;
 using MovieWorld.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
-using System.Net.Http.Headers;
+using Windows.UI.Xaml.Controls;
 
 namespace MovieWorld.ViewModels
 {
@@ -34,7 +29,7 @@ namespace MovieWorld.ViewModels
         }
 
         public ObservableCollection<SearchResult> SearchResults { get; set; } = new ObservableCollection<SearchResult>();
-        
+
         public async Task OnNavigatedAsync()
         {
             await RefreshSearchResults(Keyword);
@@ -71,7 +66,7 @@ namespace MovieWorld.ViewModels
         {
             var searchResult = item as SearchResult;
 
-            switch(searchResult.media_type)
+            switch (searchResult.media_type)
             {
                 case "movie":
                     return MovieTemplate;

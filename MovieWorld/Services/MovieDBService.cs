@@ -2,9 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MovieWorld.Services
@@ -64,9 +62,9 @@ namespace MovieWorld.Services
         public async Task<List<EpisodeList>> GetEpisodeList(int showId, int seasonCount)
         {
             List<EpisodeList> allEpisodes = new List<EpisodeList>();
-            for(int i = 0; i < seasonCount; i++)
+            for (int i = 0; i < seasonCount; i++)
             {
-                var episodesInSeason = await GetAsync<EpisodeList>(new Uri(serverUrl, $"tv/{showId}/season/{i+1}"));
+                var episodesInSeason = await GetAsync<EpisodeList>(new Uri(serverUrl, $"tv/{showId}/season/{i + 1}"));
                 allEpisodes.Add(episodesInSeason);
             }
 

@@ -2,12 +2,7 @@
 using CommunityToolkit.Mvvm.DependencyInjection;
 using MovieWorld.Models;
 using MovieWorld.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieWorld.ViewModels
 {
@@ -19,7 +14,7 @@ namespace MovieWorld.ViewModels
             if (UserModel.Instance.Watchlist is null)
                 return;
 
-            foreach(var item in UserModel.Instance.Watchlist)
+            foreach (var item in UserModel.Instance.Watchlist)
             {
                 ContentLists.Add(item);
             }

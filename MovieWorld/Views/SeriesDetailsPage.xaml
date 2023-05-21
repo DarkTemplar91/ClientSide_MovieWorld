@@ -98,6 +98,8 @@
         <converters:IsWarchlistToggledConvereter x:Key="IsWatchlistToggled"/>
         <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
         <converters:SeriesToContentItemConverter x:Key="SeriesToItemConverter"/>
+        <converters:ImagePathConverter x:Key="ImagePathConverter"/>
+        <converters:BackdropImagePathConverter x:Key="BackdropPathConverter"/>
     </Page.Resources>
 
 
@@ -111,7 +113,7 @@
         </Grid.RowDefinitions>
 
         <Grid.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="{Binding SeriesModel.BackdropImagePath}" Opacity="0.2"/>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{Binding SeriesModel, Converter={StaticResource BackdropPathConverter}}" Opacity="0.2"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
@@ -122,7 +124,7 @@
 
 
 
-        <Image Source="{Binding SeriesModel.PosterImagePath}" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" Stretch="Uniform"/>
+        <Image Source="{Binding SeriesModel, Converter={StaticResource ImagePathConverter}}" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" Stretch="Uniform"/>
         <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,0,0">
             <StackPanel  Orientation="Horizontal">
                 <TextBlock Text="{Binding SeriesModel.name}"  FontFamily="Bahnschrift" FontSize="30"/>
@@ -214,7 +216,7 @@
                     <Grid Width="200" Height="250" Margin="10">
                         <Border CornerRadius="8,0,8,0">
                             <Border.Background>
-                                <ImageBrush Stretch="Uniform" ImageSource="{Binding ProfileImagePath}"/>
+                                <ImageBrush Stretch="Uniform" ImageSource="{Binding Converter={StaticResource ImagePathConverter}}"/>
                             </Border.Background>
                         </Border>
                         <Border VerticalAlignment="Bottom" Background="#AA000000">

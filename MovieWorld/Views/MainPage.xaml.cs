@@ -1,17 +1,10 @@
-﻿using Windows.UI.Xaml.Controls;
-using CommunityToolkit.Mvvm.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using MovieWorld.Models;
 using MovieWorld.Services;
 using System.Linq;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System;
-using MovieWorld.Models;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.Networking.BackgroundTransfer;
-using MovieWorld.ViewModels;
-using System.Reflection;
-using Windows.UI.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -48,7 +41,7 @@ namespace MovieWorld.Views
         private void NavigationView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             var navigationService = Ioc.Default.GetRequiredService<INavigationService>();
-            if(navigationService.CanGoBack)
+            if (navigationService.CanGoBack)
             {
                 navigationService.GoBack(NavView);
             }
@@ -56,7 +49,7 @@ namespace MovieWorld.Views
 
         private async void controlsSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            if ( args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
                 ViewModel.RefreshSearchResults(sender.Text);
             }
@@ -95,5 +88,13 @@ namespace MovieWorld.Views
         {
             controlsSearchBox.Focus(Windows.UI.Xaml.FocusState.Keyboard);
         }
+
+        //TODO: Create converters instead of properties and use those with binding
+        //TODO: Change binging to x:bind where possible
+        //TODO: Test
+        //TODO: Create resources with labels, texts etc.
+        //TODO: Refactor, look for code smells
+        //TODO: Comment Code
+        //TODO: Compare application to spec
     }
 }

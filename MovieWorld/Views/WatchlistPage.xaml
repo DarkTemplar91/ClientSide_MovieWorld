@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:vm="using:MovieWorld.ViewModels">
+    xmlns:vm="using:MovieWorld.ViewModels" xmlns:converters="using:MovieWorld.Converters">
 
 
     <Page.Background>
@@ -31,6 +31,8 @@
             <Setter Property="FontFamily" Value="Segoe"/>
         </Style>
 
+
+        <converters:ImagePathConverter x:Key="ImagePathConverter"/>
     </Page.Resources>
 
     <Grid>
@@ -63,7 +65,7 @@
 
                         <Border CornerRadius="8,0,8,0">
                             <Border.Background>
-                                <ImageBrush Stretch="Uniform" ImageSource="{Binding PosterImagePath}"/>
+                                <ImageBrush Stretch="Uniform" ImageSource="{Binding Converter={StaticResource ImagePathConverter}}"/>
                             </Border.Background>
 
                         </Border>
