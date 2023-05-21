@@ -43,6 +43,7 @@
         <converters:MovieModelToContentItemConverter x:Key="MovieToItemConverter"/>
         <converters:ImagePathConverter x:Key="ImagePathConverter"/>
         <converters:BackdropImagePathConverter x:Key="BackdropPathConverter"/>
+        <converters:RuntimeStringConverter x:Key="RuntimeConverter" />
     </Page.Resources>
     <Grid>
 
@@ -79,7 +80,7 @@
                 <AppBarSeparator></AppBarSeparator>
                 <TextBlock Text="{Binding MovieModel.AllGenres}" VerticalAlignment="Center"/>
                 <AppBarSeparator></AppBarSeparator>
-                <TextBlock Text="{Binding MovieModel.RuntimeString}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding MovieModel.runtime, Converter={StaticResource RuntimeConverter}}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <ToggleButton Command="{Binding FavoritesCommand}" CommandParameter="{Binding MovieModel, Converter={StaticResource MovieToItemConverter}}" Margin="5,0" Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" IsChecked="{Binding MovieModel.id, Converter={StaticResource IsFavoritesToggled}}" FontFamily="Segoe MDL2 Assets"/>

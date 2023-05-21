@@ -36,16 +36,6 @@ namespace MovieWorld.Models
                 return asDate.ToString("dd/MM/yyyy");
             }
         }
-        public string RuntimeString
-        {
-            get
-            {
-                if (runtime >= 60)
-                    return $"{runtime / 60}h {runtime % 60}m";
-
-                return $"{runtime}m";
-            }
-        }
         public string IMDb_ID => $"https://www.imdb.com/title/{imdb_id}/";
 
         public string AllGenres

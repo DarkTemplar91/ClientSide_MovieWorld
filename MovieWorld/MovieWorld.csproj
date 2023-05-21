@@ -127,7 +127,10 @@
     <Compile Include="Converters\ImagePathConverter.cs" />
     <Compile Include="Converters\IsFavoriteToggledConverter.cs" />
     <Compile Include="Converters\IsWarchlistToggledConverter.cs" />
+    <Compile Include="Converters\MediaTypeToSymbolConverter.cs" />
+    <Compile Include="Converters\MediaTypeToVisibilityConverter.cs" />
     <Compile Include="Converters\MovieModelToContentItemConverter.cs" />
+    <Compile Include="Converters\RuntimeStringConverter.cs" />
     <Compile Include="Converters\SeriesToContentItemConverter.cs" />
     <Compile Include="Converters\WatchlistToggleButtonConverter.cs" />
     <Compile Include="Models\CastModel.cs" />

@@ -32,6 +32,15 @@
             <Setter Property="FontFamily" Value="Segoe"></Setter>
         </Style>
 
+        <converters:FavoriteToggleButtonConverter x:Key="FavoriteToggleConverter"/>
+        <converters:WatchlistToggleButtonConverter x:Key="WatchlistToggleConverter"/>
+        <converters:IsWatchlistToggledConverter x:Key="IsWatchlistToggled"/>
+        <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
+        <converters:SeriesToContentItemConverter x:Key="SeriesToItemConverter"/>
+        <converters:ImagePathConverter x:Key="ImagePathConverter"/>
+        <converters:BackdropImagePathConverter x:Key="BackdropPathConverter"/>
+        <converters:RuntimeStringConverter x:Key="RuntimeConverter" />
+        
         <DataTemplate x:Key="SeasonTemplate" x:DataType="model:EpisodeList">
             <muxc:TreeViewItem ItemsSource="{Binding episodes}">
                 <StackPanel Orientation="Horizontal">
@@ -81,7 +90,7 @@
 
                     <StackPanel Grid.Column="1" Margin="0,0,10,0">
                         <TextBlock HorizontalAlignment="Right" Margin="5,0,0,0" Text="{Binding AirDateString}"></TextBlock>
-                        <TextBlock HorizontalAlignment="Right" Margin="5,0,0,0" Text="{Binding RuntimeString}"></TextBlock>
+                        <TextBlock HorizontalAlignment="Right" Margin="5,0,0,0" Text="{Binding runtime, Converter={StaticResource RuntimeConverter}}"></TextBlock>
                     </StackPanel>
 
                 </Grid>
@@ -93,13 +102,7 @@
             SeasonTemplate="{StaticResource SeasonTemplate}"
             EpisodeTemplate="{StaticResource EpisodeTemplate}" />
 
-        <converters:FavoriteToggleButtonConverter x:Key="FavoriteToggleConverter"/>
-        <converters:WatchlistToggleButtonConverter x:Key="WatchlistToggleConverter"/>
-        <converters:IsWatchlistToggledConverter x:Key="IsWatchlistToggled"/>
-        <converters:IsFavoriteToggledConverter x:Key="IsFavoritesToggled"/>
-        <converters:SeriesToContentItemConverter x:Key="SeriesToItemConverter"/>
-        <converters:ImagePathConverter x:Key="ImagePathConverter"/>
-        <converters:BackdropImagePathConverter x:Key="BackdropPathConverter"/>
+        
     </Page.Resources>
 
 

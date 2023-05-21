@@ -68,8 +68,6 @@ namespace MovieWorld.Models
         public int? runtime { get; set; }
         public float vote_average { get; set; }
 
-        public string RuntimeString => runtime >= 60 ? $"{runtime / 60}h {runtime % 60}m" : $"{runtime}m";
-
         public string VoteString => $"{vote_average * 10}/100";
 
         public float VoteValueScaled => vote_average * 10;

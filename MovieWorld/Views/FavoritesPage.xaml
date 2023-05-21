@@ -33,6 +33,7 @@
         </Style>
 
         <converters:ImagePathConverter x:Key="ImagePathConverter"/>
+        <converters:MediaTypeToVisibilityConverter x:Key="VisibilityConverter"/>
 
     </Page.Resources>
 
@@ -75,8 +76,8 @@
                                 <TextBlock Text="{Binding Name}" Margin="12,12,12,4" Foreground="White"/>
                                 <Grid>
                                     <StackPanel Orientation="Horizontal" Margin="12,0,0,6">
-                                        <TextBlock VerticalAlignment="Center" Visibility="{Binding ShowIfNotPerson}" Text="{Binding VoteString}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                                        <FontIcon VerticalAlignment="Center" Visibility="{Binding ShowIfNotPerson}" Glyph="&#xEB51;" FontSize="14" Foreground="Red" Margin="2,0,0,0"/>
+                                        <TextBlock VerticalAlignment="Center" Visibility="{Binding media_type, Converter={StaticResource VisibilityConverter}}" Text="{Binding VoteString}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                        <FontIcon VerticalAlignment="Center" Visibility="{Binding media_type, Converter={StaticResource VisibilityConverter}}" Glyph="&#xEB51;" FontSize="14" Foreground="Red" Margin="2,0,0,0"/>
                                     </StackPanel>
                                 </Grid>
 

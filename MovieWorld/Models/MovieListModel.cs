@@ -32,7 +32,6 @@ namespace MovieWorld.Models
 
         public string VoteString => $"{vote_average:F1}/10";
 
-        public string ShowIfNotPerson => media_type == "person" ? "Collapsed" : "Visible";
     }
 
 }

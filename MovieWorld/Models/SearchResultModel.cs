@@ -24,15 +24,6 @@ namespace MovieWorld.Models
 
         public string SearchName => media_type == "movie" ? title : name;
 
-        public string SymbolName =>
-            media_type switch
-            {
-                "movie" => "Video",
-                "tv" => "GoToStart",
-                "person" => "People",
-                _ => ""
-            };
-
         public string KnownForSeparated
         {
             get
