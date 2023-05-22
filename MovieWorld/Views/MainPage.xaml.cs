@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Uwp.Notifications;
 using MovieWorld.Models;
 using MovieWorld.Services;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace MovieWorld.Views
     {
         private string queryText = "";
 
+        /// <summary>
+        /// Constructor the adds the Navigation and MoveDB service to the IoC container, and select the 
+        /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
@@ -28,18 +32,30 @@ namespace MovieWorld.Views
                 ContentFrame.GoBack();
         }
 
-        private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        /// <summary>
+        /// Event handler for the navigation items selection changed event. Navigates to the given page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void NavigationView_SelectionChanged(NavigationView sender,
+            NavigationViewSelectionChangedEventArgs args)
         {
 
-            var selectedItem = (NavigationViewItem)args.SelectedItem;
+            var selectedItem = (NavigationViewItem) args.SelectedItem;
             if (selectedItem != null)
             {
-                string selectedItemTag = ((string)selectedItem.Tag);
+                string selectedItemTag = ((string) selectedItem.Tag);
                 ViewModel.NavigateToNavItemPage(selectedItemTag);
             }
 
+
         }
 
+        /// <summary>
+        /// Event handler for the back request. Traverses back in the frame stack
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void NavigationView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             var navigationService = Ioc.Default.GetRequiredService<INavigationService>();
@@ -48,7 +64,11 @@ namespace MovieWorld.Views
                 navigationService.GoBack(NavView);
             }
         }
-
+        /// <summary>
+        /// Called when the text is changed in the <c>AutoSuggestBox</c>. Refreshes search results.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void ControlsSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
@@ -80,19 +100,23 @@ namespace MovieWorld.Views
                 ViewModel.NavigateToSearchPage(args.QueryText);
             }
         }
-
+        /// <summary>
+        /// If a content item was chosen, fill out the box with the name of the content
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void ControlsSearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             sender.Text = ((SearchResult) args.SelectedItem).SearchName;
         }
-
+        /// <summary>
+        /// Button accelerator. When CTRL+F is pressed, focuses the <c>AutoSuggestBox</c>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void CtrlF_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
             ControlsSearchBox.Focus(Windows.UI.Xaml.FocusState.Keyboard);
         }
-
-        //TODO: Test
-        //TODO: Comment Code
-        //TODO: Compare application to spec
     }
 }

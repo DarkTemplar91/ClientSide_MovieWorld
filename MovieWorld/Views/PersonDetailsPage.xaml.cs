@@ -1,4 +1,5 @@
-﻿using MovieWorld.Models;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using MovieWorld.Models;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -15,20 +16,28 @@ namespace MovieWorld.Views
         {
             this.InitializeComponent();
         }
-
+        /// <summary>
+        /// Called when the page was navigated to. Calls the view model's own method
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter != null) ViewModel.PersonId = (int) e.Parameter;
             ViewModel?.OnNavigatedAsync();
         }
 
+        /// <summary>
+        /// If an item was selected tries to load the content page,
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var obj = e.ClickedItem;
             if (obj.GetType() == typeof(CreditCrew))
-                ViewModel.NavigateToMoviePage(((CreditCrew)obj).id);
+                ViewModel.NavigateToMoviePage(((CreditCrew) obj).id);
             else if (obj.GetType() == typeof(CreditCast))
-                ViewModel.NavigateToMoviePage(((CreditCast)obj).id);
+                ViewModel.NavigateToMoviePage(((CreditCast) obj).id);
 
         }
     }

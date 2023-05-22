@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Uwp.Notifications;
 using MovieWorld.Commands;
 using MovieWorld.Models;
 using MovieWorld.Services;
@@ -61,11 +62,19 @@ namespace MovieWorld.ViewModels
         /// <returns></returns>
         public async Task OnNavigatedAsync()
         {
-            var service = Ioc.Default.GetRequiredService<MovieDBService>();
-            SeriesModel = await service.GetSeriesModelAsync(ShowId);
-            CastModel = await service.GetSeriesCastAsync(ShowId);
-            EpisodeList = await service.GetEpisodeList(ShowId, SeriesModel.number_of_seasons);
-
+            try
+            {
+                var service = Ioc.Default.GetRequiredService<MovieDBService>();
+                SeriesModel = await service.GetSeriesModelAsync(ShowId);
+                CastModel = await service.GetSeriesCastAsync(ShowId);
+                EpisodeList = await service.GetEpisodeList(ShowId, SeriesModel.number_of_seasons);
+            }
+            catch
+            {
+                new ToastContentBuilder()
+                    .AddText("An error occurred", hintMaxLines: 1)
+                    .AddText("We ran into an unexpected problem.").Show();
+            }
         }
         /// <summary>
         /// Navigates to the person page indicated by the id.

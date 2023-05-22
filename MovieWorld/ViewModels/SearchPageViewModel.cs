@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Toolkit.Uwp.Notifications;
 using MovieWorld.Models;
 using MovieWorld.Services;
 using System.Collections.ObjectModel;
@@ -42,7 +43,16 @@ namespace MovieWorld.ViewModels
         /// <returns></returns>
         public async Task OnNavigatedAsync()
         {
-            await RefreshSearchResults(Keyword);
+            try
+            {
+                await RefreshSearchResults(Keyword);
+            }
+            catch
+            {
+                new ToastContentBuilder()
+                    .AddText("An error occurred", hintMaxLines: 1)
+                    .AddText("We ran into an unexpected problem.").Show();
+            }
         }
         /// <summary>
         /// Refreshes the results. Uses the keyword for the query.
@@ -51,11 +61,21 @@ namespace MovieWorld.ViewModels
         /// <returns></returns>
         public async Task RefreshSearchResults(string searchKeyword)
         {
-            SearchResults.Clear();
-            var searchResultModel = await Ioc.Default.GetRequiredService<MovieDBService>().GetSearchResult(searchKeyword);
-            foreach (var result in searchResultModel.results)
+            try
             {
-                SearchResults.Add(result);
+                SearchResults.Clear();
+                var searchResultModel =
+                    await Ioc.Default.GetRequiredService<MovieDBService>().GetSearchResult(searchKeyword);
+                foreach (var result in searchResultModel.results)
+                {
+                    SearchResults.Add(result);
+                }
+            }
+            catch
+            {
+                new ToastContentBuilder()
+                    .AddText("An error occurred", hintMaxLines: 1)
+                    .AddText("We ran into an unexpected problem.").Show();
             }
         }
         /// <summary>

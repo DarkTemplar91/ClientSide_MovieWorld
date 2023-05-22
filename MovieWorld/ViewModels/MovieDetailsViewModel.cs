@@ -1,9 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using MovieWorld.Commands;
 using MovieWorld.Models;
 using MovieWorld.Services;
 using System.Threading.Tasks;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace MovieWorld.ViewModels
 {
@@ -55,9 +57,18 @@ namespace MovieWorld.ViewModels
         /// <returns></returns>
         public async Task OnNavigatedAsync()
         {
-            var service = Ioc.Default.GetRequiredService<MovieDBService>();
-            MovieModel = await service.GetMovieModelAsync(MovieId);
-            MovieCastModel = await service.GetMovieCastAsync(MovieId);
+            try
+            {
+                var service = Ioc.Default.GetRequiredService<MovieDBService>();
+                MovieModel = await service.GetMovieModelAsync(MovieId);
+                MovieCastModel = await service.GetMovieCastAsync(MovieId);
+            }
+            catch
+            {
+                new ToastContentBuilder()
+                    .AddText("An error occurred", hintMaxLines: 1)
+                    .AddText("We ran into an unexpected problem.").Show();
+            }
 
         }
         /// <summary>

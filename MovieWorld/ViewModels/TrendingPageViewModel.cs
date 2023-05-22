@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using MovieWorld.Commands;
@@ -7,6 +8,7 @@ using MovieWorld.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace MovieWorld.ViewModels
 {
@@ -42,32 +44,42 @@ namespace MovieWorld.ViewModels
         /// <returns></returns>
         private async Task OnNavigatedAsync()
         {
-            var service = Ioc.Default.GetRequiredService<MovieDBService>();
-            var recommendedMovies = await service.GetTrendingContentAsync();
-            List<ContentListItem> movieList = new();
-            List<ContentListItem> showList = new();
-            List<ContentListItem> actorList = new();
-            foreach (var item in recommendedMovies.results)
+            try
             {
-                switch (item.media_type)
+                var service = Ioc.Default.GetRequiredService<MovieDBService>();
+                var recommendedMovies = await service.GetTrendingContentAsync();
+                List<ContentListItem> movieList = new();
+                List<ContentListItem> showList = new();
+                List<ContentListItem> actorList = new();
+                foreach (var item in recommendedMovies.results)
                 {
-                    case "movie":
-                        movieList.Add(item);
-                        break;
-                    case "tv":
-                        showList.Add(item);
-                        break;
-                    case "person":
-                        actorList.Add(item);
-                        break;
+                    switch (item.media_type)
+                    {
+                        case "movie":
+                            movieList.Add(item);
+                            break;
+                        case "tv":
+                            showList.Add(item);
+                            break;
+                        case "person":
+                            actorList.Add(item);
+                            break;
+                    }
                 }
+
+                if (movieList.Count > 0)
+                    RecommendedContent.Add(new ContentGroup() {Content = movieList, Title = "Movies", Id = "0"});
+                if (showList.Count > 0)
+                    RecommendedContent.Add(new ContentGroup() {Content = showList, Title = "TV Shows", Id = "1"});
+                if (actorList.Count > 0)
+                    RecommendedContent.Add(new ContentGroup() {Content = actorList, Title = "Actors", Id = "2"});
             }
-            if (movieList.Count > 0)
-                RecommendedContent.Add(new ContentGroup() { Content = movieList, Title = "Movies", Id = "0" });
-            if (showList.Count > 0)
-                RecommendedContent.Add(new ContentGroup() { Content = showList, Title = "TV Shows", Id = "1" });
-            if (actorList.Count > 0)
-                RecommendedContent.Add(new ContentGroup() { Content = actorList, Title = "Actors", Id = "2" });
+            catch
+            {
+                new ToastContentBuilder()
+                    .AddText("An error occurred", hintMaxLines: 1)
+                    .AddText("We ran into an unexpected problem.").Show();
+            }
 
         }
         /// <summary>

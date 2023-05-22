@@ -36,6 +36,8 @@ namespace MovieWorld.Models
         {
             get
             {
+                if (birthday is null)
+                    return 0;
                 DateTime today = DateTime.Today;
                 if (deathday != null)
                     today = DateTime.ParseExact((string)deathday,
@@ -57,6 +59,8 @@ namespace MovieWorld.Models
         {
             get
             {
+                if (birthday is null)
+                    return "Unknown";
                 if (deathday is not null)
                     return birthday;
 
