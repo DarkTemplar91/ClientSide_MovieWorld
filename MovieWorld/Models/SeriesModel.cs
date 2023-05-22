@@ -9,6 +9,7 @@ namespace MovieWorld.Models
         public string backdrop_path { get; set; }
         public string first_air_date { get; set; }
         public Genre[] genres { get; set; }
+        public Created_By[] created_by { get; set; }
         public int id { get; set; }
         public string name { get; set; }
         public int number_of_seasons { get; set; }
@@ -83,4 +84,14 @@ namespace MovieWorld.Models
         }
 
     }
+
+    public class Created_By
+    {
+        public int id { get; set; }
+        public string credit_id { get; set; }
+        public string name { get; set; }
+        public int gender { get; set; }
+        public object profile_path { get; set; }
+    }
+
 }

@@ -53,11 +53,11 @@
         Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <NavigationView.AutoSuggestBox>
             <AutoSuggestBox
+                x:Uid="AutoSuggestBox"
                     x:Name="ControlsSearchBox"
                     VerticalAlignment="Center"
                     x:FieldModifier="public"
                 KeyboardAcceleratorPlacementMode="Hidden"
-                    PlaceholderText="Search"
                 TextChanged="ControlsSearchBox_TextChanged"
                 QuerySubmitted="ControlsSearchBox_QuerySubmitted"
                 SuggestionChosen="ControlsSearchBox_SuggestionChosen"
@@ -87,19 +87,19 @@
 
         <NavigationView.MenuItems>
             
-            <NavigationViewItem Content="Home" Tag="x:home">
+            <NavigationViewItem x:Uid="NavigationViewItemHome">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="Home"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            
-            <NavigationViewItem Content="Favorites" Tag="x:favorites">
+
+            <NavigationViewItem x:Uid="NavigationViewItemFavorites">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="OutlineStar"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
 
-            <NavigationViewItem Content="Watchlist" Tag="x:watchlist">
+            <NavigationViewItem x:Uid="NavigationViewItemWatchlist">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="List"/>
                 </NavigationViewItem.Icon>

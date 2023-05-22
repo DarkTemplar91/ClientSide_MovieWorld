@@ -42,11 +42,9 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <GridViewHeaderItem HorizontalAlignment="Center" FontSize="30" FontFamily="Bahnschrift">
-            <TextBlock>Watchlist</TextBlock>
-        </GridViewHeaderItem>
+        <GridViewHeaderItem x:Uid="GridViewHeaderItemWatchlist"/>
 
-        <GridView Grid.Row="1"
+            <GridView Grid.Row="1"
                   Padding="18"
                   ItemsSource="{Binding Source={StaticResource WatchlistSource}}"
                   IsItemClickEnabled="True" ItemClick="GridView_ItemClick">

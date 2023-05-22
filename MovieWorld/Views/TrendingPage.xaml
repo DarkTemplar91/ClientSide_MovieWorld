@@ -55,7 +55,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <GridViewHeaderItem HorizontalAlignment="Center" FontSize="30" FontFamily="Bahnschrift">
+        <GridViewHeaderItem  x:Uid="GridViewHeaderItemTrending">
             <TextBlock>Trending Today</TextBlock>
         </GridViewHeaderItem>
 

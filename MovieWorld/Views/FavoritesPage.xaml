@@ -43,9 +43,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <GridViewHeaderItem HorizontalAlignment="Center" FontSize="30" FontFamily="Bahnschrift">
-            <TextBlock>Favorites</TextBlock>
-        </GridViewHeaderItem>
+        <GridViewHeaderItem x:Uid="GridViewHeaderItemFavorites"/>
 
         <GridView Grid.Row="1"
                   Padding="18"

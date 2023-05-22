@@ -24,7 +24,7 @@
         <converters:ImagePathConverter x:Key="ImagePathConverter"/>
         <converters:BackdropImagePathConverter x:Key="BackdropPathConverter"/>
         <converters:RuntimeStringConverter x:Key="RuntimeConverter" />
-        <converters:CheckNullConverter x:Key="CheckNullConverter"/>
+        <converters:NameLabelConverter x:Key="NameLabelConverter"/>
 
         <CollectionViewSource x:Key="SeriesCastSource"
                               IsSourceGrouped="False"
@@ -32,7 +32,7 @@
 
         <CollectionViewSource x:Key="SeriesCrewSource"
                               IsSourceGrouped="False"
-                              Source="{x:Bind ViewModel.CastModel.GetFilteredCrew, Mode=OneWay}"/>
+                              Source="{x:Bind ViewModel.SeriesModel.created_by, Mode=OneWay}"/>
 
         <CollectionViewSource x:Key="EpisodeListSource"
                               IsSourceGrouped="False"
@@ -111,7 +111,7 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
@@ -131,12 +131,9 @@
 
         <Image Source="{x:Bind ViewModel.SeriesModel, Converter={StaticResource ImagePathConverter}, Mode=OneWay}" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0" Stretch="Uniform"/>
         <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,0,0">
-            <StackPanel  Orientation="Horizontal">
-                <TextBlock Text="{x:Bind ViewModel.SeriesModel.name, Mode = OneWay}"  FontFamily="Bahnschrift" FontSize="30"/>
-                <TextBlock Text="{x:Bind ViewModel.SeriesModel.ReleaseYear, Mode = OneWay}" FontSize="24" Margin="4,0,0,0" Foreground="Gray"/>
-            </StackPanel>
+            <TextBlock FontSize="30" TextWrapping="WrapWholeWords" Text="{x:Bind ViewModel.SeriesModel, Converter={StaticResource NameLabelConverter} ,Mode=OneWay}" />
 
-            <TextBlock Text="{x:Bind ViewModel.SeriesModel.AllGenres, Mode=OneWay}" VerticalAlignment="Center"/>
+            <TextBlock Margin="0,5" Text="{x:Bind ViewModel.SeriesModel.AllGenres, Mode=OneWay}" VerticalAlignment="Center"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <ToggleButton Command="{x:Bind ViewModel.FavoritesCommand, Mode=OneWay}" CommandParameter="{x:Bind ViewModel.SeriesModel, Converter={StaticResource SeriesToItemConverter}, Mode = OneWay}" Margin="5,0" Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" IsChecked="{x:Bind ViewModel.SeriesModel.id, Converter={StaticResource IsFavoritesToggled}, Mode = OneWay}" FontFamily="Segoe MDL2 Assets"/>
@@ -146,6 +143,9 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
             <RatingControl Value="{x:Bind ViewModel.SeriesModel.VoteAverageOnScale, Mode=OneWay}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{x:Bind ViewModel.SeriesModel.VoteCountString, Mode=OneWay}">
+                <RatingControl.Resources>
+                    <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold" />
+                </RatingControl.Resources>
             </RatingControl>
             <TextBlock Text="{x:Bind ViewModel.SeriesModel.tagline, Mode=OneWay}"></TextBlock>
             <TextBlock  Text="Overview" HorizontalAlignment="Left" FontSize="26" Margin="0,20,0,10"/>
@@ -161,7 +161,7 @@
                     <DataTemplate>
                         <StackPanel>
                             <GridViewHeaderItem>
-                                <TextBlock Text="{Binding job}"></TextBlock>
+                                <TextBlock Text="Creator"></TextBlock>
                             </GridViewHeaderItem>
                             <TextBlock Width="Auto" Text="{Binding name}" Margin="0" Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" HorizontalAlignment="Center"/>
                         </StackPanel>
@@ -181,9 +181,9 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top">
 
-            <TextBlock Text="All Episodes" Margin="15,0,0,10" FontSize="20" FontFamily="Bahnschrift"/>
+            <TextBlock x:Uid="AllEpisodes"/>
 
-            <Border CornerRadius="20" Width="520" Height="300">
+            <Border CornerRadius="20" Width="520" Height="320">
 
                 <Border.Background>
                     <SolidColorBrush Color="Black" Opacity="0.5"></SolidColorBrush>
@@ -197,13 +197,11 @@
             </Border>
 
         </StackPanel>
-        
 
-        <GridViewHeaderItem Grid.Row="3" Grid.Column="0" Margin="10,0,0,0" FontFamily="Bahnschrift">
-            <TextBlock>Cast</TextBlock>
-        </GridViewHeaderItem>
+
+        <GridViewHeaderItem Grid.Row="3" Grid.Column="0" x:Uid="GridViewHeaderItemCast"/>
         <GridView Margin="0,30,0,0"
-            Grid.Row="3"
+                  Grid.Row="3"
                   Grid.Column="0"
                   Grid.ColumnSpan="3"
                   Padding="18"

@@ -95,7 +95,7 @@
                 </RatingControl.Resources>
             </RatingControl>
             <TextBlock Text="{x:Bind ViewModel.MovieModel.tagline, Mode=OneWay}"></TextBlock>
-            <TextBlock Text="Overview" HorizontalAlignment="Left" FontSize="26" Margin="0,20,0,10"/>
+            <TextBlock x:Uid="Overview"/>
             <TextBlock TextTrimming="WordEllipsis" LineStackingStrategy="BlockLineHeight" Text="{x:Bind ViewModel.MovieModel.overview, Mode=OneWay}" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" Margin="0,0,30,0" FontSize="20" FontStyle="Italic" MaxWidth="700"/>
 
             <GridView Padding="18"
@@ -125,13 +125,12 @@
 
         </StackPanel>
 
-        <GridViewHeaderItem Grid.Row="3" Grid.Column="0" Margin="10,0,0,0" FontFamily="Bahnschrift">
-            <TextBlock>Cast</TextBlock>
-        </GridViewHeaderItem>
+        <GridViewHeaderItem Grid.Row="3" Grid.Column="0" x:Uid="GridViewHeaderItemCast"/>
+        
         <GridView Margin="0,30,0,0"
                   Height="320"
                   VerticalAlignment="Top"
-            Grid.Row="3"
+                  Grid.Row="3"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   Padding="18"

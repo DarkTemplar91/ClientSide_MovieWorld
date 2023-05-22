@@ -89,7 +89,6 @@ namespace MovieWorld.Views
             ControlsSearchBox.Focus(Windows.UI.Xaml.FocusState.Keyboard);
         }
 
-        //TODO: Change binging to x:bind where possible
         //TODO: Test
         //TODO: Create resources with labels, texts etc.
         //TODO: Refactor, look for code smells

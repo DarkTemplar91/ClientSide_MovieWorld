@@ -133,6 +133,7 @@
     <Compile Include="Converters\MediaTypeToSymbolConverter.cs" />
     <Compile Include="Converters\MediaTypeToVisibilityConverter.cs" />
     <Compile Include="Converters\MovieModelToContentItemConverter.cs" />
+    <Compile Include="Converters\NameLabelConverter.cs" />
     <Compile Include="Converters\RuntimeStringConverter.cs" />
     <Compile Include="Converters\SeriesToContentItemConverter.cs" />
     <Compile Include="Converters\VisibilityNullConverter.cs" />
@@ -261,6 +262,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

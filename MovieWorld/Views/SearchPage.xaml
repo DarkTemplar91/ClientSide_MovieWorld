@@ -50,9 +50,9 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Stretch="Uniform" Grid.RowSpan="3" Source="{Binding Converter={StaticResource ImagePathConverter}}" HorizontalAlignment="Left"/>
-                    <TextBlock FontSize="20" FontFamily="Bahnschrift" Grid.Row="0" Grid.Column="1" Text="{Binding SearchName}" Margin="0,5,0,0"></TextBlock>
-                    <TextBlock Grid.Row="1" FontFamily="Bahnschrift" Grid.Column="1" Text="{Binding release_date}" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Top" Margin="0,5"></TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="1" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding overview}"></TextBlock>
+                    <TextBlock FontSize="20" FontFamily="Bahnschrift" Grid.Row="0" Grid.Column="1" Text="{Binding SearchName}" Margin="0,5,0,0"/>
+                    <TextBlock Grid.Row="1" FontFamily="Bahnschrift" Grid.Column="1" Text="{Binding release_date}" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Top" Margin="0,5"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding overview}"/>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -128,11 +128,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Search Results for " FontFamily="Bahnschrift" FontSize="30"/>
+            <TextBlock x:Uid="SearchResultsPageLabel"/>
             <TextBlock Text="{x:Bind ViewModel.Keyword}" FontStyle="Italic" FontFamily="Bahnschrift" TextWrapping="WrapWholeWords" FontSize="30"/>
         </StackPanel>
 
-        <AutoSuggestBox Grid.Row="1" Header="Search" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="50,0" 
+        <AutoSuggestBox x:Uid="SearchResultAutoSuggestBox" Grid.Row="1" 
                 QuerySubmitted="AutoSuggestBox_QuerySubmitted">
             <AutoSuggestBox.QueryIcon>
                 <SymbolIcon Symbol="Find"/>

@@ -30,6 +30,8 @@ namespace MovieWorld.Views
                 id = ((Crew)obj).id;
             else if (obj.GetType() == typeof(Cast))
                 id = ((Cast)obj).id;
+            else if(obj.GetType() == typeof(Created_By))
+                id= ((Created_By)obj).id;
             else
                 return;
 
