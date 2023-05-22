@@ -19,12 +19,12 @@ namespace MovieWorld.ViewModels
             WatchlistCommand = new ToggleWatchlistCommand();
         }
 
-        public ObservableCollection<ContentGroup> RecommendedContent { get; set; } = new();
+        public ObservableCollection<ContentGroup> RecommendedContent { get; } = new();
         public ToggleFavoritesCommand FavoritesCommand { get; }
         public ToggleWatchlistCommand WatchlistCommand { get; }
         public IAsyncRelayCommand ReloadTaskCommand { get; }
 
-        public async Task OnNavigatedAsync()
+        private async Task OnNavigatedAsync()
         {
             var service = Ioc.Default.GetRequiredService<MovieDBService>();
             var recommendedMovies = await service.GetTrendingContentAsync();

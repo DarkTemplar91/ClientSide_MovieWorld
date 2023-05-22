@@ -25,7 +25,7 @@ namespace MovieWorld.ViewModels
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
 
-        public ObservableCollection<SearchResult> SearchResults { get; set; } = new();
+        public ObservableCollection<SearchResult> SearchResults { get; } = new();
 
         public async Task OnNavigatedAsync()
         {

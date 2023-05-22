@@ -27,16 +27,6 @@ namespace MovieWorld.Models
 
         public float VoteAverageOnScale => vote_average / 2;
 
-        public string DateString
-        {
-            get
-            {
-                DateTime asDate = DateTime.ParseExact(first_air_date,
-                   "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-                return asDate.ToString("dd/MM/yyyy");
-            }
-        }
-
         public string AllGenres
         {
             get
@@ -44,12 +34,6 @@ namespace MovieWorld.Models
                 return genres.Select(s => s.name + ", ").Aggregate((s, q) => s + q).TrimEnd(' ').TrimEnd(',');
             }
         }
-    }
-
-    public class Season
-    {
-        public int id { get; set; }
-        public string name { get; set; }
     }
 
     public class EpisodeList

@@ -1,16 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
-using CommunityToolkit.Mvvm.Input;
 using MovieWorld.Commands;
 using MovieWorld.Models;
 using MovieWorld.Services;
 using System.Collections.Generic;
-using System.ServiceModel.Channels;
 using System.Threading.Tasks;
-using Windows.Graphics.DirectX.Direct3D11;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
 
 namespace MovieWorld.ViewModels
 {
@@ -18,7 +14,6 @@ namespace MovieWorld.ViewModels
     {
         public SeriesDetailsViewModel()
         {
-            ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
             FavoritesCommand = new ToggleFavoritesCommand();
             WatchlistCommand = new ToggleWatchlistCommand();
         }
@@ -29,24 +24,23 @@ namespace MovieWorld.ViewModels
         public SeriesModel SeriesModel
         {
             get => seriesModel;
-            set => SetProperty(ref seriesModel, value);
+            private set => SetProperty(ref seriesModel, value);
         }
 
         private CastModel castModel;
         public CastModel CastModel
         {
             get => castModel;
-            set => SetProperty(ref castModel, value);
+            private set => SetProperty(ref castModel, value);
         }
 
         private List<EpisodeList> episodeList;
         public List<EpisodeList> EpisodeList
         {
             get => episodeList;
-            set => SetProperty(ref episodeList, value);
+            private set => SetProperty(ref episodeList, value);
         }
-
-        public IAsyncRelayCommand ReloadTaskCommand { get; }
+        
         public ToggleFavoritesCommand FavoritesCommand { get; }
         public ToggleWatchlistCommand WatchlistCommand { get; }
 

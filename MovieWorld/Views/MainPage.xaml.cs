@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MovieWorld.Models;
 using MovieWorld.Services;
 using System.Linq;
+using System.Net.Http;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -20,7 +21,8 @@ namespace MovieWorld.Views
         public MainPage()
         {
             this.InitializeComponent();
-            Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<INavigationService>(new NavigationService(ContentFrame)).AddSingleton<MovieDBService>().BuildServiceProvider());
+            Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<INavigationService>(new NavigationService(ContentFrame))
+                .AddSingleton<MovieDBService>().BuildServiceProvider());
             NavView.SelectedItem = NavView.MenuItems.ElementAt(0);
             if (ContentFrame.CanGoBack)
                 ContentFrame.GoBack();
@@ -90,7 +92,6 @@ namespace MovieWorld.Views
         }
 
         //TODO: Test
-        //TODO: Create resources with labels, texts etc.
         //TODO: Refactor, look for code smells
         //TODO: Comment Code
         //TODO: Compare application to spec

@@ -9,8 +9,8 @@ namespace MovieWorld.Models
     public class UserModel
     {
 
-        public List<ContentListItem> Watchlist { get; set; } = new();
-        public List<ContentListItem> Favorites { get; set; } = new();
+        public List<ContentListItem> Watchlist { get; private set; } = new();
+        public List<ContentListItem> Favorites { get; private set; } = new();
 
         private static UserModel instance;
         private UserModel()
@@ -35,12 +35,12 @@ namespace MovieWorld.Models
 
         }
 
-        async public static Task<UserModel> BuildViewModelAsync()
+        private static async Task<UserModel> BuildViewModelAsync()
         {
             return new UserModel();
         }
 
-        public async Task LoadWatchlist()
+        private async Task LoadWatchlist()
         {
             Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalCacheFolder;
             bool fileExists = await storageFolder.FileExistsAsync("watchlist.json");
@@ -56,7 +56,7 @@ namespace MovieWorld.Models
             Watchlist = JsonConvert.DeserializeObject<List<ContentListItem>>(text) ?? new List<ContentListItem>();
         }
 
-        public async Task LoadFavorites()
+        private async Task LoadFavorites()
         {
 
             Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalCacheFolder;

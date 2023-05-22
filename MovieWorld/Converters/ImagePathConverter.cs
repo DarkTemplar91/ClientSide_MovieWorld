@@ -2,7 +2,6 @@
 using System;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Markup;
-using Windows.UI.Xaml.Media;
 
 namespace MovieWorld.Converters
 {

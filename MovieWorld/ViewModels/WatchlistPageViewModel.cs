@@ -8,7 +8,7 @@ namespace MovieWorld.ViewModels
 {
     public class WatchlistPageViewModel : ObservableRecipient
     {
-        public ObservableCollection<ContentListItem> ContentLists { get; set; } = new();
+        public ObservableCollection<ContentListItem> ContentLists { get; } = new();
         public WatchlistPageViewModel()
         {
             if (UserModel.Instance.Watchlist is null)

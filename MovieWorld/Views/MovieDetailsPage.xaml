@@ -2,12 +2,10 @@
     x:Class="MovieWorld.Views.MovieDetailsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MovieWorld.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:converters="using:MovieWorld.Converters"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:vm="using:MovieWorld.ViewModels">
 
     <Page.Background>
@@ -32,7 +30,7 @@
                               Source="{x:Bind ViewModel.MovieCastModel.GetFilteredCrew, Mode=OneWay}"/>
 
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe"></Setter>
+            <Setter Property="FontFamily" Value="Segoe" />
 
         </Style>
 
@@ -48,10 +46,10 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
 
         <Grid.Background>
@@ -59,8 +57,8 @@
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
 
 
@@ -77,9 +75,9 @@
             
             <StackPanel Orientation="Horizontal">
                 <HyperlinkButton Content="IMDb" NavigateUri="{Binding MovieModel.IMDb_ID}" FontSize="15" Foreground="White"/>
-                <AppBarSeparator></AppBarSeparator>
+                <AppBarSeparator />
                 <TextBlock Text="{x:Bind ViewModel.MovieModel.AllGenres, Mode=OneWay}" VerticalAlignment="Center"/>
-                <AppBarSeparator></AppBarSeparator>
+                <AppBarSeparator />
                 <TextBlock Text="{x:Bind ViewModel.MovieModel.runtime, Converter={StaticResource RuntimeConverter}, Mode=OneWay}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -94,7 +92,7 @@
                     <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold" />
                 </RatingControl.Resources>
             </RatingControl>
-            <TextBlock Text="{x:Bind ViewModel.MovieModel.tagline, Mode=OneWay}"></TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.MovieModel.tagline, Mode=OneWay}" />
             <TextBlock x:Uid="Overview"/>
             <TextBlock TextTrimming="WordEllipsis" LineStackingStrategy="BlockLineHeight" Text="{x:Bind ViewModel.MovieModel.overview, Mode=OneWay}" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" Margin="0,0,30,0" FontSize="20" FontStyle="Italic" MaxWidth="700"/>
 
@@ -147,7 +145,7 @@
                             <Border.Background>
                                 <ImageBrush Stretch="Uniform">
                                     <ImageBrush.ImageSource>
-                                        <BitmapImage DecodePixelWidth="200" UriSource="{Binding Converter={StaticResource ImagePathConverter}}"></BitmapImage>
+                                        <BitmapImage DecodePixelWidth="200" UriSource="{Binding Converter={StaticResource ImagePathConverter}}" />
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Border.Background>

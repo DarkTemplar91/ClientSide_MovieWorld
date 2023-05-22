@@ -8,7 +8,7 @@ namespace MovieWorld.ViewModels
 {
     public class FavoritesPageViewModel : ObservableRecipient
     {
-        public ObservableCollection<ContentListItem> ContentLists { get; set; } = new();
+        public ObservableCollection<ContentListItem> ContentLists { get; } = new();
         public FavoritesPageViewModel()
         {
             if (UserModel.Instance.Favorites is null)

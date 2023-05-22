@@ -25,15 +25,11 @@ namespace MovieWorld.Views
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var obj = e.ClickedItem;
-            var id = -1;
             if (obj.GetType() == typeof(CreditCrew))
-                id = ((CreditCrew)obj).id;
+                ViewModel.NavigateToMoviePage(((CreditCrew)obj).id);
             else if (obj.GetType() == typeof(CreditCast))
-                id = ((CreditCast)obj).id;
-            else
-                return;
+                ViewModel.NavigateToMoviePage(((CreditCast)obj).id);
 
-            ViewModel.NavigateToMoviePage(id);
         }
     }
 }

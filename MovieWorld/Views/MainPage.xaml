@@ -2,7 +2,6 @@
     x:Class="MovieWorld.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MovieWorld.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:MovieWorld.ViewModels"
@@ -35,8 +34,8 @@
                               Source="{x:Bind ViewModel.SearchResults}"/>
 
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe"></Setter>
-            
+            <Setter Property="FontFamily" Value="Segoe" />
+
         </Style>
         <converters:MediaTypeToSymbolConverter x:Key="MediaTypeToSymbolConverter"/>
     </Page.Resources>
@@ -66,8 +65,8 @@
                 <AutoSuggestBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="{Binding media_type, Converter={StaticResource MediaTypeToSymbolConverter}}" Margin="0,0,5,0"></SymbolIcon>
-                            <TextBlock Text="{Binding SearchName}"></TextBlock>
+                            <SymbolIcon Symbol="{Binding media_type, Converter={StaticResource MediaTypeToSymbolConverter}}" Margin="0,0,5,0" />
+                            <TextBlock Text="{Binding SearchName}" />
                         </StackPanel>
                     </DataTemplate>
                 </AutoSuggestBox.ItemTemplate>

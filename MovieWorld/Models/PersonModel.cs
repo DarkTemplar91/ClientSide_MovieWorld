@@ -23,7 +23,7 @@ namespace MovieWorld.Models
                 _ => "Not specified"
             };
 
-        public int Age
+        private int Age
         {
             get
             {

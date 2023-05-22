@@ -15,12 +15,12 @@ namespace MovieWorld.ViewModels
             ReloadTaskCommand = new AsyncRelayCommand(OnNavigatedAsync);
         }
 
-        public ObservableCollection<SearchResult> SearchResults { get; set; } = new();
+        public ObservableCollection<SearchResult> SearchResults { get; } = new();
 
 
         public IAsyncRelayCommand ReloadTaskCommand { get; }
 
-        public async Task OnNavigatedAsync()
+        private async Task OnNavigatedAsync()
         {
             Ioc.Default.GetRequiredService<INavigationService>().Navigate<TrendingPageViewModel>();
         }
