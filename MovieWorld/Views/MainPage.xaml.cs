@@ -92,7 +92,6 @@ namespace MovieWorld.Views
         }
 
         //TODO: Test
-        //TODO: Refactor, look for code smells
         //TODO: Comment Code
         //TODO: Compare application to spec
     }

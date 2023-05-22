@@ -3,12 +3,16 @@
 namespace MovieWorld.Models
 {
 
-
+    /// <summary>
+    /// Class that contains all the <c>SearchResults</c>.
+    /// </summary>
     public class SearchResultModel
     {
         public SearchResult[] results { get; set; }
     }
-
+    /// <summary>
+    /// SearchResult model, used for the Search View and the autosuggestion.
+    /// </summary>
     public class SearchResult
     {
         public int id { get; set; }
@@ -35,7 +39,9 @@ namespace MovieWorld.Models
             }
         }
     }
-
+    /// <summary>
+    /// The department or job that the person is known for.
+    /// </summary>
     public class Known_For
     {
         public int id { get; set; }

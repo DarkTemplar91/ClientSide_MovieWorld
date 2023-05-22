@@ -2,6 +2,9 @@
 
 namespace MovieWorld.Models
 {
+    /// <summary>
+    /// The Model of a person. It contains most of the personal information of the industry member, such as birthplace, time, name, biography etc
+    /// </summary>
     public class PersonModel
     {
         public string biography { get; set; }
@@ -15,6 +18,9 @@ namespace MovieWorld.Models
         public string place_of_birth { get; set; }
         public string profile_path { get; set; }
 
+        /// <summary>
+        /// The gender of the person as a string
+        /// </summary>
         public string Gender =>
             gender switch
             {
@@ -23,6 +29,9 @@ namespace MovieWorld.Models
                 _ => "Not specified"
             };
 
+        /// <summary>
+        /// The age of the person calculated from their birthday.
+        /// </summary>
         private int Age
         {
             get
@@ -41,7 +50,9 @@ namespace MovieWorld.Models
                 return age;
             }
         }
-
+        /// <summary>
+        /// The birthday string
+        /// </summary>
         public string Birthday
         {
             get
@@ -53,10 +64,14 @@ namespace MovieWorld.Models
 
             }
         }
-
+        /// <summary>
+        /// The day of their death, and their age.
+        /// </summary>
         public string Deathday => deathday is null ? "" : $"{deathday} ({Age} years old)";
 
-
+        /// <summary>
+        /// The IMDb URL of the person.
+        /// </summary>
         public string IMDb_ID => $"https://www.imdb.com/name/{imdb_id}/";
     }
 

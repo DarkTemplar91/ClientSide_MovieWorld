@@ -6,8 +6,19 @@ using Windows.UI.Xaml.Media;
 
 namespace MovieWorld.Converters
 {
+    /// <summary>
+    /// This class converts the backdrop image of a model to the valid format.
+    /// </summary>
     internal class BackdropImagePathConverter : IValueConverter
     {
+        /// <summary>
+        /// This method converts the <c>backdrop_path</c> of the model to the correct URL. 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if( value is null)

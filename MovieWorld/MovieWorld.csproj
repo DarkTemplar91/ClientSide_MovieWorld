@@ -138,7 +138,7 @@
     <Compile Include="Converters\VisibilityNullConverter.cs" />
     <Compile Include="Converters\WatchlistToggleButtonConverter.cs" />
     <Compile Include="Models\CastModel.cs" />
-    <Compile Include="Models\MovieListModel.cs" />
+    <Compile Include="Models\ContentListModel.cs" />
     <Compile Include="Models\PersonCreditsModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SearchResultModel.cs" />

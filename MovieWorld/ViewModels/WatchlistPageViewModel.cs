@@ -6,8 +6,14 @@ using System.Collections.ObjectModel;
 
 namespace MovieWorld.ViewModels
 {
+    /// <summary>
+    /// The view model for the Watchlist page
+    /// </summary>
     public class WatchlistPageViewModel : ObservableRecipient
     {
+        /// <summary>
+        /// Content added to the watchlist
+        /// </summary>
         public ObservableCollection<ContentListItem> ContentLists { get; } = new();
         public WatchlistPageViewModel()
         {
@@ -20,6 +26,10 @@ namespace MovieWorld.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the item's corresponding details page, based on <c>media_type</c>
+        /// </summary>
+        /// <param name="model">the item the user wants to open</param>
         public void NavigateToDetailsPage(ContentListItem model)
         {
             if (model.media_type == "movie")

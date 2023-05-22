@@ -1,6 +1,8 @@
 ﻿namespace MovieWorld.Models
 {
-
+    /// <summary>
+    /// A person's credits model, that contains all of their credits as an actor or crew member
+    /// </summary>
     public class PersonCreditsModel
     {
         public CreditCast[] cast { get; set; }
@@ -8,6 +10,9 @@
         public int id { get; set; }
     }
 
+    /// <summary>
+    /// The credits as a cast member
+    /// </summary>
     public class CreditCast
     {
         public int id { get; set; }
@@ -18,6 +23,9 @@
 
     }
 
+    /// <summary>
+    /// The credits as a crew member
+    /// </summary>
     public class CreditCrew
     {
         public int id { get; set; }

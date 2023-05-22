@@ -8,8 +8,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace MovieWorld.Services
 {
+    /// <summary>
+    /// <c>NavigationService</c> implements our <c>INavigationService</c> interface.
+    /// This class is used for basic navigation between our pages.
+    /// </summary>
     public class NavigationService : INavigationService
     {
+        /// <summary>
+        /// A Dictionary for the ViewModel-View relation
+        /// </summary>
         private readonly Dictionary<Type, Type> viewMapping = new()
         {
             [typeof(TrendingPageViewModel)] = typeof(MainPage),
@@ -24,13 +31,23 @@ namespace MovieWorld.Services
 
         private readonly Frame frame;
 
+        /// <summary>
+        /// Public constructor for the NavigationService.
+        /// </summary>
+        /// <param name="frame">The root frame of our application. Used by the NavigationView to switch between views</param>
         public NavigationService(Frame frame)
         {
             this.frame = frame;
         }
 
+        /// <summary>
+        /// Property indicating if we can traverse backwards from the current frame
+        /// </summary>
         public bool CanGoBack => this.frame.CanGoBack;
-
+        /// <summary>
+        /// Goes back to the previous frame in the stack
+        /// </summary>
+        /// <param name="rootNavigationView">The <c>NavigationView</c> used in our main page</param>
         public void GoBack(NavigationView rootNavigationView = null)
         {
             if (frame.CanGoBack)
@@ -66,7 +83,11 @@ namespace MovieWorld.Services
 
             }
         }
-
+        /// <summary>
+        /// Navigates to the page specified
+        /// </summary>
+        /// <typeparam name="T">The viewmodels type</typeparam>
+        /// <param name="args">Additional arguments for the navigation</param>
         public void Navigate<T>(object args = null) where T : ObservableRecipient
         {
             this.frame.Navigate(this.viewMapping[typeof(T)], args);

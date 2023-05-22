@@ -6,19 +6,37 @@ using System.Threading.Tasks;
 
 namespace MovieWorld.Models
 {
+    /// <summary>
+    /// A User singleton that represents the current user of our application.
+    /// Custom class due to the asycn builder.
+    /// </summary>
     public class UserModel
     {
-
+        /// <summary>
+        /// The list of movies added to the user's watchlist.
+        /// </summary>
         public List<ContentListItem> Watchlist { get; private set; } = new();
+        /// <summary>
+        /// The list of movies added to the user's favorites.
+        /// </summary>
         public List<ContentListItem> Favorites { get; private set; } = new();
 
+        /// <summary>
+        /// Singleton instance of the UserModel
+        /// </summary>
         private static UserModel instance;
+        /// <summary>
+        /// Private constructor so the User can only be initialized by the application
+        /// </summary>
         private UserModel()
         {
             LoadFavorites();
             LoadWatchlist();
         }
 
+        /// <summary>
+        /// Returns with an instance for the singleton
+        /// </summary>
         public static UserModel Instance
         {
             get
@@ -28,18 +46,29 @@ namespace MovieWorld.Models
                 return instance;
             }
         }
+        /// <summary>
+        /// Async method that constructs a singleton <c>UserModel</c> asynchronously
+        /// </summary>
+        /// <returns></returns>
         public static async Task<UserModel> GetInstanceAsync()
         {
             instance ??= await BuildViewModelAsync();
             return instance;
 
         }
-
+        /// <summary>
+        /// Called by the asynchronous GetInstance method. Calls the constructor.
+        /// </summary>
+        /// <returns></returns>
         private static async Task<UserModel> BuildViewModelAsync()
         {
             return new UserModel();
         }
 
+        /// <summary>
+        /// Loads the list of content saved to the local cache as a JSON. These items are to be added to the watchlist of the user.
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadWatchlist()
         {
             Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalCacheFolder;
@@ -55,7 +84,10 @@ namespace MovieWorld.Models
             string text = await Windows.Storage.FileIO.ReadTextAsync(file);
             Watchlist = JsonConvert.DeserializeObject<List<ContentListItem>>(text) ?? new List<ContentListItem>();
         }
-
+        /// <summary>
+        /// Loads the list of content saved to the local caches. These items are to be added to the Favorites page.
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadFavorites()
         {
 
@@ -77,7 +109,11 @@ namespace MovieWorld.Models
 
 
         }
-
+        /// <summary>
+        /// Adds content to the Watchlist and overwrites the corresponding JSON file
+        /// </summary>
+        /// <param name="item">the <c>ContentListItem</c> to be added to the watchlist</param>
+        /// <returns></returns>
         public async Task AddContentToWatchlist(ContentListItem item)
         {
 
@@ -103,6 +139,11 @@ namespace MovieWorld.Models
                 Console.WriteLine(e.Message);
             }
         }
+        /// <summary>
+        /// Adds content to the Favorites and overwrites the corresponding JSON file
+        /// </summary>
+        /// <param name="item">the <c>ContentListItem</c> to be added to the favorites</param>
+        /// <returns></returns>
         public async Task AddContentToFavorites(ContentListItem item)
         {
 
@@ -128,6 +169,11 @@ namespace MovieWorld.Models
                 Console.WriteLine(e.Message);
             }
         }
+        /// <summary>
+        /// Removes content From the Watchlist and overwrites the corresponding JSON file
+        /// </summary>
+        /// <param name="item">the <c>ContentListItem</c> to be removed from the watchlist</param>
+        /// <returns></returns>
         public async Task RemoveContentFromWatchlist(ContentListItem item)
         {
             Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalCacheFolder;
@@ -152,6 +198,11 @@ namespace MovieWorld.Models
                 Console.WriteLine(e.Message);
             }
         }
+        /// <summary>
+        /// Removes content from the Watchlist and overwrites the corresponding JSON file
+        /// </summary>
+        /// <param name="item">the <c>ContentListItem</c> to be removed from the favorites</param>
+        /// <returns></returns>
         public async Task RemoveContentFromFavorites(ContentListItem item)
         {
             Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalCacheFolder;

@@ -5,8 +5,20 @@ using Windows.UI.Xaml.Markup;
 
 namespace MovieWorld.Converters
 {
+    /// <summary>
+    /// Class used for converting the images to the correct format
+    /// </summary>
     internal class ImagePathConverter : IValueConverter
     {
+        /// <summary>
+        /// Depending on the type of object and its use-case, it converts the
+        /// <c>image_path</c> or <c>poster_path</c> to the correct format.
+        /// </summary>
+        /// <param name="value">The model</param>
+        /// <param name="targetType"><c>ImageSource URI</c></param>
+        /// <param name="parameter"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
 

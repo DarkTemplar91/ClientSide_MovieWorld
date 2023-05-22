@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace MovieWorld.ViewModels
 {
+    /// <summary>
+    /// The trending page's corresponding view model where trending content can be seen
+    /// </summary>
     public class TrendingPageViewModel : ObservableRecipient
     {
         public TrendingPageViewModel()
@@ -18,12 +21,25 @@ namespace MovieWorld.ViewModels
             FavoritesCommand = new ToggleFavoritesCommand();
             WatchlistCommand = new ToggleWatchlistCommand();
         }
-
+        /// <summary>
+        /// The list of trending/recommendid content
+        /// </summary>
         public ObservableCollection<ContentGroup> RecommendedContent { get; } = new();
+        /// <summary>
+        /// Commands used to add or remove from the Favorites list via the favorite toggle button
+        /// </summary>
         public ToggleFavoritesCommand FavoritesCommand { get; }
+        /// <summary>
+        /// Commands used to add or remove from the Watchlist via the favorite toggle button
+        /// </summary>
         public ToggleWatchlistCommand WatchlistCommand { get; }
         public IAsyncRelayCommand ReloadTaskCommand { get; }
 
+        /// <summary>
+        /// Called when the corresponding page was navigated to. Fetches a list of content, and it organizes is into groups
+        /// for the GridView to display.
+        /// </summary>
+        /// <returns></returns>
         private async Task OnNavigatedAsync()
         {
             var service = Ioc.Default.GetRequiredService<MovieDBService>();
@@ -54,7 +70,10 @@ namespace MovieWorld.ViewModels
                 RecommendedContent.Add(new ContentGroup() { Content = actorList, Title = "Actors", Id = "2" });
 
         }
-
+        /// <summary>
+        /// Navigates to the content's details page, based on <c>media_type</c>
+        /// </summary>
+        /// <param name="model"></param>
         public void NavigateToDetailsPage(ContentListItem model)
         {
             if (model.media_type == "movie")

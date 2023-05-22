@@ -4,6 +4,10 @@ using System.Windows.Input;
 
 namespace MovieWorld.Commands
 {
+    /// <summary>
+    /// The <c>ToggleFavoritesCommand</c> is a class implementing the <c>ICommand</c> interface.
+    /// It is used for the toggle buttons, so when pressed it adds to or removes the content from the Favorites page.
+    /// </summary>
     public class ToggleFavoritesCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
