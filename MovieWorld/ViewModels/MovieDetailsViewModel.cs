@@ -42,8 +42,7 @@ namespace MovieWorld.ViewModels
 
         public async Task OnNavigatedAsync()
         {
-            //TODO: Create a singleton somewhere else and use it here with ioc and di
-            var service = new MovieDBService();
+            var service = Ioc.Default.GetRequiredService<MovieDBService>();
             MovieModel = await service.GetMovieModelAsync(movieId);
             MovieCastModel = await service.GetMovieCastAsync(movieId);
 

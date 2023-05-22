@@ -20,7 +20,7 @@ namespace MovieWorld.Views
         public MainPage()
         {
             this.InitializeComponent();
-            Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<INavigationService>(new NavigationService(ContentFrame)).BuildServiceProvider());
+            Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<INavigationService>(new NavigationService(ContentFrame)).AddSingleton<MovieDBService>().BuildServiceProvider());
             NavView.SelectedItem = NavView.MenuItems.ElementAt(0);
             if (ContentFrame.CanGoBack)
                 ContentFrame.GoBack();
@@ -89,7 +89,6 @@ namespace MovieWorld.Views
             ControlsSearchBox.Focus(Windows.UI.Xaml.FocusState.Keyboard);
         }
 
-        //TODO: Create converters instead of properties and use those with binding
         //TODO: Change binging to x:bind where possible
         //TODO: Test
         //TODO: Create resources with labels, texts etc.

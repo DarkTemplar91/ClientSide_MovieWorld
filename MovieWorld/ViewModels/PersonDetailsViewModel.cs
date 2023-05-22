@@ -5,6 +5,7 @@ using MovieWorld.Models;
 using MovieWorld.Services;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Microsoft.Toolkit.Uwp.UI.Converters;
 
 namespace MovieWorld.ViewModels
 {
@@ -39,54 +40,15 @@ namespace MovieWorld.ViewModels
 
         public async Task OnNavigatedAsync()
         {
-            var service = new MovieDBService();
+            var service = Ioc.Default.GetRequiredService<MovieDBService>();
             PersonModel = await service.GetPersonDetailsAsync(PersonId);
             Credits = await service.GetPersonCredits(PersonId);
-            SetContentVisibility();
-
         }
-
-        private string showDeathDate = "Visible";
-        private string showActingCredit = "Visible";
-        private string showCrewCredit = "Visible";
 
         public void NavigateToMoviePage(int movieId)
         {
             Ioc.Default.GetRequiredService<INavigationService>().Navigate<MovieDetailsViewModel>(movieId);
         }
-
-        public int DefaultTabPage => personModel?.known_for_department == "Acting" ? 0 : 1;
-
-        public string ShowDeathDate
-        {
-            get => showDeathDate;
-            set => SetProperty(ref showDeathDate, value);
-        }
-
-        public string ShowActingCredit
-        {
-            get => showActingCredit;
-
-            set => SetProperty(ref showActingCredit, value);
-        }
-
-        public string ShowCrewCredit
-        {
-            get => showCrewCredit;
-            set => SetProperty(ref showCrewCredit, value);
-        }
-
-        public void SetContentVisibility()
-        {
-
-            ShowActingCredit = Credits?.cast.Length == 0 ? "Collapsed" : "Visible";
-
-            ShowCrewCredit = Credits?.crew.Length == 0 ? "Collapsed" : "Visible";
-
-            ShowDeathDate = PersonModel?.deathday is null ? "Collapsed" : "Visible";
-
-        }
-
 
     }
 }

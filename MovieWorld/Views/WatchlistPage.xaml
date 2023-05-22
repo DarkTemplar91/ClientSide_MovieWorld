@@ -24,7 +24,7 @@
     <Page.Resources>
         <CollectionViewSource x:Key="WatchlistSource"
                               IsSourceGrouped="False"
-                              Source="{Binding ContentLists}"
+                              Source="{x:Bind ViewModel.ContentLists}"
                               ItemsPath="Content"/>
 
         <Style TargetType="TextBlock">

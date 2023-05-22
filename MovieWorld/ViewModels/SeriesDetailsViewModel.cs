@@ -5,9 +5,12 @@ using MovieWorld.Commands;
 using MovieWorld.Models;
 using MovieWorld.Services;
 using System.Collections.Generic;
+using System.ServiceModel.Channels;
 using System.Threading.Tasks;
+using Windows.Graphics.DirectX.Direct3D11;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace MovieWorld.ViewModels
 {
@@ -49,7 +52,7 @@ namespace MovieWorld.ViewModels
 
         public async Task OnNavigatedAsync()
         {
-            var service = new MovieDBService();
+            var service = Ioc.Default.GetRequiredService<MovieDBService>();
             SeriesModel = await service.GetSeriesModelAsync(ShowId);
             CastModel = await service.GetSeriesCastAsync(ShowId);
             EpisodeList = await service.GetEpisodeList(ShowId, SeriesModel.number_of_seasons);

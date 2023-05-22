@@ -1,4 +1,7 @@
-﻿using MovieWorld.Models;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using MovieWorld.Models;
+using MovieWorld.Services;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;

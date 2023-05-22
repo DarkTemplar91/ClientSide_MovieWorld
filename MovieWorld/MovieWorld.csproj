@@ -123,6 +123,9 @@
     <Compile Include="Commands\ToggleFavoritesCommand.cs" />
     <Compile Include="Commands\ToggleWatchlistCommand.cs" />
     <Compile Include="Converters\BackdropImagePathConverter.cs" />
+    <Compile Include="Converters\CheckNullConverter.cs" />
+    <Compile Include="Converters\CreditsVisibilityConverter.cs" />
+    <Compile Include="Converters\DefaultTabPageConverter.cs" />
     <Compile Include="Converters\FavoriteToggleButtonConverter.cs" />
     <Compile Include="Converters\ImagePathConverter.cs" />
     <Compile Include="Converters\IsFavoriteToggledConverter.cs" />
@@ -132,6 +135,7 @@
     <Compile Include="Converters\MovieModelToContentItemConverter.cs" />
     <Compile Include="Converters\RuntimeStringConverter.cs" />
     <Compile Include="Converters\SeriesToContentItemConverter.cs" />
+    <Compile Include="Converters\VisibilityNullConverter.cs" />
     <Compile Include="Converters\WatchlistToggleButtonConverter.cs" />
     <Compile Include="Models\CastModel.cs" />
     <Compile Include="Models\MovieListModel.cs" />

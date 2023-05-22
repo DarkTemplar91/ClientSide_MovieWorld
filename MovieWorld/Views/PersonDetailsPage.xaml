@@ -24,11 +24,11 @@
     <Page.Resources>
         <CollectionViewSource x:Key="CastCreditsList"
                               IsSourceGrouped="False"
-                              Source="{Binding Credits.cast}"/>
+                              Source="{x:Bind ViewModel.Credits.cast, Mode=OneWay}"/>
 
         <CollectionViewSource x:Key="CrewCreditsList"
                               IsSourceGrouped="False"
-                              Source="{Binding Credits.crew}"/>
+                              Source="{x:Bind ViewModel.Credits.crew, Mode=OneWay}"/>
 
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe"></Setter>
@@ -36,6 +36,9 @@
         </Style>
 
         <converters:ImagePathConverter x:Key="ImagePathConverter"/>
+        <converters:DefaultTabPageConverter x:Key="DefaultTabPageConverter"/>
+        <converters:VisibilityNullConverter x:Key="VisibilityNullConverter"/>
+        <converters:CreditsVisibilityConverter x:Key="CreditVisibilityConverter"/>
     </Page.Resources>
 
 
@@ -55,7 +58,7 @@
                 <Border.Background>
                     <ImageBrush Stretch="UniformToFill">
                         <ImageBrush.ImageSource>
-                            <BitmapImage DecodePixelWidth="400" UriSource="{Binding PersonModel, Converter={StaticResource ImagePathConverter}}"></BitmapImage>
+                            <BitmapImage DecodePixelWidth="400" UriSource="{x:Bind ViewModel.PersonModel, Converter={StaticResource ImagePathConverter}, Mode=OneWay}"></BitmapImage>
                         </ImageBrush.ImageSource>
                     </ImageBrush>
                 </Border.Background>
@@ -63,10 +66,10 @@
         </Grid>
 
         <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" >
-            <TextBlock Text="{Binding PersonModel.name}" FontFamily="Bahnschrift" FontSize="30"/>
-            <HyperlinkButton Content="IMDb" NavigateUri="{Binding PersonModel.IMDb_ID}"  Foreground="White" HorizontalAlignment="Left"/>
+            <TextBlock Text="{x:Bind ViewModel.PersonModel.name, Mode=OneWay}" FontFamily="Bahnschrift" FontSize="30"/>
+            <HyperlinkButton Content="IMDb" NavigateUri="{x:Bind ViewModel.PersonModel.IMDb_ID, Mode=OneWay}"  Foreground="White" HorizontalAlignment="Left"/>
             <TextBlock Text="Biography" Margin="0,10,0,0" FontSize="20"/>
-            <TextBlock Margin="0,20" Text="{Binding PersonModel.biography}" MaxWidth="800" MaxHeight="400" TextWrapping="Wrap" Height="Auto" Visibility="Visible" TextTrimming="CharacterEllipsis"/>
+            <TextBlock Margin="0,20" Text="{x:Bind ViewModel.PersonModel.biography, Mode=OneWay}" MaxWidth="800" MaxHeight="400" TextWrapping="Wrap" Height="Auto" Visibility="Visible" TextTrimming="CharacterEllipsis"/>
         </StackPanel>
 
 
@@ -74,25 +77,25 @@
             <TextBlock FontSize="25" FontFamily="Bahnschrift">Personal Info</TextBlock>
 
             <TextBlock Margin="0,20,0,0" FontSize="18">Known for</TextBlock>
-            <TextBlock Text="{Binding PersonModel.known_for_department}"></TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.PersonModel.known_for_department, Mode=OneWay}"></TextBlock>
 
             <TextBlock Margin="0,20,0,0" FontSize="18">Gender</TextBlock>
-            <TextBlock Text="{Binding PersonModel.Gender}"></TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.PersonModel.Gender, Mode=OneWay}"></TextBlock>
 
             <TextBlock Margin="0,20,0,0" FontSize="18">Birthday</TextBlock>
-            <TextBlock Text="{Binding PersonModel.Birthday}"></TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.PersonModel.Birthday, Mode=OneWay}"></TextBlock>
 
-            <TextBlock Margin="0,20,0,0" FontSize="18" Visibility="{Binding ShowDeathDate, Mode=OneWay}">Day of Death</TextBlock>
-            <TextBlock Text="{Binding PersonModel.Deathday}" Visibility="{Binding ShowDeathDate, Mode=OneWay}"></TextBlock>
+            <TextBlock Margin="0,20,0,0" FontSize="18" Visibility="{x:Bind ViewModel.ShowDeathDate, Mode=OneWay}">Day of Death</TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.PersonModel.Deathday, Mode=OneWay}" Visibility="{x:Bind ViewModel.PersonModel.deathday, Converter={StaticResource VisibilityNullConverter},  Mode=OneWay}"></TextBlock>
 
             <TextBlock Margin="0,20,0,0" FontSize="18" Text="Place of Birth" />
-            <TextBlock Text="{Binding PersonModel.place_of_birth}"></TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.PersonModel.place_of_birth, Mode=OneWay}"></TextBlock>
 
 
         </StackPanel>
 
-        <muxc:TabView Grid.Row="2" Grid.Column="1" IsAddTabButtonVisible="False" CanReorderTabs="False" CanDragTabs="False" SelectedIndex="{Binding DefaultTabPage, Mode=TwoWay}">
-            <muxc:TabViewItem Header="Cast credits" IsClosable="False" Visibility="{Binding ShowActingCredit, Mode=OneWay}">
+        <muxc:TabView Grid.Row="2" Grid.Column="1" IsAddTabButtonVisible="False" CanReorderTabs="False" CanDragTabs="False" SelectedIndex="{x:Bind ViewModel.PersonModel, Converter={StaticResource DefaultTabPageConverter}, Mode=OneWay}">
+            <muxc:TabViewItem Header="Cast credits" IsClosable="False" Visibility="{x:Bind ViewModel.Credits,Converter={StaticResource CreditVisibilityConverter}, ConverterParameter=CastCredit, Mode=OneWay}">
                 <GridView 
                   Padding="18"
                   ItemsSource="{Binding Source={StaticResource CastCreditsList}}"
@@ -130,7 +133,7 @@
                 </GridView>
             </muxc:TabViewItem>
 
-            <muxc:TabViewItem Header="Crew credits" IsClosable="False" Visibility="{Binding ShowCrewCredit, Mode=OneWay}">
+            <muxc:TabViewItem Header="Crew credits" IsClosable="False" Visibility="{x:Bind ViewModel.Credits,Converter={StaticResource CreditVisibilityConverter}, ConverterParameter=CrewCredit, Mode=OneWay}">
                 <GridView 
                   Padding="18"
                   ItemsSource="{Binding Source={StaticResource CrewCreditsList}}"

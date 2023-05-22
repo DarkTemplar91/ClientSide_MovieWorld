@@ -12,7 +12,7 @@
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:EventTriggerBehavior.Actions>
-                <core:InvokeCommandAction Command="{Binding ReloadTaskCommand}"/>
+                <core:InvokeCommandAction Command="{x:Bind ViewModel.ReloadTaskCommand}"/>
             </core:EventTriggerBehavior.Actions>
         </core:EventTriggerBehavior>
 
@@ -32,7 +32,7 @@
     <Page.Resources>
         <CollectionViewSource x:Key="ContentGroupSource"
                               IsSourceGrouped="True"
-                              Source="{Binding RecommendedContent}"
+                              Source="{x:Bind ViewModel.RecommendedContent}"
                               ItemsPath="Content"/>
 
         <Style TargetType="TextBlock">

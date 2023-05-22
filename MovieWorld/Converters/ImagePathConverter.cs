@@ -1,6 +1,8 @@
 ﻿using MovieWorld.Models;
 using System;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Markup;
+using Windows.UI.Xaml.Media;
 
 namespace MovieWorld.Converters
 {
@@ -8,8 +10,9 @@ namespace MovieWorld.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+
             if (value == null)
-                return "ms-appx:///Assets/headshot-placeholder.png";
+                return XamlBindingHelper.ConvertValue(targetType, "ms-appx:///Assets/headshot-placeholder.png");
 
             string size = "w342";
             string poster_path = null;
@@ -70,10 +73,10 @@ namespace MovieWorld.Converters
             }
 
             if (string.IsNullOrEmpty(poster_path))
-                return "ms-appx:///Assets/no_image_placeholder.png";
+                return XamlBindingHelper.ConvertValue(targetType, "ms-appx:///Assets/no_image_placeholder.png");
 
             string baseUri = $"https://image.tmdb.org/t/p/{size}";
-            return $"{baseUri}/{poster_path.Trim('/')}";
+            return XamlBindingHelper.ConvertValue(targetType, $"{baseUri}/{poster_path.Trim('/')}");
 
 
         }

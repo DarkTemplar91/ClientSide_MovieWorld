@@ -1,6 +1,8 @@
 ﻿using MovieWorld.Models;
 using System;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Markup;
+using Windows.UI.Xaml.Media;
 
 namespace MovieWorld.Converters
 {
@@ -8,6 +10,9 @@ namespace MovieWorld.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            if( value is null)
+                return XamlBindingHelper.ConvertValue(typeof(ImageSource), "ms-appx:///Assets/headshot-placeholder.png");
+
             string backdrop_path = null;
             if (value is MovieModel model)
             {
@@ -19,10 +24,10 @@ namespace MovieWorld.Converters
             }
 
             if (string.IsNullOrEmpty(backdrop_path))
-                return "ms-appx:///Assets/headshot-placeholder.png";
+                return XamlBindingHelper.ConvertValue(typeof(ImageSource), "ms-appx:///Assets/headshot-placeholder.png");
 
             string baseUri = "https://image.tmdb.org/t/p/original";
-            return $"{baseUri}/{backdrop_path.Trim('/')}";
+            return XamlBindingHelper.ConvertValue(typeof(ImageSource), $"{baseUri}/{backdrop_path.Trim('/')}");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

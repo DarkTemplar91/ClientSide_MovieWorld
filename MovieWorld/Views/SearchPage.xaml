@@ -23,7 +23,7 @@
         
         <CollectionViewSource x:Key="SearchResultsSource"
                               IsSourceGrouped="False"
-                              Source="{Binding SearchResults}"/>
+                              Source="{x:Bind ViewModel.SearchResults}"/>
 
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe"></Setter>
@@ -129,7 +129,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Search Results for " FontFamily="Bahnschrift" FontSize="30"/>
-            <TextBlock Text="{Binding Keyword}" FontStyle="Italic" FontFamily="Bahnschrift" TextWrapping="WrapWholeWords" FontSize="30"/>
+            <TextBlock Text="{x:Bind ViewModel.Keyword}" FontStyle="Italic" FontFamily="Bahnschrift" TextWrapping="WrapWholeWords" FontSize="30"/>
         </StackPanel>
 
         <AutoSuggestBox Grid.Row="1" Header="Search" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="50,0" 

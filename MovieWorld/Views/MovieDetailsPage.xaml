@@ -25,11 +25,11 @@
     <Page.Resources>
         <CollectionViewSource x:Key="MovieCastSource"
                               IsSourceGrouped="False"
-                              Source="{Binding MovieCastModel.cast}"/>
+                              Source="{x:Bind ViewModel.MovieCastModel.cast, Mode=OneWay}"/>
 
         <CollectionViewSource x:Key="MovieCrewSource"
                               IsSourceGrouped="False"
-                              Source="{Binding MovieCastModel.GetFilteredCrew}"/>
+                              Source="{x:Bind ViewModel.MovieCastModel.GetFilteredCrew, Mode=OneWay}"/>
 
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe"></Setter>
@@ -55,7 +55,7 @@
         </Grid.RowDefinitions>
 
         <Grid.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="{Binding MovieModel, Converter={StaticResource BackdropPathConverter}}" Opacity="0.2"/>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{x:Bind ViewModel.MovieModel, Mode=OneWay, Converter={StaticResource BackdropPathConverter}}" Opacity="0.2"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
@@ -65,38 +65,38 @@
 
 
         <Border Padding="18" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Image Source="{Binding MovieModel, Converter={StaticResource ImagePathConverter}}" Stretch="Uniform"/>
+            <Image Source="{x:Bind ViewModel.MovieModel, Mode=OneWay, Converter={StaticResource ImagePathConverter}}" Stretch="Uniform"/>
         </Border>
 
         <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="2,0,0,0">
             <StackPanel  Orientation="Horizontal">
-                <TextBlock Text="{Binding MovieModel.title}"  FontFamily="Bahnschrift" FontSize="30"/>
-                <TextBlock Text="{Binding MovieModel.ReleaseYear}" FontSize="24" Margin="4,0,0,0" Foreground="Gray"/>
+                <TextBlock Text="{x:Bind ViewModel.MovieModel.title, Mode=OneWay}"  FontFamily="Bahnschrift" FontSize="30"/>
+                <TextBlock Text="{x:Bind ViewModel.MovieModel.ReleaseYear, Mode=OneWay}" FontSize="24" Margin="4,0,0,0" Foreground="Gray"/>
             </StackPanel>
-            <TextBlock Text="{Binding MovieModel.DateString}"/>
+            <TextBlock Text="{x:Bind ViewModel.MovieModel.DateString, Mode=OneWay}"/>
             
             <StackPanel Orientation="Horizontal">
                 <HyperlinkButton Content="IMDb" NavigateUri="{Binding MovieModel.IMDb_ID}" FontSize="15" Foreground="White"/>
                 <AppBarSeparator></AppBarSeparator>
-                <TextBlock Text="{Binding MovieModel.AllGenres}" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind ViewModel.MovieModel.AllGenres, Mode=OneWay}" VerticalAlignment="Center"/>
                 <AppBarSeparator></AppBarSeparator>
-                <TextBlock Text="{Binding MovieModel.runtime, Converter={StaticResource RuntimeConverter}}" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind ViewModel.MovieModel.runtime, Converter={StaticResource RuntimeConverter}, Mode=OneWay}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <ToggleButton Command="{Binding FavoritesCommand}" CommandParameter="{Binding MovieModel, Converter={StaticResource MovieToItemConverter}}" Margin="5,0" Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" IsChecked="{Binding MovieModel.id, Converter={StaticResource IsFavoritesToggled}}" FontFamily="Segoe MDL2 Assets"/>
-                <ToggleButton Command="{Binding WatchlistCommand}" CommandParameter="{Binding MovieModel, Converter={StaticResource MovieToItemConverter}}" Margin="5,0" Foreground="Green" BorderBrush="Green" VerticalAlignment="Center" x:Name="WatchlistToggleButton" Content="{Binding ElementName=WatchlistToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource WatchlistToggleConverter}}" IsChecked="{Binding MovieModel.id, Converter={StaticResource IsWatchlistToggled}}" FontFamily="Segoe MDL2 Assets"/>
+                <ToggleButton Command="{x:Bind ViewModel.FavoritesCommand, Mode=OneWay}" CommandParameter="{x:Bind ViewModel.MovieModel, Converter={StaticResource MovieToItemConverter}, Mode=OneWay}" Margin="5,0" Foreground="Gold" BorderBrush="Gold" VerticalAlignment="Center" x:Name="FavoriteToggleButton" Content="{Binding ElementName=FavoriteToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource FavoriteToggleConverter}}" IsChecked="{x:Bind ViewModel.MovieModel.id, Converter={StaticResource IsFavoritesToggled}, Mode=OneWay}" FontFamily="Segoe MDL2 Assets"/>
+                <ToggleButton Command="{x:Bind ViewModel.WatchlistCommand, Mode=OneWay}" CommandParameter="{x:Bind ViewModel.MovieModel, Converter={StaticResource MovieToItemConverter}, Mode=OneWay}" Margin="5,0" Foreground="Green" BorderBrush="Green" VerticalAlignment="Center" x:Name="WatchlistToggleButton" Content="{Binding ElementName=WatchlistToggleButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource WatchlistToggleConverter}}" IsChecked="{x:Bind ViewModel.MovieModel.id, Converter={StaticResource IsWatchlistToggled}, Mode=OneWay}" FontFamily="Segoe MDL2 Assets"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Padding="2,0,0,0">
-            <RatingControl Value="{Binding MovieModel.VoteAverageOnScale}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding MovieModel.VoteCountString}">
+            <RatingControl Value="{x:Bind ViewModel.MovieModel.VoteAverageOnScale, Mode=OneWay}" HorizontalAlignment="Left" IsReadOnly="True" Caption="{Binding MovieModel.VoteCountString}">
                 <RatingControl.Resources>
                     <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold" />
                 </RatingControl.Resources>
             </RatingControl>
-            <TextBlock Text="{Binding MovieModel.tagline}"></TextBlock>
+            <TextBlock Text="{x:Bind ViewModel.MovieModel.tagline, Mode=OneWay}"></TextBlock>
             <TextBlock Text="Overview" HorizontalAlignment="Left" FontSize="26" Margin="0,20,0,10"/>
-            <TextBlock TextTrimming="WordEllipsis" LineStackingStrategy="BlockLineHeight" Text="{Binding MovieModel.overview}" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" Margin="0,0,30,0" FontSize="20" FontStyle="Italic" MaxWidth="700"/>
+            <TextBlock TextTrimming="WordEllipsis" LineStackingStrategy="BlockLineHeight" Text="{x:Bind ViewModel.MovieModel.overview, Mode=OneWay}" TextWrapping="WrapWholeWords" HorizontalAlignment="Left" Margin="0,0,30,0" FontSize="20" FontStyle="Italic" MaxWidth="700"/>
 
             <GridView Padding="18"
                   ItemsSource="{Binding Source={StaticResource MovieCrewSource}}"

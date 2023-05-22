@@ -21,7 +21,7 @@ namespace MovieWorld.Models
         public float vote_average { get; set; }
         public int vote_count { get; set; }
 
-        public string ReleaseYear => "(" + release_date.Substring(0, 4) + ")";
+        public string ReleaseYear => string.IsNullOrEmpty(release_date) ? "" : "(" + release_date.Substring(0, 4) + ")";
 
         public string VoteCountString => $"({vote_count})";
 
@@ -31,6 +31,9 @@ namespace MovieWorld.Models
         {
             get
             {
+                if (string.IsNullOrEmpty(release_date))
+                    return "";
+
                 DateTime asDate = DateTime.ParseExact(release_date,
                    "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
                 return asDate.ToString("dd/MM/yyyy");
@@ -42,6 +45,8 @@ namespace MovieWorld.Models
         {
             get
             {
+                if (genres is null || genres.Length == 0)
+                    return "";
                 return genres.Select(s => s.name + ", ").Aggregate((s, q) => s + q).TrimEnd(' ').TrimEnd(',');
             }
         }

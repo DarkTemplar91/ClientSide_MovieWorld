@@ -44,7 +44,7 @@ namespace MovieWorld.ViewModels
         public async Task RefreshSearchResults(string keyword)
         {
             SearchResults.Clear();
-            var searchResultModel = await new MovieDBService().GetSearchResult(keyword);
+            var searchResultModel = await Ioc.Default.GetRequiredService<MovieDBService>().GetSearchResult(keyword);
             foreach (var result in searchResultModel.results)
             {
                 SearchResults.Add(result);

@@ -20,7 +20,7 @@
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:EventTriggerBehavior.Actions>
-                <core:InvokeCommandAction Command="{Binding ReloadTaskCommand}"/>
+                <core:InvokeCommandAction Command="{x:Bind ViewModel.ReloadTaskCommand}"/>
             </core:EventTriggerBehavior.Actions>
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
@@ -32,7 +32,7 @@
     <Page.Resources>
         <CollectionViewSource x:Key="SearchResultsSource"
                               IsSourceGrouped="False"
-                              Source="{Binding SearchResults}"/>
+                              Source="{x:Bind ViewModel.SearchResults}"/>
 
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe"></Setter>
